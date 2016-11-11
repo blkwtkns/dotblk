@@ -1,4 +1,4 @@
-# My accummulated Dotfiles (currently functional for Ubuntu builds):
+# My accummulated Dotfiles (currently for Ubuntu):
 ---
 This details process to get dev environment up and going quickly. 
 Please feel free to take whatever pleases you, it's what I've done,
