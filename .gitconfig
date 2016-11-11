@@ -1,0 +1,8 @@
+[user]
+	name = Blake Watkins
+	email = iamsoblake@gmail.com
+[core]
+	autocrlf = input
+	safecrlf = true
+[color]
+	ui = true
