@@ -10,7 +10,7 @@ and what others do to get these things tuned to one's liking.
 
 ## Zsh
 * $ sudo apt-get install zsh
-Then install Prezto: https://github.com/sorin-ionescu/prezto [link](https://github.com/sorin-ionescu/prezto) 
+Then install Prezto: https://github.com/sorin-ionescu/prezto 
 Remember to change shell: chsh -s /usr/bin/zsh (or chsh -s /bin/zsh)
 
 ## Curl
@@ -31,7 +31,7 @@ $ if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
 
 ## Neovim Installation (Ubuntu):
 The HQ suggests a PPA that contains the development version:
-https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu [link](https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu)
+https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu
 
 * $ sudo add-apt-repository -y ppa:neovim-ppa/unstable
 * $ sudo apt-get update && sudo apt-get install -y neovim
@@ -41,7 +41,7 @@ https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu [link](https://gi
 * $ ln -s ~/.vimrc ~/.config/nvim/init.vim
 
 ### If you want to build Neovim from source, here are the steps:
-Visit https://github.com/neovim/neovim [link](https://github.com/neovim/neovim) and find the tagged version you need.
+Visit https://github.com/neovim/neovim and find the tagged version you need.
 Download the zip, uncompress it, and enter the project folder.
 
 #### Install the dependencies:
@@ -62,7 +62,7 @@ I apt-get installed autoconf and automake)
 I think at this point the symlinks can be made, which 
 I made a shell script to shorten the process, although there are 
 only a few links haha, but I expect this to keep growing 
-in symlinks and functionality).
+in symlinks and functionality.
 
 #### Go to home folder: 
 * $ cd ~
@@ -93,7 +93,7 @@ in symlinks and functionality).
 
 ## Tmux
 * $ sudo apt-get install tmux 
-See: https://tomordonez.com/install-tmux-ubuntu/ [link](https://tomordonez.com/install-tmux-ubuntu/)
+See: https://tomordonez.com/install-tmux-ubuntu/
 
 # Misc
 
@@ -101,7 +101,7 @@ See: https://tomordonez.com/install-tmux-ubuntu/ [link](https://tomordonez.com/i
 * $ sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) ~/Downloads ~/host
 
 ## Links:
-https://github.com/greg-js/dotfiles [link](https://github.com/greg-js/dotfiles)
+https://github.com/greg-js/dotfiles
 
 ## TODOS
 Work on cross platform config conditions and sh scripting
