@@ -101,6 +101,12 @@ just use the file as reference.
 * $ sudo apt-get install tmux 
 * See: https://tomordonez.com/install-tmux-ubuntu/
 
+## Tags
+* $ sudo apt-get install exuberant-ctags
+* http://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
+* http://vi.stackexchange.com/questions/2944/can-i-load-different-tags-per-project
+* http://vim.wikia.com/wiki/Browsing_programs_with_tags
+
 # Misc
 
 ## Shared folder mounting via VirtualBox

@@ -562,6 +562,11 @@ Plug 'ctrlpvim/ctrlp.vim'
     " noremap <F3> :Unite file_mru<cr>
 " }}}
 
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar'
+" {{{
+nmap <Leader>tg :TagbarToggle<CR>
+" }}}
 " ====================================================================
 " Python
 " ====================================================================
