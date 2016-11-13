@@ -8,10 +8,14 @@ and what others do to get these things tuned to one's liking.
 * $ sudo apt-get update
 * $ sudo apt-get install git
 
+## Clone repo
+$ git clone https://github.com/blkwtkns/dotfiles.git ~/.dotblk
+
 ## Zsh
 * $ sudo apt-get install zsh
 Then install Prezto: https://github.com/sorin-ionescu/prezto 
 Remember to change shell: chsh -s /usr/bin/zsh (or chsh -s /bin/zsh)
+Then logout of desktop session and log back in!
 
 ## Curl
 * $ sudo apt-get install curl 
@@ -20,7 +24,7 @@ Remember to change shell: chsh -s /usr/bin/zsh (or chsh -s /bin/zsh)
 * $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | zsh 
 * $ nvm install node
 
-#### Put in .zshrc | .bashrc to load nvm:
+#### The following should be automatically put in .zshrc | .bashrc to load nvm:
 $ export NVM_DIR="/home/blahque/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
 
@@ -33,12 +37,18 @@ $ if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
 The HQ suggests a PPA that contains the development version:
 https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu
 
-* $ sudo add-apt-repository -y ppa:neovim-ppa/unstable
-* $ sudo apt-get update && sudo apt-get install -y neovim
-* $ pip install --user neovim
+* $ sudo apt-get install python-dev python-pip python3-dev python3-pip
+* $ sudo apt-get install software-properties-common
+* $ sudo add-apt-repository ppa:neovim-ppa/unstable
+* $ sudo apt-get update
+* $ sudo apt-get install neovim
 
-* $ mkdir -p ~/.config/nvim
-* $ ln -s ~/.vimrc ~/.config/nvim/init.vim
+## Py stuff
+* $ pip install --user neovim
+* $ pip install --upgrade neovim
+* $ pip2 install --upgrade neovim
+* $ pip3 install --upgrade neovim
+* $ pip install --upgrade pip
 
 ### If you want to build Neovim from source, here are the steps:
 Visit https://github.com/neovim/neovim and find the tagged version you need.
@@ -65,16 +75,10 @@ only a few links haha, but I expect this to keep growing
 in symlinks and functionality.
 
 #### Go to home folder: 
-* $ cd ~
+* $ cd ~ (the first command in script changes directory to $HOME as insurance)
 #### Run sh script: 
-* $ sh links.sh
+* $ zsh scripts.sh (or bash scripts.sh)
 
-## Py stuff
-* $ sudo apt-get install python-dev python-pip python3-dev python3-pip
-* $ sudo pip install --upgrade neovim
-* $ pip2 install --upgrade neovim
-* $ pip3 install --upgrade neovim
-* $ pip install --upgrade pip
 
 ## For Neomake (if Neovim not built from source):
 * $ sudo apt-get install build essentials
@@ -102,6 +106,7 @@ See: https://tomordonez.com/install-tmux-ubuntu/
 
 ## Links:
 https://github.com/greg-js/dotfiles
+wikimatze.de/better-zsh-with-prezto
 
 ## TODOS
 Work on cross platform config conditions and sh scripting
