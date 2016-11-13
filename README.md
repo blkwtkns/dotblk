@@ -9,12 +9,12 @@ and what others do to get these things tuned to one's liking.
 * $ sudo apt-get install git
 
 ## Clone repo
-$ git clone https://github.com/blkwtkns/dotfiles.git ~/.dotblk
+$ git clone https://github.com/blkwtkns/dotfiles.git ~/.you_choose_folder_name (I suggest to prefix '.')
 
 ## Zsh
 * $ sudo apt-get install zsh
-Then install Prezto: https://github.com/sorin-ionescu/prezto 
-Remember to change shell: chsh -s /usr/bin/zsh (or chsh -s /bin/zsh)
+* Then install Prezto: https://github.com/sorin-ionescu/prezto 
+* Remember to change shell: chsh -s /usr/bin/zsh (or chsh -s /bin/zsh)
 Then logout of desktop session and log back in!
 
 ## Curl
@@ -25,13 +25,13 @@ Then logout of desktop session and log back in!
 * $ nvm install node
 
 #### The following should be automatically put in .zshrc | .bashrc to load nvm:
-$ export NVM_DIR="/home/blahque/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
+> $ export NVM_DIR="/home/blahque/.nvm"
+> [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
 
 #####If colors funky:
-$ if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
-    export TERM=xterm-256color
-  fi
+>$ if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
+>    export TERM=xterm-256color
+>  fi
 
 ## Neovim Installation (Ubuntu):
 The HQ suggests a PPA that contains the development version:
@@ -55,8 +55,8 @@ Visit https://github.com/neovim/neovim and find the tagged version you need.
 Download the zip, uncompress it, and enter the project folder.
 
 #### Install the dependencies:
-NB (This might be preferable, neomake wouldn't work until 
-I apt-get installed autoconf and automake)
+NB: This might be preferable, neomake wouldn't work until 
+I apt-get installed autoconf and automake
 
 * $ sudo apt-get install libtool autoconf automake cmake libncurses5-dev g++
 
@@ -104,7 +104,7 @@ just use the file as reference.
 # Misc
 
 ## Shared folder mounting via VirtualBox
-* $ sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) ~/Downloads ~/host
+* $ sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) ~/folder_from_non_virtual_machine ~/name_of_folder_on_virtual_machine
 
 ## Links:
 * https://github.com/greg-js/dotfiles
