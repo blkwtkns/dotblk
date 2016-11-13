@@ -69,16 +69,18 @@ I apt-get installed autoconf and automake)
 * $ sudo pip2/pip3 install neovim -U
 
 ## Shell script
-I think at this point the symlinks can be made, which 
-I made a shell script to shorten the process, although there are 
-only a few links haha, but I expect this to keep growing 
-in symlinks and functionality.
+Changes to home directory, establishes symlinks, and
+assigns neovim (nvim) to global EDITOR and VISUAL shell
+global variables. I keep working on making this script
+automate as much as possible, but with required passwords
+and possible errors, I think most of this should be done
+manually. If you're not comfortable with running scripts, 
+just use the file as reference.
 
 #### Go to home folder: 
 * $ cd ~ (the first command in script changes directory to $HOME as insurance)
 #### Run sh script: 
 * $ zsh scripts.sh (or bash scripts.sh)
-
 
 ## For Neomake (if Neovim not built from source):
 * $ sudo apt-get install build essentials
@@ -97,7 +99,7 @@ in symlinks and functionality.
 
 ## Tmux
 * $ sudo apt-get install tmux 
-See: https://tomordonez.com/install-tmux-ubuntu/
+* See: https://tomordonez.com/install-tmux-ubuntu/
 
 # Misc
 
@@ -105,11 +107,12 @@ See: https://tomordonez.com/install-tmux-ubuntu/
 * $ sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) ~/Downloads ~/host
 
 ## Links:
-https://github.com/greg-js/dotfiles
-wikimatze.de/better-zsh-with-prezto
+* https://github.com/greg-js/dotfiles
+* wikimatze.de/better-zsh-with-prezto
 
 ## TODOS
-Work on cross platform config conditions and sh scripting
+* Work on cross platform config conditions and sh scripting
+* Separate npm script for global installs
 
 ## Issues
 * Eslint not working with current config, use jscs
