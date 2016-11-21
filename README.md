@@ -109,12 +109,23 @@ just use the file as reference.
 
 # Misc
 
+## Capslock to Ctrl
+$ sudo nvim /etc/default/keyboard 
+then change XKBOPTIONS="ctrl:nocaps"
+then
+$ setxkbmap -layout us -option ctrl:nocaps
+
 ## Shared folder mounting via VirtualBox
 * $ sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) ~/folder_from_non_virtual_machine ~/name_of_folder_on_virtual_machine
 
 ## Links:
 * https://github.com/greg-js/dotfiles
 * wikimatze.de/better-zsh-with-prezto
+
+### Linux Links:
+* https://github.com/thezerobit/asus-zenbook-ux305fa
+* http://askubuntu.com/questions/715306/xbacklight-no-outputs-have-backlight-property-no-sys-class-backlight-folder
+* https://help.ubuntu.com/community/AsusZenbook#Power_Saving_Optimizations
 
 ## TODOS
 * Work on cross platform config conditions and sh scripting
