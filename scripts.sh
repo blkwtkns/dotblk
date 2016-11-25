@@ -13,6 +13,8 @@ ln -sv $dotDir/.eslintrc
 ln -sv $dotDir/.gitconfig
 ln -sv $dotDir/.jscsrc
 ln -sv $dotDir/.tmux.conf
+ln -sf $dotDir/.zpreztorc $HOME/.zpreztorc
+ln -sf $dotDir/.zprofile $HOME/.zprofile
 
 # script to make nvim default for editor and visual globals
 dot="."
