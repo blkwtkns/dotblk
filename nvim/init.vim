@@ -567,6 +567,21 @@ Plug 'majutsushi/tagbar'
 " {{{
 nmap <Leader>tg :TagbarToggle<CR>
 " }}}
+
+" ====================================================================
+" Haskell
+" ====================================================================
+" Plug 'dag/vim2hs'
+" Plug 'bitc/vim-hdevtools'
+"{{{
+"au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
+"au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+"}}}
+Plug 'eagletmt/neco-ghc'
+" Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+
+
 " ====================================================================
 " Python
 " ====================================================================
@@ -777,6 +792,11 @@ augroup omnifuncs
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 augroup end
 
+"Haskell
+augroup NeomakeHaskell
+  autocmd!
+  autocmd! BufWritePost *.hs Neomake
+augroup END
 " tern
 " if exists('g:plugs["tern_for_vim"]')
 "   let g:tern_show_argument_hints = 'on_hold'

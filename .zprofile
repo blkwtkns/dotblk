@@ -72,7 +72,10 @@ if [[ ! -d "$TMPDIR" ]]; then
 fi
 
 # Aliases
-#
+# open neovim on vi and vim commands
+alias vim='nvim'
+alias vi='nvim'
+
 # aliases for Tmux
 alias tmux='tmux -2'
 alias ta='tmux attach -t'
@@ -84,5 +87,9 @@ alias tkill='tmux kill-session -t'
 alias ev='nvim ~/.config/nvim/init.vim'
 alias et='nvim ~/.tmux.conf'
 alias ez='nvim ~/.zshrc'
+
+# Haskell
+alias ghc='stack exec -- ghc'
+alias ghci='stack exec -- ghci'
 
 TMPPREFIX="${TMPDIR%/}/zsh"
