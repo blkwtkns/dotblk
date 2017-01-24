@@ -134,6 +134,7 @@ $ setxkbmap -layout us -option ctrl:nocaps
 ## TODOS
 * Work on cross platform config conditions and sh scripting
 * Separate npm script for global installs
+* Added workflow and scripts for AWS-cli and Apex
 
 ## Issues
 * Eslint not working with current config, use jscs
