@@ -239,13 +239,8 @@ Plug 'valloric/MatchTagAlways'
   " autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 " }}}
 
-Plug 'tomtom/tcomment_vim'
-" {{{
-    " http://vimawesome.com/plugin/tcomment
-    " gcc    -> toggle current line (press . to toggle subsequent lines)
-    " gc     -> toggle selected lines
-    " Ctrl-/    -> also works but press it twice
-" }}}
+
+
 
 Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-repeat'
@@ -474,6 +469,43 @@ Plug 'scrooloose/nerdtree'
     let g:NERDDefaultAlign = 'left'
 " }}}
 
+
+" ====================================================================
+" Commenting
+" ====================================================================
+Plug 'scrooloose/nerdcommenter'
+" {{{
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 
+\ 'javascript.jsx': { 'leftAlt': '/*', 'rightAlt': '*/', 'left': '{/*','right': '*/}' },
+\ 'html': { 'left': '<!-- ', 'right': '-->', 'leftAlt': '/*','rightAlt': '*/' },
+\}
+
+" Use alternative delimiters by default
+" let g:NERDAltDelims_js = 1
+
+let NERD_jsx_alt_style=1
+let NERD_html_alt_style=1
+"}}} 
+
+" Plug 'tomtom/tcomment_vim'
+" {{{
+    " http://vimawesome.com/plugin/tcomment
+    " gcc    -> toggle current line (press . to toggle subsequent lines)
+    " gc     -> toggle selected lines
+    " Ctrl-/    -> also works but press it twice
+" }}}
+" ====================================================================
+
 " Plug 'easymotion/vim-easymotion'
 " {{{
     " http://vimawesome.com/plugin/easymotion
@@ -659,8 +691,28 @@ filetype indent on
 "Always show current position
 set ruler
 
-" number the lines.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Numbering
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" absolute number is default
 set number
+" relative number for lines
+set relativenumber
+
+" function and key map to toggle absolute and relative numbering
+" function! NumberToggle()
+  " if(&relativenumber == 1)
+    " set number
+  " else
+    " set relativenumber
+  " endif
+" endfunc
+
+" nnoremap <C-n> :call NumberToggle()<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " show location of cursor using a horizontal line.
 " set cursorline
