@@ -100,6 +100,9 @@ just use the file as reference.
 ## Tmux
 * $ sudo apt-get install tmux 
 * See: https://tomordonez.com/install-tmux-ubuntu/
+* After installing tmux and running script, do the following to enable tmux plugin management
+* $ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+* :source-file ~/.tmux.conf
 
 ## Tags
 * $ sudo apt-get install exuberant-ctags
