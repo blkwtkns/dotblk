@@ -13,6 +13,7 @@ ln -sv $dotDir/.eslintrc
 ln -sv $dotDir/.gitconfig
 ln -sv $dotDir/.jscsrc
 ln -sv $dotDir/.tmux.conf
+ln -sv $dotDir/jsdev.conf $HOME/.tmux/jsdev.conf
 ln -sf $dotDir/.zpreztorc $HOME/.zpreztorc
 ln -sf $dotDir/.zprofile $HOME/.zprofile
 
