@@ -1,7 +1,79 @@
-# Shell scripts 
+#!/bin/bash
 
-#Ensure that script is being run in home directory
+# Determine OS
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+   platform='linux'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+   platform='mac'
+fi
+
+# Ensure that script is being run in home directory
 cd $HOME
+
+# Install the good stuff - OS dependent
+if [[ $platform == 'linux' ]]; then
+  sudo apt-get update
+  sudo apt-get upgrade
+
+  sudo apt-get install zsh
+  chsh -s /usr/bin/zsh
+
+  git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+  setopt EXTENDED_GLOB
+  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+    ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+  done
+
+  sudo apt-get install curl
+
+  sudo apt-get install build essentials
+  sudo apt-get install make
+  sudo apt-get install libtool autoconf automake cmake libncurses5-dev g++
+  sudo apt-get install python-dev python-pip python3-dev python3-pip
+  sudo apt-get install software-properties-common
+  sudo add-apt-repository ppa:neovim-ppa/unstable
+  sudo apt-get update
+  sudo apt-get install neovim
+
+  sudo pip2/pip3 install neovim -U
+
+  sudo apt-get install xclip
+
+  sudo apt-get install tmux 
+
+  sudo apt-get install exuberant-ctags
+
+elif [[ $platform == 'mac' ]]; then
+  xcode-select –install
+  /usr/bin/ruby -e “$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)”
+  brew doctor
+  brew install caskroom/cask/brew-cask
+
+  brew install zsh
+  sudo -s 'echo /usr/local/bin/zsh >> /etc/shells' && chsh -s /usr/local/bin/zsh
+  brew link curl --force
+  brew install tmux
+fi
+
+# Might be redundant but shouldn't hurt
+pip install --user neovim
+pip install --upgrade neovim
+pip2 install --upgrade neovim
+pip3 install --upgrade neovim
+pip install --upgrade pip
+
+# Download tmux plugin manager then source config
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+tmux source-file ~/.tmux.conf
+
+# tags for mac?
+
+# Install nvm and newest node version
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | zsh 
+nvm install node
+
 
 #Create variable to find path to script 
 dotDir=$(dirname "$(readlink -f "$0")")
@@ -25,3 +97,4 @@ rcfile=$dot$ed$rc
 
 echo "export EDITOR='$(which nvim)'" >> $HOME/$rcfile
 echo "export VISUAL='$(which nvim)'" >> $HOME/$rcfile
+

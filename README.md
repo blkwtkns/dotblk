@@ -135,9 +135,10 @@ $ setxkbmap -layout us -option ctrl:nocaps
 * https://help.ubuntu.com/community/AsusZenbook#Power_Saving_Optimizations
 
 ## TODOS
-* Work on cross platform config conditions and sh scripting
+* Work on cross platform config conditions and sh scripting(needs testing)
 * Separate npm script for global installs
 * Added workflow and scripts for AWS-cli and Apex
+* Work on plug-less vimrc for easy use anywhere
 
 ## Issues
 * Eslint not working with current config, use jscs
