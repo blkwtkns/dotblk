@@ -134,6 +134,9 @@ $ setxkbmap -layout us -option ctrl:nocaps
 * http://askubuntu.com/questions/715306/xbacklight-no-outputs-have-backlight-property-no-sys-class-backlight-folder
 * https://help.ubuntu.com/community/AsusZenbook#Power_Saving_Optimizations
 
+### Tips:
+* install rtv ($ pip install --user rtv)
+
 ## TODOS
 * Work on cross platform config conditions and sh scripting(needs testing)
 * Separate npm script for global installs
