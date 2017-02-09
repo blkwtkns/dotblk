@@ -364,7 +364,7 @@ Plug 'mxw/vim-jsx'
 " JavaScript and JSX highlighting
 "
 " Allow JSX in normal JS files
-let g:jsx_ext_required = 1
+let g:jsx_ext_required = 0
 
 " ====================================================================
 " Appearance
@@ -682,7 +682,7 @@ set noswapfile
 "=========
 
 "Leader remap
-" let mapleader=","
+"let mapleader=","
 
 " Enable filetype plugins
 filetype plugin on
@@ -764,8 +764,15 @@ set splitbelow
 set splitright
 
 " Treat long lines as break lines (useful when moving around in them)
-map j gj
-map k gk
+" map j gj
+" map k gk
+noremap <silent> <expr> j (v:count == 0  'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0  'gk' : 'k')
+
+" Terminal mode
+"
+" Switch to normal mode
+tnoremap <Leader><ESC> <C-\><C-n>
 
 " Ignore case when searching
 set ignorecase
@@ -818,7 +825,21 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*node_modules*,*.jpg,*.png,*.svg,*.ttf,
 ",*public/css/*,*public/js*
 
 " HTML Autocomplete
-" set omnifunc=htmlcomplete#CompleteTags
+set omnifunc=htmlcomplete#CompleteTags
+
+""""""""""""""""""""""""""""""
+" => Folding
+""""""""""""""""""""""""""""""
+"set fdm=indent
+"set fdc=4
+"set fdl=1
+" augroup remember_folds
+  " autocmd!
+  " autocmd BufWinLeave *.* mkview
+  " autocmd BufWinEnter *.* loadview
+" augroup END
+
+
 """"""""""""""""""""""""""""""
 " => Status line
 """"""""""""""""""""""""""""""
@@ -849,6 +870,7 @@ augroup NeomakeHaskell
   autocmd!
   autocmd! BufWritePost *.hs Neomake
 augroup END
+
 " tern
 " if exists('g:plugs["tern_for_vim"]')
 "   let g:tern_show_argument_hints = 'on_hold'
