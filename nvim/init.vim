@@ -108,6 +108,8 @@ if has("unix")
   let g:python3_host_prog = '/usr/bin/python3'
   if s:uname == "Darwin\n"
     let g:python_host_prog='/usr/local/bin/python' 
+    let g:python2_host_prog='/usr/local/bin/python2' 
+    let g:python3_host_prog='/usr/local/bin/python3' 
   endif
 endif
 
@@ -766,8 +768,8 @@ set splitright
 " Treat long lines as break lines (useful when moving around in them)
 " map j gj
 " map k gk
-noremap <silent> <expr> j (v:count == 0  'gj' : 'j')
-noremap <silent> <expr> k (v:count == 0  'gk' : 'k')
+noremap <expr> j v:count ? 'j' : 'gj'
+noremap <expr> k v:count ? 'k' : 'gk'
 
 " Terminal mode
 "
