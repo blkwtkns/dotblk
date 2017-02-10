@@ -107,9 +107,9 @@ if has("unix")
   let g:python_host_prog = '/usr/bin/python2'
   let g:python3_host_prog = '/usr/bin/python3'
   if s:uname == "Darwin\n"
-    let g:python_host_prog='/usr/local/bin/python' 
-    let g:python2_host_prog='/usr/local/bin/python2' 
-    let g:python3_host_prog='/usr/local/bin/python3' 
+    let g:python_host_prog='/usr/local/bin/python'
+    let g:python2_host_prog='/usr/local/bin/python2'
+    let g:python3_host_prog = '/usr/local/bin/python3'
   endif
 endif
 
@@ -242,8 +242,6 @@ Plug 'valloric/MatchTagAlways'
 " }}}
 
 
-
-
 Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-repeat'
 " {{{
@@ -316,7 +314,7 @@ Plug 'neomake/neomake'
     " \ 'errorformat': '%f: line %l\, col %c\, %m',
     " \ }
 
-    let g:neomake_javascript_enabled_makers = ['jscs']
+    let g:neomake_javascript_enabled_makers = ['eslint']
     " let g:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
     " let g:neomake_javascript_eslint_exe=substitute(g:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
@@ -362,18 +360,20 @@ Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+" {{{
+    " JavaScript and JSX highlighting
+    "
+    " Allow JSX in normal JS files
+    let g:jsx_ext_required = 0
+" }}}
 
-" JavaScript and JSX highlighting
-"
-" Allow JSX in normal JS files
-let g:jsx_ext_required = 0
 
 " ====================================================================
 " Appearance
 " ====================================================================
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" {{{
+""{{{
     " https://github.com/vim-airline/vim-airline
     " let distro = system("cat /etc/issue | head -1 | cut -f 1 -d ' '")
     " if distro == "Manjaro\n"
@@ -385,11 +385,12 @@ Plug 'vim-airline/vim-airline-themes'
     " endif
     " set termguicolors
     " also install the system package 'powerline-fonts'
-    let g:airline_powerline_fonts = 1
+    " let g:airline_powerline_fonts = 1
     " Enable the list of buffers
     let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#buffer_nr_show = 1
     " Show just the filename
-    let g:airline#extensions#tabline#fnamemod = ':t'
+    " let g:airline#extensions#tabline#fnamemod = ':t'
 
     let g:airline#extensions#tabline#left_sep = ''
     let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -407,6 +408,7 @@ Plug 'vim-airline/vim-airline-themes'
     let g:airline_theme = 'dark'
 " }}}
 
+
 " ====================================================================
 " Buffers
 " ====================================================================
@@ -414,6 +416,7 @@ Plug 'vim-airline/vim-airline-themes'
 " {{{
     " :BufOnly closes all buffers except the current one
 " }}}
+
 
 " ====================================================================
 " Formatter
@@ -434,6 +437,7 @@ Plug 'vim-airline/vim-airline-themes'
     " https://github.com/avakhov/vim-yaml
     " indent yaml
 " }}}
+
 
 " ====================================================================
 " Navigation
@@ -475,31 +479,31 @@ Plug 'scrooloose/nerdtree'
 " ====================================================================
 " Commenting
 " ====================================================================
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
 " {{{
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
+    " Add spaces after comment delimiters by default
+    " let g:NERDSpaceDelims = 1
 
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
+    " Use compact syntax for prettified multi-line comments
+    " let g:NERDCompactSexyComs = 1
 
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
+    " Align line-wise comment delimiters flush left instead of following code indentation
+    " let g:NERDDefaultAlign = 'left'
 
-" Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 
-\ 'javascript.jsx': { 'leftAlt': '/*', 'rightAlt': '*/', 'left': '{/*','right': '*/}' },
-\ 'html': { 'left': '<!-- ', 'right': '-->', 'leftAlt': '/*','rightAlt': '*/' },
-\}
+    " Add your own custom formats or override the defaults
+    " let g:NERDCustomDelimiters = { 
+    " \ 'javascript.jsx': { 'leftAlt': '/*', 'rightAlt': '*/', 'left': '{/*','right': '*/}' },
+    " \ 'html': { 'left': '<!-- ', 'right': '-->', 'leftAlt': '/*','rightAlt': '*/' },
+    " \}
 
-" Use alternative delimiters by default
-" let g:NERDAltDelims_js = 1
+    " Use alternative delimiters by default
+    " let g:NERDAltDelims_js = 1
 
-let NERD_jsx_alt_style=1
-let NERD_html_alt_style=1
+    " let NERD_jsx_alt_style=1
+    " let NERD_html_alt_style=1
 "}}} 
 
-" Plug 'tomtom/tcomment_vim'
+Plug 'tomtom/tcomment_vim'
 " {{{
     " http://vimawesome.com/plugin/tcomment
     " gcc    -> toggle current line (press . to toggle subsequent lines)
@@ -596,11 +600,6 @@ Plug 'ctrlpvim/ctrlp.vim'
     " noremap <F3> :Unite file_mru<cr>
 " }}}
 
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'majutsushi/tagbar'
-" {{{
-nmap <Leader>tg :TagbarToggle<CR>
-" }}}
 
 " ====================================================================
 " Haskell
@@ -630,11 +629,13 @@ Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 " ====================================================================
 " Tags
 " ====================================================================
-" Plug 'majutsushi/tagbar'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar'
 " {{{
     " $ yaourt ctags                  # Manjaro
     " $ sudo apt-get install ctags    # Ubuntu
     " nnoremap <F4> :TagbarToggle<cr>
+      nmap <Leader>tg :TagbarToggle<CR>
 " }}}
 
 " ====================================================================
@@ -661,6 +662,7 @@ Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 " }}}
 
 call plug#end()    " vim-plug
+
 
 "############################################################################
 "#  START: Blakes's own config :)
@@ -768,8 +770,8 @@ set splitright
 " Treat long lines as break lines (useful when moving around in them)
 " map j gj
 " map k gk
-noremap <expr> j v:count ? 'j' : 'gj'
-noremap <expr> k v:count ? 'k' : 'gk'
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk'
 
 " Terminal mode
 "
@@ -849,13 +851,21 @@ set omnifunc=htmlcomplete#CompleteTags
 " set laststatus=2 (already set in airline config below)
 
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+
+" Status Line 
+"{{{  
+"}}}  
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetypes
 "
 " Force *.md files to be recognized as markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" Stop Automatic insert of comment leader when hitting <Enter> in insert mode
+" or hitting 'o' or 'O' in Normal mode
+au FileType * set fo-=r fo-=o
 
 "Omnifuncs
 augroup omnifuncs
