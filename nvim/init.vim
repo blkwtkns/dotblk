@@ -393,6 +393,7 @@ Plug 'vim-airline/vim-airline-themes'
     " let g:airline#extensions#tabline#fnamemod = ':t'
 
     let g:airline#extensions#tabline#left_sep = ''
+    " let g:python_host_prog='/usr/local/bin/python' 
     let g:airline#extensions#tabline#left_alt_sep = '|'
 
     " Always display status line
