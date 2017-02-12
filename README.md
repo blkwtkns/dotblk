@@ -136,6 +136,10 @@ $ setxkbmap -layout us -option ctrl:nocaps
 
 ### Tips:
 * install rtv ($ pip install --user rtv)
+* read rtv docs
+* install urlview...
+* $ sudo apt-get update
+  $ sudo apt-get install urlview
 
 ## TODOS
 * Work on cross platform config conditions and sh scripting(needs testing)
