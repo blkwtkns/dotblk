@@ -140,6 +140,7 @@ $ setxkbmap -layout us -option ctrl:nocaps
 * install urlview...
 * $ sudo apt-get update
   $ sudo apt-get install urlview
+  $ export RTV_URLVIEWER=urlview
 
 ## TODOS
 * Work on cross platform config conditions and sh scripting(needs testing)
