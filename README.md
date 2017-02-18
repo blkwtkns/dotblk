@@ -4,23 +4,23 @@ This details process to get dev environment up and going quickly.
 Please feel free to take whatever pleases you, it's what I've done,
 and what others do to get these things tuned to one's liking. 
 
-## Git
+### Git
 * $ sudo apt-get update
 * $ sudo apt-get install git
 
-## Clone repo
+### Clone repo
 $ git clone https://github.com/blkwtkns/dotfiles.git ~/.you_choose_folder_name (I suggest to prefix '.')
 
-## Zsh
+### Zsh
 * $ sudo apt-get install zsh
 * Then install Prezto: https://github.com/sorin-ionescu/prezto 
 * Remember to change shell: chsh -s /usr/bin/zsh (or chsh -s /bin/zsh)
 Then logout of desktop session and log back in!
 
-## Curl
+### Curl
 * $ sudo apt-get install curl 
 
-## NVM and Node
+### NVM and Node
 * $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | zsh 
 * $ nvm install node
 
@@ -28,12 +28,12 @@ Then logout of desktop session and log back in!
 > $ export NVM_DIR="/home/blahque/.nvm"
 > [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
 
-#####If colors funky:
+##### If colors funky:
 >$ if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
 >    export TERM=xterm-256color
 >  fi
 
-## Neovim Installation (Ubuntu):
+### Neovim Installation (Ubuntu):
 The HQ suggests a PPA that contains the development version:
 https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu
 
@@ -43,7 +43,7 @@ https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu
 * $ sudo apt-get update
 * $ sudo apt-get install neovim
 
-## Py stuff
+### Py stuff
 * $ pip install --user neovim
 * $ pip install --upgrade neovim
 * $ pip2 install --upgrade neovim
@@ -68,7 +68,7 @@ I apt-get installed autoconf and automake
 #### On all platforms (update this package frequently):
 * $ sudo pip2/pip3 install neovim -U
 
-## Shell script
+### Shell script
 Changes to home directory, establishes symlinks, and
 assigns neovim (nvim) to global EDITOR and VISUAL shell
 global variables. I keep working on making this script
@@ -82,29 +82,29 @@ just use the file as reference.
 #### Run sh script: 
 * $ zsh scripts.sh (or bash scripts.sh)
 
-## For Neomake (if Neovim not built from source):
+### For Neomake (if Neovim not built from source):
 * $ sudo apt-get install build essentials
 * $ sudo apt-get install make
 * $ sudo apt-get install autoconf automake
 
-## Beautifier
+### Beautifier
 * $ npm i -g js-beautify
 
-## Lint
+### Lint
 * $ npm i -g eslint
 * $ npm i -g jscs
 
-## clipboard: 
+### clipboard: 
 * $ sudo apt-get install xclip
 
-## Tmux
+### Tmux
 * $ sudo apt-get install tmux 
 * See: https://tomordonez.com/install-tmux-ubuntu/
 * After installing tmux and running script, do the following to enable tmux plugin management
 * $ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 * :source-file ~/.tmux.conf
 
-## Tags
+### Tags
 * $ sudo apt-get install exuberant-ctags
 * http://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
 * http://vi.stackexchange.com/questions/2944/can-i-load-different-tags-per-project
@@ -112,18 +112,19 @@ just use the file as reference.
 
 # Misc
 
-## Capslock to Ctrl
+### Capslock to Ctrl
 $ sudo nvim /etc/default/keyboard 
 then change XKBOPTIONS="ctrl:nocaps"
 then
 $ setxkbmap -layout us -option ctrl:nocaps
 
-## Shared folder mounting via VirtualBox
+### Shared folder mounting via VirtualBox
 * $ sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) ~/folder_from_non_virtual_machine ~/name_of_folder_on_virtual_machine
 
-## Links:
+### Links:
 * https://github.com/greg-js/dotfiles
 * wikimatze.de/better-zsh-with-prezto
+* Docker installation (ubuntu): https://docs.docker.com/engine/installation/linux/ubuntu/
 
 ### Haskell setup: 
 * http://www.stephendiehl.com/posts/vim_2016.html
@@ -142,14 +143,15 @@ $ setxkbmap -layout us -option ctrl:nocaps
   $ sudo apt-get install urlview
   $ export RTV_URLVIEWER=urlview
 
-## TODOS
+### TODOS
 * Work on cross platform config conditions and sh scripting(needs testing)
 * Separate npm script for global installs
 * Added workflow and scripts for AWS-cli and Apex
 * Work on plug-less vimrc for easy use anywhere
+* Finish Dockerfile for portable dev environment (DON'T USE YET!!)
 
-## Issues
+### Issues
 * Eslint not working with current config, use jscs
 
-## Thanks
+### Thanks
 Many to give, links to repos and blogs coming soon
