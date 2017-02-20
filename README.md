@@ -125,6 +125,7 @@ $ setxkbmap -layout us -option ctrl:nocaps
 * https://github.com/greg-js/dotfiles
 * wikimatze.de/better-zsh-with-prezto
 * Docker installation (ubuntu): https://docs.docker.com/engine/installation/linux/ubuntu/
+* https://github.com/raelgc/scudcloud/
 
 ### Haskell setup: 
 * http://www.stephendiehl.com/posts/vim_2016.html
@@ -149,6 +150,7 @@ $ setxkbmap -layout us -option ctrl:nocaps
 * Added workflow and scripts for AWS-cli and Apex
 * Work on plug-less vimrc for easy use anywhere
 * Finish Dockerfile for portable dev environment (DON'T USE YET!!)
+* Default to gnome terminal
 
 ### Issues
 * Eslint not working with current config, use jscs

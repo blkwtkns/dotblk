@@ -668,8 +668,12 @@ call plug#end()    " vim-plug
 "############################################################################
 "#  START: Blakes's own config :)
 "############################################################################
+
+"visualbell off
+set t_vb=
+
 " Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
+set encoding=utf-8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
@@ -811,7 +815,7 @@ syntax enable
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
-set t_ut=
+" set t_ut=
 colorscheme gruvbox
 " colorscheme solarized
 set background=dark
