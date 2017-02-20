@@ -443,10 +443,10 @@ Plug 'vim-airline/vim-airline-themes'
 " ====================================================================
 " Navigation
 " ====================================================================
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 " {{{
     " noremap <F1> :call NERDTreeToggleAndFind()<cr>
-    noremap <Leader>nt :NERDTreeToggle<cr>
+    " noremap <Leader>nt :NERDTreeToggle<cr>
 
     " function! NERDTreeToggleAndFind()
     "     if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
@@ -467,15 +467,25 @@ Plug 'scrooloose/nerdtree'
     " let g:NERDTreeShowBookmarks = 1
     "let g:NERDTreeCascadeOpenSingleChildDir = 1
     " Add spaces after comment delimiters by default
-    let g:NERDSpaceDelims = 1
+    " let g:NERDSpaceDelims = 1
 
     " Use compact syntax for prettified multi-line comments
-    let g:NERDCompactSexyComs = 1
+    " let g:NERDCompactSexyComs = 1
 
     " Align line-wise comment delimiters flush left instead of following code indentation
-    let g:NERDDefaultAlign = 'left'
+    " let g:NERDDefaultAlign = 'left'
 " }}}
 
+" Netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 0
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Vexplore
+" augroup END
 
 " ====================================================================
 " Commenting
@@ -668,6 +678,9 @@ call plug#end()    " vim-plug
 "############################################################################
 "#  START: Blakes's own config :)
 "############################################################################
+
+" Allow hidden buffers
+set hidden
 
 "visualbell off
 set t_vb=

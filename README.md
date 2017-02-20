@@ -125,7 +125,7 @@ $ setxkbmap -layout us -option ctrl:nocaps
 * https://github.com/greg-js/dotfiles
 * wikimatze.de/better-zsh-with-prezto
 * Docker installation (ubuntu): https://docs.docker.com/engine/installation/linux/ubuntu/
-* https://github.com/raelgc/scudcloud/
+* (linux) https://github.com/raelgc/scudcloud/
 
 ### Haskell setup: 
 * http://www.stephendiehl.com/posts/vim_2016.html
