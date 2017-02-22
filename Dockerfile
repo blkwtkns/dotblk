@@ -2,37 +2,61 @@
 # Dockerfile for testing sh scripting in container
 #
 
-FROM ubuntu:latest
+FROM gliderlabs/alpine:3.4
 MAINTAINER Blake Watkins "blakemwatkins@gmail.com"
 
-RUN apt-get update -y
-RUN apt-get install -y git
-RUN apt-get install -y python
-RUN apt-get install -y curl
-# RUN apt-get install -y vim
-RUN apt-get install -y strace
-RUN apt-get install -y diffstat
-RUN apt-get install -y pkg-config
-RUN apt-get install -y cmake
-RUN apt-get install -y build-essential
-RUN apt-get install -y tcpdump
+RUN apk add --update \
+  git \
+  alpine-sdk build-base\
+  libtool \
+  automake \
+  m4 \
+  autoconf \
+  linux-headers \
+  unzip \
+  ncurses ncurses-dev ncurses-libs ncurses-terminfo \
+  python \
+  python-dev \
+  py-pip \
+  clang \
+  go \
+  nodejs \
+  xz \
+  curl \
+  make \
+  cmake \
+  && rm -rf /var/cache/apk/*
 
-RUN apt-get install -y build essentials
-RUN apt-get install -y make
-RUN apt-get install -y libtool autoconf automake cmake libncurses5-dev g++
-RUN apt-get install -y python-dev python-pip python3-dev python3-pip
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:neovim-ppa/unstable
-RUN apt-get -y update
-RUN apt-get -y install neovim
+RUN git clone https://github.com/neovim/libtermkey.git && \
+  cd libtermkey && \
+  make && \
+  make install && \
+  cd ../ && rm -rf libtermkey
 
-RUN pip2/pip3 -y install neovim -U
+RUN git clone https://github.com/neovim/libvterm.git && \
+      cd libvterm && \
+      make && \
+      make install && \
+      cd ../ && rm -rf libvterm
 
-RUN apt-get -y install xclip
+RUN git clone https://github.com/neovim/unibilium.git && \
+  cd unibilium && \
+  make && \
+  make install && \
+  cd ../ && rm -rf unibilium
 
-RUN apt-get -y install tmux 
+RUN  git clone https://github.com/neovim/neovim.git && \
+  cd neovim && \
+  make && \
+  make install && \
+  cd ../ && rm -rf nvim
 
-RUN apt-get -y install exuberant-ctags
+
+
+RUN apk add --update \
+ xclip\
+ tmux \
+ exuberant-ctags
 
 # Install go
 # RUN curl https://go.googlecode.com/files/go1.2.1.linux-amd64.tar.gz | tar -C /usr/local -zx
