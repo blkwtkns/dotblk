@@ -92,4 +92,27 @@ alias ez='nvim ~/.zshrc'
 alias ghc='stack exec -- ghc'
 alias ghci='stack exec -- ghci'
 
+# git alias (should move to gitconfig)
+alias gflog='git reflog | grep -A1 pull | head -2'
+
+# Kill all running Docker containers
+alias docker-killa='docker kill $(docker ps -q)'
+
+# Remove all Docker containers
+alias docker-rm='docker rm $(docker ps -a -q)'
+
+# Remove all Docker images
+alias docker-rmi='docker rmi $(docker images -q)'
+
+# Automatize search for Docker container
+function docks() {
+  docker ps | grep "$1" | cut -d ' ' -f1
+}
+#
+function inspectContainer() {
+  docker exec -it `docks $1` sh
+}
+#
+alias dockInspect=inspectContainer
+
 TMPPREFIX="${TMPDIR%/}/zsh"
