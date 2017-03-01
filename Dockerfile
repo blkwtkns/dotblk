@@ -2,7 +2,7 @@
 # Dockerfile for testing sh scripting in container
 #
 
-FROM gliderlabs/alpine:3.4
+FROM node:7.6-alpine
 MAINTAINER Blake Watkins "blakemwatkins@gmail.com"
 
 RUN apk add --update \
@@ -20,11 +20,11 @@ RUN apk add --update \
   py-pip \
   clang \
   go \
-  nodejs \
   xz \
   curl \
   make \
   cmake \
+  zsh \
   && rm -rf /var/cache/apk/*
 
 RUN git clone https://github.com/neovim/libtermkey.git && \
@@ -50,8 +50,6 @@ RUN  git clone https://github.com/neovim/neovim.git && \
   make && \
   make install && \
   cd ../ && rm -rf nvim
-
-
 
 RUN apk add --update \
  xclip\
@@ -86,15 +84,32 @@ ENV LD_LIBRARY_PATH /home/dev/lib
 
 WORKDIR /home/dev
 ENV HOME /home/dev
-ADD vimrc /home/dev/.vimrc
-ADD vim /home/dev/.vim
-ADD bash_profile /home/dev/.bash_profile
-ADD gitconfig /home/dev/.gitconfig
 
+RUN git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+RUN tmux source-file ~/.tmux.conf
+
+RUN chsh -s /usr/bin/zsh 
+
+RUN git clone --recursive https://github.com/sorin-ionescu/prezto.git
+COPY prezScript.sh /home/dev/
+RUN prezScript.sh
+
+COPY nvim /home/dev/.config
+COPY .tmux.conf /home/dev/
+COPY .gitconfig /home/dev/
+COPY .eslintrc /home/dev/
+COPY .jscsrc /home/dev/
+COPY jsdev.conf /home/dev/.tmux/
+COPY .zpreztorc /home/dev/
+COPY .zprofile /home/dev/
+COPY exports.sh /home/dev/
+
+RUN exports.sh
 # Link in shared parts of the home directory
 # RUN ln -s /var/shared/.ssh
 # RUN ln -s /var/shared/.bash_history
 # RUN ln -s /var/shared/.maintainercfg
+
 
 RUN chown -R dev: /home/dev
 USER dev
