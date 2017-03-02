@@ -1,0 +1,415 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Maintainer: 
+"       Amir Salihefendic
+"       http://amix.dk - amix@amix.dk
+"
+" Version: 
+"       5.0 - 29/05/12 15:43:36
+"
+" Blog_post: 
+"       http://amix.dk/blog/post/19691#The-ultimate-Vim-configuration-on-Github
+"
+" Awesome_version:
+"       Get this config, nice color schemes and lots of plugins!
+"
+"       Install the awesome version from:
+"
+"           https://github.com/amix/vimrc
+"
+" Syntax_highlighted:
+"       http://amix.dk/vim/vimrc.html
+"
+" Raw_version: 
+"       http://amix.dk/vim/vimrc.txt
+"
+" Sections:
+"    -> General
+"    -> VIM user interface
+"    -> Colors and Fonts
+"    -> Files and backups
+"    -> Text, tab and indent related
+"    -> Visual mode related
+"    -> Moving around, tabs and buffers
+"    -> Status line
+"    -> Editing mappings
+"    -> vimgrep searching and cope displaying
+"    -> Spell checking
+"    -> Misc
+"    -> Helper functions
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins (shortlist)
+
+" Autoinstall vim-plug {{{
+    " https://github.com/junegunn/vim-plug
+    let s:vim_plug_dir=expand($HOME.'/.vim/autoload')
+    if !filereadable(s:vim_plug_dir.'/plug.vim')
+        execute '!wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -P '.s:vim_plug_dir
+        let s:install_plug=1
+    endif
+" }}}
+
+" Specify a directory for plugins
+call plug#begin('~/.vim/plugged')
+
+Plug 'maksimr/vim-jsbeautify'
+"jsbeautify Config
+"{{{
+let g:config_Beautifier = {}
+let g:config_Beautifier['js'] = {}
+let g:config_Beautifier['js'].indent_size = '2'
+let g:config_Beautifier['css'] = {}
+let g:config_Beautifier['css'].indent_size = '2'
+let g:config_Beautifier['html'] = {}
+let g:config_Beautifier['html'].indent_size = '2'
+" for file beautification
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
+autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+
+" for range beautification
+autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+autocmd FileType json vnoremap <buffer> <c-f> :call RangeJsonBeautify()<cr>
+autocmd FileType jsx vnoremap <buffer> <c-f> :call RangeJsxBeautify()<cr>
+autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
+autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
+"}}}
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+""{{{
+    " Enable the list of buffers
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#buffer_nr_show = 1
+    let g:airline#extensions#tabline#left_sep = ''
+    let g:airline#extensions#tabline#left_alt_sep = '|'
+
+    if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+    endif
+
+    let g:airline_symbols.space = "\ua0"
+    let g:airline_theme = 'dark'
+" }}}
+
+Plug 'ctrlpvim/ctrlp.vim'
+" {{{
+    " https://github.com/ctrlpvim/ctrlp.vim
+    let g:ctrlp_map = '<c-p>'
+    let g:ctrlp_cmd = 'CtrlP'
+" }}}
+
+Plug 'tpope/vim-surround'
+Plug 'morhetz/gruvbox'
+Plug 'tomtom/tcomment_vim'
+
+" Initialize plugin system
+call plug#end()
+
+
+
+"###########################################################################
+"#  START: Blakes's own config :)
+"###########################################################################
+
+" Height of the command bar
+set cmdheight=2
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 0
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+
+""""""""""""""""""""""""""""""
+" => Status line
+""""""""""""""""""""""""""""""
+" Always show the status line
+set laststatus=2
+
+" Format the status line
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+
+" Allow hidden buffers
+set hidden
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf-8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
+
+"=========
+" General
+"=========
+
+"Leader remap
+let mapleader=","
+
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
+
+"Always show current position
+set ruler
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Numbering
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" absolute number is default
+set number
+" relative number for lines
+set relativenumber
+
+" function and key map to toggle absolute and relative numbering
+" function! NumberToggle()
+  " if(&relativenumber == 1)
+    " set number
+  " else
+    " set relativenumber
+  " endif
+" endfunc
+
+" nnoremap <C-n> :call NumberToggle()<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" show location of cursor using a horizontal line.
+" set cursorline
+" autocmd InsertEnter * highlight CursorLine guifg=white guibg=blue ctermfg=white ctermbg=blue
+" autocmd InsertLeave * highlight CursorLine guifg=white guibg=darkblue ctermfg=yellow ctermbg=darkblue
+
+" keep cursor in the middle of the screen while scrolling up and down.
+set scrolloff=999
+
+" Sets how many lines of history VIM has to remember
+set history=700
+
+" Enable system clipboard
+set clipboard=unnamedplus
+
+"key time delays
+set timeoutlen=1000
+set ttimeoutlen=1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Be smart when using tabs ;)
+set smarttab
+
+" Linebreak on 500 characters
+set lbr
+set tw=500
+
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+
+
+" Tab settings
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+set nolist " list disables linebreak
+
+" Prevent Vim from automatically inserting line 
+"   breaks in newly entered text
+set textwidth=0
+set wrapmargin=0
+
+" Open split windows below / to the right
+set splitbelow
+set splitright
+
+" Treat long lines as break lines (useful when moving around in them)
+" map j gj
+" map k gk
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk'
+
+" Terminal mode
+"
+" Switch to normal mode
+tnoremap <Leader><ESC> <C-\><C-n>
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases 
+set smartcase
+
+" Makes search act like search in modern browsers
+set incsearch 
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw 
+
+" For regular expressions turn magic on
+set magic
+
+" Highlights all search hits
+set hlsearch
+
+" Toggle search highlighting
+nnoremap <F3> :set hlsearch!<CR>
+
+" Show matching brackets when text indicator is over them
+set showmatch 
+
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+" Set the color scheme
+syntax enable
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
+" set t_ut=
+colorscheme gruvbox
+" colorscheme solarized
+set background=dark
+let g:gruvbox_contrast_dark='hard'
+
+highlight Normal ctermbg=None
+" highlight NonText ctermbg=none
+
+" Use the vim wildmenu for command completion
+set wildmenu
+set wildmode=longest:full,full
+
+" Ignore files in the wildmenu
+" set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.meteor/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*node_modules*,*.jpg,*.png,*.svg,*.ttf,*.woff,*.woff3,*.eot
+",*public/css/*,*public/js*
+
+" HTML Autocomplete
+set omnifunc=htmlcomplete#CompleteTags
+
+""""""""""""""""""""""""""""""
+" => Folding
+""""""""""""""""""""""""""""""
+"set fdm=indent
+"set fdc=4
+"set fdl=1
+" augroup remember_folds
+  " autocmd!
+  " autocmd BufWinLeave *.* mkview
+  " autocmd BufWinEnter *.* loadview
+" augroup END
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Filetypes
+"
+" Force *.md files to be recognized as markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" Stop Automatic insert of comment leader when hitting <Enter> in insert mode
+" or hitting 'o' or 'O' in Normal mode
+au FileType * set fo-=r fo-=o
+
+"Omnifuncs
+augroup omnifuncs
+  autocmd!
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup end
+
+"function that clears all registers with ClearRegister command
+function! ClearRegisters()
+    let regs='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-="*+'
+    let i=0
+    while (i<strlen(regs))
+        exec 'let @'.regs[i].'=""'
+        let i=i+1
+    endwhile
+endfunction
+ 
+command! ClearReg call ClearRegisters()
+
+" allows cursor change in tmux mode
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+
+" when re-opening a file, jump back to the previous position
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+" {{{
+    function! CenterCursor()
+        call feedkeys("zz")    " emulate these keypresses: zz (center line)
+    endfunction
+
+    " autocmd BufReadPre,FileReadPre * call CenterCursor()
+" }}}
+
+" close empty buffers {{{
+    " tip from http://stackoverflow.com/a/6561076/232485
+    function! NrBufs()
+        let i = bufnr('$')
+        let j = 0
+        while i >= 1
+            if buflisted(i)
+                let j+=1
+            endif
+            let i-=1
+        endwhile
+        return j
+    endfunction
+
+    function! CloseEmptyBuffers()
+        if NrBufs() == 1
+            return
+        endif
+        let [i, n; empty] = [1, bufnr('$')]
+        while i <= n
+            if bufexists(i) && bufname(i) == ''
+                call add(empty, i)
+            endif
+            let i += 1
+        endwhile
+        if len(empty) > 0
+            exe 'bdelete' join(empty)
+        endif
+    endfunction
+
+    nnoremap <F8> :call CloseEmptyBuffers()<cr>
+" }}}

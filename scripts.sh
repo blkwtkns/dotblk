@@ -91,7 +91,8 @@ ln -sf $dotDir/.zprofile $HOME/.zprofile
 
 # script to make nvim default for editor and visual globals
 dot="."
-ed=`ps h -p $$ -o args='' | cut -f1 -d ' '`
+foo=`ps h -p $$ -o args=''`
+ed=${foo:0:3}
 rc="rc"
 rcfile=$dot$ed$rc
 

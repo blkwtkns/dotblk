@@ -682,8 +682,11 @@ call plug#end()    " vim-plug
 " Allow hidden buffers
 set hidden
 
-"visualbell off
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
 set t_vb=
+set tm=500
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf-8
