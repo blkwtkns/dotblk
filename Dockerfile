@@ -24,14 +24,13 @@ RUN apk add --update \
   curl \
   make \
   cmake \
-  zsh \
   && rm -rf /var/cache/apk/*
 
 RUN git clone https://github.com/neovim/libtermkey.git && \
-  cd libtermkey && \
-  make && \
-  make install && \
-  cd ../ && rm -rf libtermkey
+      cd libtermkey && \
+      make && \
+      make install && \
+      cd ../ && rm -rf libtermkey
 
 RUN git clone https://github.com/neovim/libvterm.git && \
       cd libvterm && \
@@ -40,21 +39,23 @@ RUN git clone https://github.com/neovim/libvterm.git && \
       cd ../ && rm -rf libvterm
 
 RUN git clone https://github.com/neovim/unibilium.git && \
-  cd unibilium && \
-  make && \
-  make install && \
-  cd ../ && rm -rf unibilium
+      cd unibilium && \
+      make && \
+      make install && \
+      cd ../ && rm -rf unibilium
 
 RUN  git clone https://github.com/neovim/neovim.git && \
-  cd neovim && \
-  make && \
-  make install && \
-  cd ../ && rm -rf nvim
+      cd neovim && \
+      make && \
+      make install && \
+      cd ../ && rm -rf nvim
 
 RUN apk add --update \
- xclip\
- tmux \
- exuberant-ctags
+     xclip\
+     tmux \
+     zsh \
+     exuberant-ctags \
+     && rm -rf /var/cache/apk/*
 
 # Install go
 # RUN curl https://go.googlecode.com/files/go1.2.1.linux-amd64.tar.gz | tar -C /usr/local -zx
@@ -90,7 +91,8 @@ RUN tmux source-file ~/.tmux.conf
 
 RUN chsh -s /usr/bin/zsh 
 
-RUN git clone --recursive https://github.com/sorin-ionescu/prezto.git
+RUN git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+
 COPY prezScript.sh /home/dev/
 RUN prezScript.sh
 
