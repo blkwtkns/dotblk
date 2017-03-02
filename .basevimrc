@@ -284,3 +284,11 @@ autocmd BufReadPost *
 
     nnoremap <F8> :call CloseEmptyBuffers()<cr>
 " }}}
+
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    endif
+    return ''
+endfunction
