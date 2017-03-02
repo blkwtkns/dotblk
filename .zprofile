@@ -109,10 +109,13 @@ function docks() {
   docker ps | grep "$1" | cut -d ' ' -f1
 }
 #
-function inspectContainer() {
+function inspectcontainer() {
   docker exec -it `docks $1` sh
 }
 #
-alias dockInspect=inspectContainer
+alias dockspec=inspectcontainer
+
+# Show all groups (sorted)
+alias allgroups='cut -d: -f1 /etc/group | sort'
 
 TMPPREFIX="${TMPDIR%/}/zsh"
