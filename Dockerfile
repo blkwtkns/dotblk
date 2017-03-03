@@ -42,7 +42,7 @@ COPY .gitconfig /home/dev/
 COPY .eslintrc /home/dev/
 COPY .jscsrc /home/dev/
 COPY .zshrc /home/dev/
-COPY zsh /home/dev/zsh
+COPY .zsh /home/dev/.zsh
 
 # Link in shared parts of the home directory
 # RUN ln -s /var/shared/.ssh
