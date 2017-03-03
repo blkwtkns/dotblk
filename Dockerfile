@@ -3,7 +3,6 @@ FROM node:7.6-alpine
 MAINTAINER Blake Watkins "blakemwatkins@gmail.com"
 
 RUN apk add --update \
-  tmux \
   zsh \
   git \
   less \
@@ -33,18 +32,21 @@ USER dev
 WORKDIR /home/dev
 ENV HOME /home/dev
 
-RUN git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# RUN git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # RUN tmux source-file ~/.tmux.conf
+# COPY .tmux.conf /home/dev/
+# COPY jsdev.conf /home/dev/.tmux/
 
 COPY .basevimrc /home/dev/.vimrc
-COPY .tmux.conf /home/dev/
 COPY .gitconfig /home/dev/
 COPY .eslintrc /home/dev/
 COPY .jscsrc /home/dev/
-COPY jsdev.conf /home/dev/.tmux/
 COPY .zshrc /home/dev/
+COPY zsh /home/dev/zsh
 
 # Link in shared parts of the home directory
 # RUN ln -s /var/shared/.ssh
 # RUN ln -s /var/shared/.bash_history
 # RUN ln -s /var/shared/.maintainercfg
+ENV SHELL /bin/zsh
+CMD ["zsh", "-l"]

@@ -96,13 +96,13 @@ alias ghci='stack exec -- ghci'
 alias gflog='git reflog | grep -A1 pull | head -2'
 
 # Kill all running Docker containers
-alias docker-killa='docker kill $(docker ps -q)'
+alias dock-killa='docker kill $(docker ps -q)'
 
 # Remove all Docker containers
-alias docker-rm='docker rm $(docker ps -a -q)'
+alias dock-rm='docker rm $(docker ps -a -q)'
 
 # Remove all Docker images
-alias docker-rmi='docker rmi $(docker images -q)'
+alias dock-rmi='docker rmi $(docker images -q)'
 
 # Automatize search for Docker container
 function docks() {
