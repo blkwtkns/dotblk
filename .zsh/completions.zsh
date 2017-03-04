@@ -1,4 +1,6 @@
-autoload -U compinit && compinit                                                                                       
+autoload -U compinit && 
+compinit 
+
 zmodload -i zsh/complist
 
 # man zshcontrib
