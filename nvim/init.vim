@@ -436,6 +436,10 @@ Plug 'tomtom/tcomment_vim'
 
 " Easy grep like searching - install ack-grep first
 Plug 'mileszs/ack.vim'
+" {{{
+" ripgrep needs to be installed, use cargo(Rust)
+let g:ackprg = 'rg -S --no-heading --vimgrep'
+" }}}
 
 Plug 'ctrlpvim/ctrlp.vim'
 " {{{
