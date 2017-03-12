@@ -107,9 +107,9 @@ if has("unix")
   let g:python_host_prog = '/usr/bin/python2'
   let g:python3_host_prog = '/usr/bin/python3'
   if s:uname == "Darwin\n"
-    let g:python_host_prog='/usr/local/bin/python'
-    let g:python2_host_prog='/usr/local/bin/python2'
-    let g:python3_host_prog = '/usr/local/bin/python3'
+    let g:python_host_prog='/usr/bin/python'
+    let g:python2_host_prog='/usr/bin/python2'
+    let g:python3_host_prog = '/usr/bin/python3'
   endif
 endif
 
@@ -144,7 +144,7 @@ Plug 'morhetz/gruvbox'
 " ====================================================================
 " Visuals
 " ====================================================================
-
+" Plug 'ntpeters/vim-better-whitespace'
 Plug 'editorconfig/editorconfig-vim'
 " Beautifier
 " Plug 'maksimr/vim-jsbeautify'
@@ -264,6 +264,7 @@ Plug 'neomake/neomake'
     " \ 'errorformat': '%f: line %l\, col %c\, %m',
     " \ }
 
+    " install eslint via npm
     let g:neomake_javascript_enabled_makers = ['eslint']
     " let g:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
     " let g:neomake_javascript_eslint_exe=substitute(g:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
@@ -553,6 +554,12 @@ filetype indent on
 "Always show current position
 set ruler
 
+" Buffers
+" nnoremap <leader>T :enew<cr>
+nnoremap gy :bnext<CR>
+nnoremap gt :bprevious<cr>
+" nnoremap gd :bdelete<cr>
+nnoremap <leader>bl :ls<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Numbering
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -577,7 +584,7 @@ set relativenumber
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " show location of cursor using a horizontal line.
-set cursorline
+" set cursorline
 " autocmd InsertEnter * highlight CursorLine guifg=white guibg=blue ctermfg=white ctermbg=blue
 " autocmd InsertLeave * highlight CursorLine guifg=white guibg=darkblue ctermfg=yellow ctermbg=darkblue
 
@@ -614,7 +621,7 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
-set nolist " list disables linebreak
+" set nolist " list disables linebreak
 
 " Prevent Vim from automatically inserting line
 "   breaks in newly entered text
@@ -655,7 +662,13 @@ set magic
 set hlsearch
 
 " Toggle search highlighting
-nnoremap <F3> :set hlsearch!<CR>
+nnoremap <leader><space> :noh<CR>
+
+" Character representation of whitespaces
+set list listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+
+" Strips whitespace
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 " Show matching brackets when text indicator is over them
 set showmatch
@@ -675,7 +688,8 @@ set background=dark
 let g:gruvbox_contrast_dark='hard'
 
 highlight Normal ctermbg=None
-" highlight NonText ctermbg=none
+highlight SpecialKey ctermfg=132 guifg=Cyan
+" highlight NonText ctermfg=12 guifg=Blue
 
 " Use the vim wildmenu for command completion
 set wildmenu
@@ -709,15 +723,31 @@ set omnifunc=htmlcomplete#CompleteTags
 " Format the status line
 " set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
-" Status Line
-"{{{
-"}}}
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetypes
 "
 " Force *.md files to be recognized as markdown
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+augroup file_types
+    autocmd!
+    autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
+    autocmd BufRead,BufNewFile *.md set filetype=markdown
+    autocmd BufRead,BufNewFile *.txt set filetype=markdown
+    autocmd BufRead,BufNewFile *.module set filetype=php
+    autocmd BufRead,BufNewFile *.install set filetype=php
+    autocmd BufRead,BufNewFile *.test set filetype=php
+    autocmd BufRead,BufNewFile *.inc set filetype=php
+    autocmd BufRead,BufNewFile *.profile set filetype=php
+    autocmd BufRead,BufNewFile *.view set filetype=php
+    autocmd BufNewFile,BufRead *.less set filetype=less
+    autocmd BufRead,BufNewFile *.js set ft=javascript syntax=javascript
+    autocmd BufRead,BufNewFile *.ts set ft=typescript syntax=typescript
+    autocmd BufRead,BufNewFile *.es6 set ft=javascript syntax=javascript
+    autocmd BufRead,BufNewFile *.json set ft=json syntax=javascript
+    autocmd BufRead,BufNewFile *.twig set ft=htmldjango
+    autocmd BufRead,BufNewFile *.rabl set ft=ruby
+    autocmd BufRead,BufNewFile *.jade set ft=jade
+augroup END
 
 " Stop Automatic insert of comment leader when hitting <Enter> in insert mode
 " or hitting 'o' or 'O' in Normal mode
@@ -840,29 +870,19 @@ autocmd BufReadPost *
     call matchadd('ColorColumn', '\%81v', 100)    " column 80
 " }}}
 
-"====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]====== {{{
-    exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
-    set list
-" }}}
-
-" (http://unlogic.co.uk/posts/vim-python-ide.html)
-" Use l to toggle display of whitespace
-" nnoremap <Leader>l :set list!<cr>
-" And set some nice chars to do it with
-"set listchars=tab:»\ ,eol:¬
 " automatically change window's cwd to file's dir
 " set autochdir
 
 " remove trailing whitespaces {{{
-    autocmd BufWritePre *.txt :%s/\s\+$//e
-    autocmd BufWritePre *.py :%s/\s\+$//e
-    autocmd BufWritePre *.php :%s/\s\+$//e
-    autocmd BufWritePre *.java :%s/\s\+$//e
-    autocmd BufWritePre *.md :%s/\s\+$//e
-    autocmd BufWritePre *.h :%s/\s\+$//e
-    autocmd BufWritePre *.tex :%s/\s\+$//e
-    autocmd BufWritePre *.vim :%s/\s\+$//e
-    autocmd BufWritePre *.nfo :%s/\s\+$//e
+    " autocmd BufWritePre *.txt :%s/\s\+$//e
+    " autocmd BufWritePre *.py :%s/\s\+$//e
+    " autocmd BufWritePre *.php :%s/\s\+$//e
+    " autocmd BufWritePre *.java :%s/\s\+$//e
+    " autocmd BufWritePre *.md :%s/\s\+$//e
+    " autocmd BufWritePre *.h :%s/\s\+$//e
+    " autocmd BufWritePre *.tex :%s/\s\+$//e
+    " autocmd BufWritePre *.vim :%s/\s\+$//e
+    " autocmd BufWritePre *.nfo :%s/\s\+$//e
 " }}}
 
 " when going back to a terminal, switch to insert mode automatically
