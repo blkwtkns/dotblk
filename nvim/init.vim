@@ -434,6 +434,9 @@ Plug 'tomtom/tcomment_vim'
     " \   'sink':  'vertical botright split' })<cr>
 " }}}
 
+" Easy grep like searching - install ack-grep first
+Plug 'mileszs/ack.vim'
+
 Plug 'ctrlpvim/ctrlp.vim'
 " {{{
     " https://github.com/ctrlpvim/ctrlp.vim
