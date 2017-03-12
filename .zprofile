@@ -71,6 +71,9 @@ if [[ ! -d "$TMPDIR" ]]; then
   mkdir -p -m 700 "$TMPDIR"
 fi
 
+# cursor shape
+echo -ne '\e[5 q'
+
 # Aliases
 # open neovim on vi and vim commands
 alias vim='nvim'
