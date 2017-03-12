@@ -6,7 +6,6 @@
 "         |_| |_|\___|\___/ \_/ |_|_| |_| |_|
 "
 " My rendtion of Jabba's config, (credit: Jabba Laci (jabba.laci@gmail.com));
-" last change: 2016.11.11. (yyyy.mm.dd.)
 " Jabba's repo: https://github.com/jabbalaci/dotfiles/blob/master/nvim/init.vim
 "
 " Place of this configuration file:
@@ -23,6 +22,7 @@
 "
 " Most recent (bleedind edge) info on commits:
 "   * https://github.com/neovim/neovim/wiki/Following-HEAD
+"
 " Installation (Ubuntu):
 "   The HQ suggests a PPA that contains the development version:
 "     * https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu
@@ -122,16 +122,9 @@ endif
     endif
 " }}}
 
-" call plug#begin('~/nvim.local/plugged')
-call plug#begin('~/nvim.local/plugged')
 " BEGIN
+call plug#begin('~/nvim.local/plugged')
 
-
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-"Plug 'junegunn/vim-easy-align'
-
-" Any valid git URL is allowed
-"Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 " ====================================================================
 " Remote support
@@ -151,43 +144,35 @@ Plug 'morhetz/gruvbox'
 " ====================================================================
 " Visuals
 " ====================================================================
+
+Plug 'editorconfig/editorconfig-vim'
 " Beautifier
-Plug 'maksimr/vim-jsbeautify'
+" Plug 'maksimr/vim-jsbeautify'
 "jsbeautify Config
 
 "{{{
-let g:config_Beautifier = {}
-let g:config_Beautifier['js'] = {}
-let g:config_Beautifier['js'].indent_size = '2'
-let g:config_Beautifier['css'] = {}
-let g:config_Beautifier['css'].indent_size = '2'
-let g:config_Beautifier['html'] = {}
-let g:config_Beautifier['html'].indent_size = '2'
+" let g:config_Beautifier = {}
+" let g:config_Beautifier['js'] = {}
+" let g:config_Beautifier['js'].indent_size = '2'
+" let g:config_Beautifier['css'] = {}
+" let g:config_Beautifier['css'].indent_size = '2'
+" let g:config_Beautifier['html'] = {}
+" let g:config_Beautifier['html'].indent_size = '2'
 " for file beautification
-autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
-autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+" autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+" autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
+" autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
+" autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+" autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
 " for range beautification
-autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
-autocmd FileType json vnoremap <buffer> <c-f> :call RangeJsonBeautify()<cr>
-autocmd FileType jsx vnoremap <buffer> <c-f> :call RangeJsxBeautify()<cr>
-autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
-autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
+" autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+" autocmd FileType json vnoremap <buffer> <c-f> :call RangeJsonBeautify()<cr>
+" autocmd FileType jsx vnoremap <buffer> <c-f> :call RangeJsxBeautify()<cr>
+" autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
+" autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
 "}}}
 
-" Plug 'Yggdroot/indentLine'
-" let g:indentLine_char = '¦'
-
-Plug 'nathanaelkane/vim-indent-guides'
-" {{{
-  " :h indent-guide
-  " <Leader>ig    -> toggle indent guide on/off
-  let g:indent_guides_enable_on_vim_startup = 0
-  let g:indent_guides_guide_size = 1
-" }}}
 
 Plug 'elzr/vim-json'
 " {{{
@@ -245,41 +230,6 @@ Plug 'valloric/MatchTagAlways'
 Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-repeat'
 " {{{
-    " viw    -> visually select the current word
-    nnoremap <space> viw
-    " select the text, press s and type in the surrounding character / tag
-    " cs'"    -> (DON'T select the text) change ' to "
-    " ds"     -> (DON'T select the text) delete surrounding "
-    " dst     -> (DON'T select the text) delete surrounding tags (for ex. <q> and </q>)
-    " cs'<q>  -> (DON'T select the text) change ' to <q>...</q>
-    " cst'    -> (DON'T select the text) change surrounding tag to '
-    " select text, s ]    -> surround with [ and ] (no space)
-    " ----------
-    " the s was deprecated and mapped to S (capital s)
-    " this is how to go back to the old behaviour:
-    " vmap s S
-
-    " vim-repeat: https://github.com/tpope/vim-repeat
-    " However, I didn't understand how to use it...
-    " But here I found an excellent example:
-    " http://vimcasts.org/episodes/creating-repeatable-mappings-with-repeat-vim/
-
-    " here are some own surroundings that are more intuitive for me
-    " nnoremap <silent> <Plug>SurroundWordWithApostrophe  viw<esc>a'<esc>hbi'<esc>lel
-    "     \ :call repeat#set("\<Plug>SurroundWordWithApostrophe", v:count)<cr>
-    " nmap <Leader>'  <Plug>SurroundWordWithApostrophe
-    "
-    " nnoremap <silent> <Plug>SurroundWordWithQuote  viw<esc>a"<esc>hbi"<esc>lel
-    "     \ :call repeat#set("\<Plug>SurroundWordWithQuote", v:count)<cr>
-    " nmap <Leader>"  <Plug>SurroundWordWithQuote
-    "
-    " nnoremap <silent> <Plug>SurroundWordWithBacktick  viw<esc>a`<esc>hbi`<esc>lel
-    "     \ :call repeat#set("\<Plug>SurroundWordWithBacktick", v:count)<cr>
-    " nmap <Leader>`  <Plug>SurroundWordWithBacktick
-    "
-    " vnoremap <Leader>'  <esc>`<i'<esc>`>la'<esc>
-    " vnoremap <Leader>"  <esc>`<i"<esc>`>la"<esc>
-    " vnoremap <Leader>`  <esc>`<i`<esc>`>la`<esc>
 " }}}
 
 " ====================================================================
@@ -289,7 +239,7 @@ Plug 'tpope/vim-fugitive'
 " {{{
 " }}}
 
-" Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 " {{{
 " }}}
 
@@ -302,7 +252,7 @@ Plug 'tpope/vim-fugitive'
 " ====================================================================
 Plug 'neomake/neomake'
 " {{{
-    "neomake error 
+    "neomake error
     " let g:neomake_verbose=3
 
     " run neomake on the current file on every write:
@@ -393,7 +343,7 @@ Plug 'vim-airline/vim-airline-themes'
     " let g:airline#extensions#tabline#fnamemod = ':t'
 
     let g:airline#extensions#tabline#left_sep = ''
-    " let g:python_host_prog='/usr/local/bin/python' 
+    " let g:python_host_prog='/usr/local/bin/python'
     let g:airline#extensions#tabline#left_alt_sep = '|'
 
     " Always display status line
@@ -410,72 +360,6 @@ Plug 'vim-airline/vim-airline-themes'
 " }}}
 
 
-" ====================================================================
-" Buffers
-" ====================================================================
-" Plug 'vim-scripts/BufOnly.vim'
-" {{{
-    " :BufOnly closes all buffers except the current one
-" }}}
-
-
-" ====================================================================
-" Formatter
-" ====================================================================
-" Plug 'Chiel92/vim-autoformat'
-" {{{
-    " https://github.com/Chiel92/vim-autoformat
-    " Usage:
-    "   1) :Autoformat    -> entire file
-    "   2) select a region and then :Autoformat    -> format just the region
-    " for json, html, css, javascript:
-    "   $ sudo npm install -g js-beautify
-    " noremap <F5> :Autoformat<cr>
-" }}}
-
-" Plug 'avakhov/vim-yaml'
-" {{{
-    " https://github.com/avakhov/vim-yaml
-    " indent yaml
-" }}}
-
-
-" ====================================================================
-" Navigation
-" ====================================================================
-" Plug 'scrooloose/nerdtree'
-" {{{
-    " noremap <F1> :call NERDTreeToggleAndFind()<cr>
-    " noremap <Leader>nt :NERDTreeToggle<cr>
-
-    " function! NERDTreeToggleAndFind()
-    "     if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
-    "         execute ':NERDTreeClose'
-    "     else
-    "         execute ':NERDTreeFind'
-    "     endif
-    " endfunction
-
-    " let g:NERDTreeQuitOnOpen = 1
-    " let NERDTreeIgnore=['\.pyc$', '\~$']    " ignore files in NERDTree
-
-    "let g:NERDTreeMinimalUI = 1
-    "let g:NERDTreeHijackNetrw = 0
-    "let g:NERDTreeWinSize = 31
-    " let g:NERDTreeChDirMode = 2
-    "let g:NERDTreeAutoDeleteBuffer = 1
-    " let g:NERDTreeShowBookmarks = 1
-    "let g:NERDTreeCascadeOpenSingleChildDir = 1
-    " Add spaces after comment delimiters by default
-    " let g:NERDSpaceDelims = 1
-
-    " Use compact syntax for prettified multi-line comments
-    " let g:NERDCompactSexyComs = 1
-
-    " Align line-wise comment delimiters flush left instead of following code indentation
-    " let g:NERDDefaultAlign = 'left'
-" }}}
-
 " Netrw
 let g:netrw_banner = 0
 let g:netrw_liststyle = 0
@@ -487,32 +371,6 @@ let g:netrw_winsize = 25
 "   autocmd VimEnter * :Vexplore
 " augroup END
 
-" ====================================================================
-" Commenting
-" ====================================================================
-" Plug 'scrooloose/nerdcommenter'
-" {{{
-    " Add spaces after comment delimiters by default
-    " let g:NERDSpaceDelims = 1
-
-    " Use compact syntax for prettified multi-line comments
-    " let g:NERDCompactSexyComs = 1
-
-    " Align line-wise comment delimiters flush left instead of following code indentation
-    " let g:NERDDefaultAlign = 'left'
-
-    " Add your own custom formats or override the defaults
-    " let g:NERDCustomDelimiters = { 
-    " \ 'javascript.jsx': { 'leftAlt': '/*', 'rightAlt': '*/', 'left': '{/*','right': '*/}' },
-    " \ 'html': { 'left': '<!-- ', 'right': '-->', 'leftAlt': '/*','rightAlt': '*/' },
-    " \}
-
-    " Use alternative delimiters by default
-    " let g:NERDAltDelims_js = 1
-
-    " let NERD_jsx_alt_style=1
-    " let NERD_html_alt_style=1
-"}}} 
 
 Plug 'tomtom/tcomment_vim'
 " {{{
@@ -581,34 +439,6 @@ Plug 'ctrlpvim/ctrlp.vim'
     " https://github.com/ctrlpvim/ctrlp.vim
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlP'
-" }}}
-
-" Plug 'shougo/unite.vim' | Plug 'shougo/neomru.vim'
-" {{{
-    " Ctrl-p    -> since we are used to it
-    " http://vimawesome.com/plugin/unite-vim
-    " https://github.com/shougo/neomru.vim , this is required for file_mru
-    " function! s:unite_settings()
-    "    imap <buffer><tab>           <c-x><c-f>
-    "    nmap <silent><buffer><esc>   :bd<cr>
-    "    imap <buffer><c-p>   <Plug>(unite_select_previous_line)
-    "    imap <buffer><c-n>   <Plug>(unite_select_next_line)
-    "    inoremap <silent><buffer><expr> <C-s>     unite#do_action('split')
-    "    inoremap <silent><buffer><expr> <C-v>     unite#do_action('vsplit')
-    "    " for toggling (show / hide)
-    "    " imap <silent><buffer><c-l>   <esc>:bd<cr>
-    "    imap <silent><buffer><c-p>   <esc>:bd<cr>
-    "    imap <F3>                    <esc>:bd<cr>
-    " endfunction
-    " custom mappings for the unite buffer
-    " autocmd FileType unite call s:unite_settings()
-
-    " nnoremap <c-p> :Unite file file_rec -start-insert -vertical -direction=botright<cr>
-
-    "nnoremap <Leader>r :<C-u>Unite -start-insert file_rec<cr>
-    " nnoremap <c-p> :Unite file file_rec buffer<cr>
-    " nnoremap <c-l> :Unite line<cr>
-    " noremap <F3> :Unite file_mru<cr>
 " }}}
 
 
@@ -740,7 +570,7 @@ set relativenumber
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " show location of cursor using a horizontal line.
-" set cursorline
+set cursorline
 " autocmd InsertEnter * highlight CursorLine guifg=white guibg=blue ctermfg=white ctermbg=blue
 " autocmd InsertLeave * highlight CursorLine guifg=white guibg=darkblue ctermfg=yellow ctermbg=darkblue
 
@@ -779,7 +609,7 @@ set expandtab
 
 set nolist " list disables linebreak
 
-" Prevent Vim from automatically inserting line 
+" Prevent Vim from automatically inserting line
 "   breaks in newly entered text
 set textwidth=0
 set wrapmargin=0
@@ -802,14 +632,14 @@ tnoremap <Leader><ESC> <C-\><C-n>
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Makes search act like search in modern browsers
-set incsearch 
+set incsearch
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw 
+set lazyredraw
 
 " For regular expressions turn magic on
 set magic
@@ -821,7 +651,7 @@ set hlsearch
 nnoremap <F3> :set hlsearch!<CR>
 
 " Show matching brackets when text indicator is over them
-set showmatch 
+set showmatch
 
 " How many tenths of a second to blink when matching brackets
 set mat=2
@@ -845,9 +675,7 @@ set wildmenu
 set wildmode=longest:full,full
 
 " Ignore files in the wildmenu
-" set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.meteor/*
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*node_modules*,*.jpg,*.png,*.svg,*.ttf,*.woff,*.woff3,*.eot
-",*public/css/*,*public/js*
 
 " HTML Autocomplete
 set omnifunc=htmlcomplete#CompleteTags
@@ -874,9 +702,9 @@ set omnifunc=htmlcomplete#CompleteTags
 " Format the status line
 " set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
-" Status Line 
-"{{{  
-"}}}  
+" Status Line
+"{{{
+"}}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetypes
@@ -921,7 +749,7 @@ function! ClearRegisters()
         let i=i+1
     endwhile
 endfunction
- 
+
 command! ClearReg call ClearRegisters()
 
 " allows cursor change in tmux mode
@@ -933,25 +761,6 @@ else
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
-
-" https://github.com/Shougo/neobundle.vim/issues/330
-" {{{
-    " call unite#filters#matcher_default#use(['matcher_fuzzy'])
-    " call unite#custom#profile('default', 'context', {
-    " \   'prompt': '» ',
-    " \   'start_insert': 1,
-    " \   'vertical': 1,
-    " \   'direction': 'botright',
-    " \   'ignorecase': 1
-    " \ })
-" }}}
-
-" =================================================================================
-
-" set scrolloff=2    " Show 2 lines of context around the cursor.
-" set nostartofline
-" ^^^ When 'on' the jump commands move the cursor to the first non-blank
-" of the line.  When off the cursor is kept in the same column (if possible).
 
 " mouse {{{
     " set mouse=a
@@ -990,113 +799,11 @@ endif
 " }}}
 
 
-"VimTip 66: Transfer text between two Vim 'sessions' {{{
-    " transfer/read and write one block of text between vim sessions
-    " Usage:
-    " `from' session:
-    "     ma
-    "     move to end-of-block
-    "     xw
-    "
-    " `to' session:
-    "     move to where I want block inserted
-    "     xr
-    "
-    " nnoremap xr   :r $HOME/.vimxfer<cr>
-    " nnoremap xR   :-r $HOME/.vimxfer<cr>
-    " nnoremap xw   :'a,.w! $HOME/.vimxfer<cr>
-    " vnoremap xr   c<esc>:r $HOME/.vimxfer<cr>
-    " vnoremap xR   c<esc>:-r $HOME/.vimxfer<cr>
-    " vnoremap xw   :w! $HOME/.vimxfer<cr>
-" }}}
-
-"VimTip 20: Are *.swp and *~ files littering your working directory? {{{
-    " set backup
-    " set backupext=~
-    " set backupdir=~/nvim.local/tmp
-    " set directory=~/nvim.local/tmp
-
-    " let's add undo
-    " set undofile
-    " set undodir=~/nvim.local/undo
-" }}}
-
 " when re-opening a file, jump back to the previous position
 autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
-
-" VimTip 305: make it easy to update/reload .vimrc {{{
-    "src: source rc file
-    "erc: edit rc file
-    " nnoremap <Leader>src :source $MYVIMRC<cr>
-    " nnoremap <Leader>erc :e $MYVIMRC<cr>
-    " nnoremap <Leader>erc :vsplit $MYVIMRC<cr>
-" }}}
-
-" close (kill) window / buffer
-" {{{
-    " If you are in a split window, Ctrl-k closes the window.
-    " If there is only one window (no split), Ctrl-k closes the current buffer.
-    " This way you don't need to memorize two shortcuts for each operation.
-    " function! CloseWindowOrBuffer()
-    "     if winnr('$') > 1    " there is more than one window, i.e. there is a split
-    "         call feedkeys("\<c-w>q")
-    "     else
-    "         call feedkeys(":bd\<cr>")
-    "     endif
-    " endfunction
-
-    " nnoremap <c-k> :call CloseWindowOrBuffer()<cr>
-    " inoremap <c-k> <Esc>:call CloseWindowOrBuffer()<cr>
-" }}}
-
-" split / buffers / windows {{{
-    " noremap <c-x>\| :vsplit<cr>
-    " noremap <c-x>\ :vsplit<cr>
-    " noremap <c-x>/ :vsplit<cr>
-    " noremap <c-x>- :split<cr>
-    " noremap <c-x>3 :vsplit<cr>
-    " noremap <c-x>1 :only<cr>
-    " Ctrl-l is clear screen in bash but Ctrl-l was taken
-    " so Alt-l is chosen to 'clear' the screen, i.e. keep the current window only
-    " nnoremap <A-l> :only<cr>
-    " maximize the current window (highest possible, then widest possible)
-    " vertical to horizontal ( | -> -- )
-    " noremap <c-w>-  <c-w>t<c-w>K
-    " horizontal to vertical ( -- -> | )
-    " noremap <c-w>\|  <c-w>t<c-w>H
-    " noremap <c-w>\  <c-w>t<c-w>H
-    " noremap <c-w>/  <c-w>t<c-w>H
-    "noremap <F11>    <c-w>_<c-w>\|
-    " function! ToggleWindow()
-    "   if exists("w:maximized")
-    "       call feedkeys("\<c-w>=", "n")
-    "       unlet w:maximized
-    "   else
-    "       call feedkeys("\<c-w>_\<c-w>\|", "n")
-    "       let w:maximized = 1
-    "   endif
-    " endfunction
-    " noremap <F11>  :call ToggleWindow()<cr>
-" }}}
-
-" save current file {{{
-    " noremap <c-x><c-s> <ESC>:w<cr>
-    " inoremap <c-x><c-s> <ESC>:w<cr>i
-" }}}
-
-"############################################################################
-"#  START: Jabba's own config :)
-"############################################################################
-
-"this way Y is more logical
-" noremap Y y$
-
-" VimTip 224: Shifting blocks visually
-" vnoremap < <gv
-" vnoremap > >gv
 
 "############################################################################
 "#  Function keys
@@ -1120,15 +827,15 @@ autocmd BufReadPost *
 " inoremap # #
 
 "====[ Make the 81st column stand out ]==================== {{{
-    " highlight ColorColumn ctermbg=magenta
-    " call matchadd('ColorColumn', '\%101v', 100)    " I set it to 100
-    "call matchadd('ColorColumn', '\%121v', 100)   " column 120
-    "call matchadd('ColorColumn', '\%81v', 100)    " column 80
+    highlight ColorColumn ctermbg=magenta
+    call matchadd('ColorColumn', '\%101v', 100)    " I set it to 100
+    call matchadd('ColorColumn', '\%121v', 100)   " column 120
+    call matchadd('ColorColumn', '\%81v', 100)    " column 80
 " }}}
 
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]====== {{{
-    " exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
-    " set list
+    exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+    set list
 " }}}
 
 " (http://unlogic.co.uk/posts/vim-python-ide.html)
@@ -1140,97 +847,19 @@ autocmd BufReadPost *
 " set autochdir
 
 " remove trailing whitespaces {{{
-    " autocmd BufWritePre *.txt :%s/\s\+$//e
-    " autocmd BufWritePre *.py :%s/\s\+$//e
-    " autocmd BufWritePre *.php :%s/\s\+$//e
-    " autocmd BufWritePre *.java :%s/\s\+$//e
-    " autocmd BufWritePre *.md :%s/\s\+$//e
-    " autocmd BufWritePre *.h :%s/\s\+$//e
-    " autocmd BufWritePre *.tex :%s/\s\+$//e
-    " autocmd BufWritePre *.vim :%s/\s\+$//e
-    " autocmd BufWritePre *.nfo :%s/\s\+$//e
+    autocmd BufWritePre *.txt :%s/\s\+$//e
+    autocmd BufWritePre *.py :%s/\s\+$//e
+    autocmd BufWritePre *.php :%s/\s\+$//e
+    autocmd BufWritePre *.java :%s/\s\+$//e
+    autocmd BufWritePre *.md :%s/\s\+$//e
+    autocmd BufWritePre *.h :%s/\s\+$//e
+    autocmd BufWritePre *.tex :%s/\s\+$//e
+    autocmd BufWritePre *.vim :%s/\s\+$//e
+    autocmd BufWritePre *.nfo :%s/\s\+$//e
 " }}}
 
 " when going back to a terminal, switch to insert mode automatically
 " autocmd BufWinEnter,WinEnter term://* startinsert
-
-" terminal emulator {{{
-    " https://www.reddit.com/r/neovim/comments/3wqo0i/nvim_terminal/
-    """""""""""""""
-    " this way ESC-0 works in the terminal in Midnight Commander to quit mc:
-    " tnoremap <esc><esc> <C-\><C-n>
-    " Move between windows
-    " tnoremap <A-left> <C-\><C-n><C-w>h
-    " tnoremap <A-down> <C-\><C-n><C-w>j
-    " tnoremap <A-up> <C-\><C-n><C-w>k
-    " tnoremap <A-right> <C-\><C-n><C-w>l
-    " nnoremap <A-left> <C-w>h
-    " nnoremap <A-down> <C-w>j
-    " nnoremap <A-up> <C-w>k
-    " nnoremap <A-right> <C-w>l
-    "
-    " tnoremap <A-h> <C-\><C-n><C-w>h
-    " tnoremap <A-j> <C-\><C-n><C-w>j
-    " tnoremap <A-k> <C-\><C-n><C-w>k
-    " tnoremap <A-l> <C-\><C-n><C-w>l
-    " nnoremap <A-h> <C-w>h
-    " nnoremap <A-j> <C-w>j
-    " nnoremap <A-k> <C-w>k
-    " nnoremap <A-l> <C-w>l
-
-    " nnoremap <c-x>t :vsplit<cr>:term<cr>
-    " nnoremap <c-x>T :split<cr>:term<cr>
-
-    " function! Terminal(params)
-    "     call feedkeys(":vsplit\<cr>:term\<cr>")
-    "     call feedkeys(a:params . "\<cr>")
-    " endfunction
-
-    " :T cmd    -> open the cmd command in the terminal, e.g. :T mc    -> open mc
-    " command! -nargs=1 T call Terminal(<f-args>)
-" }}}
-
-" centre the screen on the current search result {{{
-    "nnoremap n nzz
-    "nnoremap N Nzz
-    " nnoremap * *zz
-    " nnoremap # #zz
-    " nnoremap g* g*zz
-    " nnoremap g# g#zz
-" }}}
-
-"scroll half page left (CTRL-B) / right (CTRL-J) {{{
-    " noremap  <c-b> zH
-    " noremap! <c-b> zH
-    " noremap  <c-j> zL
-    " noremap! <c-j> zL
-" }}}
-
-"VimTip 38: Cursor one line at a time when :set wrap {{{
-    " nnoremap j gj
-    " nnoremap k gk
-    " vnoremap j gj
-    " vnoremap k gk
-    " nnoremap <Down> gj
-    " nnoremap <Up> gk
-    " vnoremap <Down> gj
-    " vnoremap <Up> gk
-    " inoremap <Down> <C-o>gj
-" }}}
-
-" close window
-" nnoremap <c-q> <c-w>q
-
-"VimTip 163: Toggle Search Highlighting {{{
-    " nnoremap <Leader>h :set cursorline! hlsearch!<cr>
-    " nnoremap H :set cursorline! hlsearch!<cr>
-"}}}
-
-" scroll in the 'background' {{{
-    " the cursor remains in the center and the text scrolls up/down
-    " noremap <s-up>   kzz
-    " noremap <s-down> jzz
-" }}}
 
 " This makes the cursor a pipe in insert-mode, and a block in normal-mode.
 " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
@@ -1255,7 +884,7 @@ autocmd BufReadPost *
     command! -nargs=1 Go call Google(<f-args>)
 
     " :Google    -> open Google's search page
-    " command! Google exec 'silent !xdg-open http://www.google.com'
+    command! Google exec 'silent !xdg-open http://www.google.com'
 " }}}
 
 " Firefox bookmarks (works with other browsers too) {{{
@@ -1281,81 +910,4 @@ autocmd BufReadPost *
     endfunction
 
     command! -nargs=1 FF call Firefox(<f-args>)
-" }}}
-
-" {{{
-    function! CenterCursor()
-        call feedkeys("zz")    " emulate these keypresses: zz (center line)
-    endfunction
-
-    " autocmd BufReadPre,FileReadPre * call CenterCursor()
-" }}}
-
-" filename / dirname of the current file {{{
-    " copy result to the system clipboard and echo the result
-    " the cb> prompt means the clipboard
-    " *f*ile *n*ame, ex. init.vim
-    " nnoremap <Leader>fn :let @+ = expand("%:t") \| echo 'cb> ' . @+<cr>
-    " *f*ile *p*ath, ex. /home/user/nvim/init.vim
-    " nnoremap <Leader>fp :let @+ = expand("%:p") \| echo 'cb> ' . @+<cr>
-    " *d*irectory *p*ath, ex. /home/user/nvim
-    " nnoremap <Leader>dp :let @+ = expand("%:p:h") \| echo 'cb> ' . @+<cr>
-    " *d*irectory *n*ame, ex. nvim
-    " nnoremap <Leader>dn :let @+ = expand("%:p:h:t") \| echo 'cb> ' . @+<cr>
-" }}}
-
-" {{{
-    " from http://stackoverflow.com/a/9459366/232485
-    function! HandleURL()
-      let uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;]*')
-      echo uri
-      if uri != ""
-        silent exec "!xdg-open '" . uri . "'"
-      else
-        echo "no URI found in line"
-      endif
-    endfunction
-
-    nnoremap <Leader>u :call HandleURL()<cr>
-" }}}
-
-" some abbreviations {{{
-    " iabbrev tubi    https://ubuntuincident.wordpress.com/
-    " iabbrev pyadv   https://pythonadventures.wordpress.com/
-" }}}
-
-" exit insert, dd line, enter insert
-" inoremap <c-d> <esc>ddi
-
-" close empty buffers {{{
-    " tip from http://stackoverflow.com/a/6561076/232485
-    function! NrBufs()
-        let i = bufnr('$')
-        let j = 0
-        while i >= 1
-            if buflisted(i)
-                let j+=1
-            endif
-            let i-=1
-        endwhile
-        return j
-    endfunction
-
-    function! CloseEmptyBuffers()
-        if NrBufs() == 1
-            return
-        endif
-        let [i, n; empty] = [1, bufnr('$')]
-        while i <= n
-            if bufexists(i) && bufname(i) == ''
-                call add(empty, i)
-            endif
-            let i += 1
-        endwhile
-        if len(empty) > 0
-            exe 'bdelete' join(empty)
-        endif
-    endfunction
-
-    nnoremap <F8> :call CloseEmptyBuffers()<cr>
 " }}}
