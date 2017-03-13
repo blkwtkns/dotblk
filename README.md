@@ -47,6 +47,12 @@ just use the file as reference.
 * http://www.stephendiehl.com/posts/vim_2016.html
 * http://lonelyproton.com/posts/26-getting-started-with-haskell-development-3
 
+### Rust
+* http://doc.crates.io/index.html
+
+### Ripgrep
+* http://blog.burntsushi.net/ripgrep/
+
 ### Linux Links:
 * https://github.com/thezerobit/asus-zenbook-ux305fa
 * http://askubuntu.com/questions/715306/xbacklight-no-outputs-have-backlight-property-no-sys-class-backlight-folder
