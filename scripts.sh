@@ -36,13 +36,10 @@ if [[ $platform == 'linux' ]]; then
   sudo add-apt-repository ppa:neovim-ppa/unstable
   sudo apt-get update
   sudo apt-get install neovim
-
   sudo pip2/pip3 install neovim -U
 
   sudo apt-get install xclip
-
   sudo apt-get install tmux
-
   sudo apt-get install exuberant-ctags
 
 elif [[ $platform == 'mac' ]]; then
@@ -97,14 +94,16 @@ dotDir=$(dirname "$(readlink -f "$0")")
 # try out copy instead so that dotfile repo isn't mutating from
 # local configurations
 cp $dotDir/nvim $HOME/.config
-cp $dotDir/.eslintrc
-cp $dotDir/.gitconfig
-cp $dotDir/.jscsrc
-cp $dotDir/.tmux.conf
+cp $dotDir/.eslintrc $HOME/.eslintrc
+cp $dotDir/.gitconfig $HOME/.gitconfig
+cp $dotDir/.jscsrc $HOME/.jscsrc
+cp $dotDir/.tmux.conf $HOME/.tmux.conf
 cp $dotDir/jsdev.conf $HOME/.tmux/jsdev.conf
 cp $dotDir/.zpreztorc $HOME/.zpreztorc
 cp $dotDir/.zprofile $HOME/.zprofile
+cp $dotDir/.global_ignore $HOME/.global_ignore
 
+git config --global core.excludesfile $HOME/.global_ignore
 
 # script to make nvim default for editor and visual globals
 dot="."
