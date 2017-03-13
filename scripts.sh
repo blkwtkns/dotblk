@@ -41,7 +41,7 @@ if [[ $platform == 'linux' ]]; then
 
   sudo apt-get install xclip
 
-  sudo apt-get install tmux 
+  sudo apt-get install tmux
 
   sudo apt-get install exuberant-ctags
 
@@ -59,9 +59,9 @@ fi
 
 # Might be redundant but shouldn't hurt
 pip install --user neovim
-pip install --upgrade neovim
-pip2 install --upgrade neovim
-pip3 install --upgrade neovim
+pip install --user --upgrade neovim
+pip2 install --user --upgrade neovim
+pip3 install --user --upgrade neovim
 pip install --upgrade pip
 
 # Download tmux plugin manager then source config
@@ -71,23 +71,40 @@ tmux source-file ~/.tmux.conf
 # tags for mac?
 
 # Install nvm and newest node version
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | zsh 
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | zsh
 nvm install node
 
+# Install Cargo
+curl -sSf https://static.rust-lang.org/rustup.sh | sh
 
-#Create variable to find path to script 
+# Install ripgrep
+cargo install ripgrep
+
+# Create variable to find path to script
 dotDir=$(dirname "$(readlink -f "$0")")
 # echo $dotDir
 
 # symlinks
-ln -sv $dotDir/nvim $HOME/.config
-ln -sv $dotDir/.eslintrc
-ln -sv $dotDir/.gitconfig
-ln -sv $dotDir/.jscsrc
-ln -sv $dotDir/.tmux.conf
-ln -sv $dotDir/jsdev.conf $HOME/.tmux/jsdev.conf
-ln -sf $dotDir/.zpreztorc $HOME/.zpreztorc
-ln -sf $dotDir/.zprofile $HOME/.zprofile
+# ln -sv $dotDir/nvim $HOME/.config
+# ln -sv $dotDir/.eslintrc
+# ln -sv $dotDir/.gitconfig
+# ln -sv $dotDir/.jscsrc
+# ln -sv $dotDir/.tmux.conf
+# ln -sv $dotDir/jsdev.conf $HOME/.tmux/jsdev.conf
+# ln -sf $dotDir/.zpreztorc $HOME/.zpreztorc
+# ln -sf $dotDir/.zprofile $HOME/.zprofile
+
+# try out copy instead so that dotfile repo isn't mutating from
+# local configurations
+cp $dotDir/nvim $HOME/.config
+cp $dotDir/.eslintrc
+cp $dotDir/.gitconfig
+cp $dotDir/.jscsrc
+cp $dotDir/.tmux.conf
+cp $dotDir/jsdev.conf $HOME/.tmux/jsdev.conf
+cp $dotDir/.zpreztorc $HOME/.zpreztorc
+cp $dotDir/.zprofile $HOME/.zprofile
+
 
 # script to make nvim default for editor and visual globals
 dot="."
@@ -99,3 +116,4 @@ rcfile=$dot$ed$rc
 echo "export EDITOR='$(which nvim)'" >> $HOME/$rcfile
 echo "export VISUAL='$(which nvim)'" >> $HOME/$rcfile
 
+npm i -g eslint jscs elm
