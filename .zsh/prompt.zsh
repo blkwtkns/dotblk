@@ -2,7 +2,7 @@
 # %{${fg[yellow]}%}%# '
 
 autoload -Uz promptinit
-promptinit                
+promptinit
 
 prompt adam2
 

@@ -1,5 +1,8 @@
 # Setup terminal, and turn on colors
 export TERM=xterm-256color
+[ -n "$TMUX" ] && export TERM=screen-256color
+# export TERM=screen-256color
+# export TERM=xterm-256color
 export CLICOLOR=1
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
@@ -15,12 +18,35 @@ export PAGER='less'
 export EDITOR='vim'
 export VISUAL='vim'
 
-#export NODE_PATH=/opt/github/homebrew/lib/node_modules
-#export PYTHONPATH=/usr/local/lib/python2.6/site-packages
-# CTAGS Sorting in VIM/Emacs is better behaved with this in place
+# Language
+if [[ -z "$LANG" ]]; then
+  export LANG='en_US.UTF-8'
+fi
+# export LC_ALL=en_US.UTF-8
+# export LC_CTYPE=en_US.UTF-8
+# export LANG=en_US.UTF-8
+
+# CTAG
 export LC_COLLATE=C 
+
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path
 
 # Virtual Environment Stuff
 # export WORKON_HOME=$HOME/.virtualenvs
 # export PROJECT_HOME=$HOME/Projects/django
 # source /usr/local/bin/virtualenvwrapper.sh
+
+# if nvim
+# export EDITOR='/usr/bin/nvim'
+# export VISUAL='/usr/bin/nvim'
+
+# if cargo
+# export PATH=$HOME/.local/bin:$PATH
+# export PATH=$HOME/.cargo/bin:$PATH
+
+# Set the list of directories that Zsh searches for programs.
+path=(
+  /usr/local/{bin,sbin}
+  $path
+)

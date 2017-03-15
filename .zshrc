@@ -6,3 +6,4 @@ source ~/.zsh/completions.zsh
 source ~/.zsh/aliases.zsh
 source ~/.zsh/bindkeys.zsh
 source ~/.zsh/history.zsh
+source ~/.zsh/functions.zsh
