@@ -21,6 +21,14 @@ export EDITOR='nano'
 export VISUAL='nano'
 export PAGER='less'
 
+# Make neovim default
+# export EDITOR='/usr/bin/nvim'
+# export VISUAL='/usr/bin/nvim'
+
+# Set up local bins
+# export PATH=$HOME/.local/bin:$PATH
+# export PATH=$HOME/.cargo/bin:$PATH
+
 #
 # Language
 #

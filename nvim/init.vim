@@ -146,33 +146,6 @@ Plug 'morhetz/gruvbox'
 " ====================================================================
 " Plug 'ntpeters/vim-better-whitespace'
 Plug 'editorconfig/editorconfig-vim'
-" Beautifier
-" Plug 'maksimr/vim-jsbeautify'
-"jsbeautify Config
-
-"{{{
-" let g:config_Beautifier = {}
-" let g:config_Beautifier['js'] = {}
-" let g:config_Beautifier['js'].indent_size = '2'
-" let g:config_Beautifier['css'] = {}
-" let g:config_Beautifier['css'].indent_size = '2'
-" let g:config_Beautifier['html'] = {}
-" let g:config_Beautifier['html'].indent_size = '2'
-" for file beautification
-" autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-" autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
-" autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
-" autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-" autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-
-" for range beautification
-" autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
-" autocmd FileType json vnoremap <buffer> <c-f> :call RangeJsonBeautify()<cr>
-" autocmd FileType jsx vnoremap <buffer> <c-f> :call RangeJsxBeautify()<cr>
-" autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
-" autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
-"}}}
-
 
 Plug 'elzr/vim-json'
 " {{{
@@ -445,8 +418,16 @@ let g:ackprg = 'rg -S --no-heading --vimgrep'
 Plug 'ctrlpvim/ctrlp.vim'
 " {{{
     " https://github.com/ctrlpvim/ctrlp.vim
+
+    if executable('rg')
+      set grepprg=rg\ --color=never
+      let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+      let g:ctrlp_use_caching = 0
+    endif
+
     let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlP'
+    nnoremap <leader>ct :CtrlPTag<CR>
 " }}}
 
 
@@ -483,7 +464,6 @@ Plug 'majutsushi/tagbar'
 " {{{
     " $ yaourt ctags                  # Manjaro
     " $ sudo apt-get install ctags    # Ubuntu
-    " nnoremap <F4> :TagbarToggle<cr>
       nmap <Leader>tg :TagbarToggle<CR>
 " }}}
 
@@ -540,6 +520,10 @@ set nobackup
 set nowb
 set noswapfile
 
+" ctags optimization
+" Look for tags in current and above directories
+" set tags=./tags;/,tags;/
+
 "=========
 " General
 "=========
@@ -556,8 +540,8 @@ set ruler
 
 " Buffers
 " nnoremap <leader>T :enew<cr>
-nnoremap gy :bnext<CR>
-nnoremap gt :bprevious<cr>
+nnoremap gl :bnext<CR>
+nnoremap gh :bprevious<cr>
 " nnoremap gd :bdelete<cr>
 nnoremap <leader>bl :ls<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

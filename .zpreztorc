@@ -40,6 +40,23 @@ zstyle ':prezto:load' pmodule \
   'history-substring-search' \
   'prompt'
 
+# Use this one for linux
+# zstyle ':prezto:load' pmodule  \
+#     'environment'              \
+#     'terminal'                 \
+#     'editor'                   \
+#     'history'                  \
+#     'directory'                \
+#     'spectrum'                 \
+#     'utility'                  \
+#     'completion'               \
+#     'archive'                  \
+#     'pacman'                   \
+#     'fasd'                     \
+#     'syntax-highlighting'      \
+#     'history-substring-search' \
+#     'prompt'
+
 #
 # Autosuggestions
 #
