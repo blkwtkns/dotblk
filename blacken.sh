@@ -18,7 +18,7 @@ if [[ $platform == 'linux' ]]; then
   sudo apt-get upgrade
 
   sudo apt-get install zsh
-  chsh -s /usr/bin/zsh
+  # chsh -s /usr/bin/zsh
 
   git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
   setopt EXTENDED_GLOB
@@ -36,7 +36,8 @@ if [[ $platform == 'linux' ]]; then
   sudo add-apt-repository ppa:neovim-ppa/unstable
   sudo apt-get update
   sudo apt-get install neovim
-  sudo pip2/pip3 install neovim -U
+  sudo pip2 install neovim -U
+  sudo pip3 install neovim -U
 
   sudo apt-get install xclip
   sudo apt-get install tmux
@@ -49,7 +50,7 @@ elif [[ $platform == 'mac' ]]; then
   brew install caskroom/cask/brew-cask
 
   brew install zsh
-  sudo -s 'echo /usr/local/bin/zsh >> /etc/shells' && chsh -s /usr/local/bin/zsh
+  # sudo -s 'echo /usr/local/bin/zsh >> /etc/shells' && chsh -s /usr/local/bin/zsh
   brew link curl --force
   brew install tmux
 fi
@@ -68,7 +69,7 @@ tmux source-file ~/.tmux.conf
 # tags for mac?
 
 # Install nvm and newest node version
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | zsh
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
 nvm install node
 
 # Install Cargo
@@ -112,7 +113,4 @@ ed=${foo:0:3}
 rc="rc"
 rcfile=$dot$ed$rc
 
-echo "export EDITOR='$(which nvim)'" >> $HOME/$rcfile
-echo "export VISUAL='$(which nvim)'" >> $HOME/$rcfile
-
-npm i -g eslint jscs elm
+# npm i -g eslint jscs elm
