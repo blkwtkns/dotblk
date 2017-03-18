@@ -413,6 +413,8 @@ Plug 'mileszs/ack.vim'
 " {{{
 " ripgrep needs to be installed, use cargo(Rust)
 let g:ackprg = 'rg -S --no-heading --vimgrep'
+vnoremap <Leader>a y:Ack <C-r>=fnameescape(@")<CR><CR>
+nnoremap <Leader>rg :Ack<space>
 " }}}
 
 Plug 'ctrlpvim/ctrlp.vim'

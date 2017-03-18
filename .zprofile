@@ -130,3 +130,6 @@ alias dockspec=inspectcontainer
 alias allgroups='cut -d: -f1 /etc/group | sort'
 
 TMPPREFIX="${TMPDIR%/}/zsh"
+
+# FZF and Ripgrep ish
+# export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
