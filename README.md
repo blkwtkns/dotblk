@@ -53,6 +53,10 @@ just use the file as reference.
 ### Ripgrep
 * http://blog.burntsushi.net/ripgrep/
 
+### FZF
+* Install: https://github.com/junegunn/fzf
+* Powerup: https://www.reddit.com/r/linux/comments/5rrpyy/turbo_charge_bash_with_fzf_ripgrep/
+
 ### Linux Links:
 * https://github.com/thezerobit/asus-zenbook-ux305fa
 * http://askubuntu.com/questions/715306/xbacklight-no-outputs-have-backlight-property-no-sys-class-backlight-folder
