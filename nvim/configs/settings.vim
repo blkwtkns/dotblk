@@ -153,15 +153,19 @@ let g:netrw_winsize = 25
 " 'mileszs/ack.vim' Easy grep like searching - install ack-grep first
 " {{{
 " ripgrep needs to be installed, use cargo(Rust)
+" let g:ackprg = 'rg -S --hidden --no-heading --vimgrep'
 let g:ackprg = 'rg -S --no-heading --vimgrep'
 " }}}
 
 " 'ctrlpvim/ctrlp.vim'
 " {{{
-" This needs to be made more compatible
 if executable('rg')
-  set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
+  " use for hidden files
+  " set grepprg=rg\ --hidden\ --color\ never\ --line-number\ --no-heading
+  set grepprg=rg\ --color\ never\ --line-number\ --no-heading
+  " let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
+  " let g:ctrlp_user_command = 'rg %s --files --hidden --color never'
+  let g:ctrlp_user_command = 'rg %s --files --color never'
   let g:ctrlp_use_caching = 0
 endif
 
