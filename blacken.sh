@@ -107,10 +107,10 @@ cp $dotDir/.global_ignore $HOME/.global_ignore
 git config --global core.excludesfile $HOME/.global_ignore
 
 # script to make nvim default for editor and visual globals
-dot="."
-foo=`ps h -p $$ -o args=''`
-ed=${foo:0:3}
-rc="rc"
-rcfile=$dot$ed$rc
+# dot="."
+# foo=`ps h -p $$ -o args=''`
+# ed=${foo:0:3}
+# rc="rc"
+# rcfile=$dot$ed$rc
 
 # npm i -g eslint jscs elm

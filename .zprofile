@@ -21,6 +21,7 @@ export EDITOR='nano'
 export VISUAL='nano'
 export PAGER='less'
 
+export MYVIMRC='.config/nvim/init.vim'
 # Make neovim default
 # export EDITOR='/usr/bin/nvim'
 # export VISUAL='/usr/bin/nvim'
