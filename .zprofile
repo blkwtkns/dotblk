@@ -134,3 +134,7 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 
 # FZF and Ripgrep ish
 # export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+
+# if you want to access hidden files with alt-C and ctrl-t commands
+# export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+# export FZF_ALT_C_COMMAND=$FZF_DEFAULT_COMMAND

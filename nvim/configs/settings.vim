@@ -154,15 +154,14 @@ let g:netrw_winsize = 25
 " {{{
 " ripgrep needs to be installed, use cargo(Rust)
 let g:ackprg = 'rg -S --no-heading --vimgrep'
-vnoremap <Leader>rg y:Ack <C-r>=fnameescape(@")<CR><CR>
-nnoremap <Leader>rg :Ack<space>
 " }}}
 
 " 'ctrlpvim/ctrlp.vim'
 " {{{
+" This needs to be made more compatible
 if executable('rg')
   set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
   let g:ctrlp_use_caching = 0
 endif
 
