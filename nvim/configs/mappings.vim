@@ -10,8 +10,17 @@ inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual
 " ====================================================================
 " Ack
 " ====================================================================
-vnoremap <Leader>a y:Ack! <C-r>=fnameescape(@")<CR><CR>
-nnoremap <Leader>a :Ack!<space>
+" vnoremap <Leader>a y:Ack! <C-r>=fnameescape(@")<CR><CR>
+" nnoremap <Leader>a :Ack!<space>
+
+" ====================================================================
+" vim-grepper
+" ====================================================================
+nnoremap <leader>g :Grepper -tool rg<cr>
+nnoremap <leader>gw :Grepper -tool rg -cword -noprompt<cr>
+nnoremap <leader>gb :Grepper -tool rg -buffers<cr>
+nmap <leader>gs <plug>(GrepperOperator)<cr>
+xmap <leader>gs <plug>(GrepperOperator)<cr>
 
 " ====================================================================
 " Ctrlp
@@ -30,7 +39,7 @@ nnoremap <Leader>tg :TagbarToggle<CR>
 " ====================================================================
 nnoremap gl :bnext<CR>
 nnoremap gh :bprevious<cr>
-nnoremap <leader>bs :cex []<BAR>bufdo grepadd @@g %<BAR>cw<s-left><s-left><right>
+" nnoremap <leader>bs :cex []<BAR>bufdo grepadd @@g %<BAR>cw<s-left><s-left><right>
 
 " ====================================================================
 " Terminal mode

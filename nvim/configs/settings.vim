@@ -154,15 +154,23 @@ let g:netrw_winsize = 25
 " {{{
 " ripgrep needs to be installed, use cargo(Rust)
 " let g:ackprg = 'rg -S --hidden --no-heading --vimgrep'
-let g:ackprg = 'rg -S --no-heading --vimgrep'
+" let g:ackprg = 'rg -S --no-heading --vimgrep'
 " }}}
+
+" 'mhinz/vim-grepper' - grep tool like ack.vim
+" {{{
+let g:grepper = {}
+let g:grepper.tools = ['rg']
+" }}}
+
 
 " 'ctrlpvim/ctrlp.vim'
 " {{{
 if executable('rg')
   " use for hidden files
   " set grepprg=rg\ --hidden\ --color\ never\ --line-number\ --no-heading
-  set grepprg=rg\ --color\ never\ --line-number\ --no-heading
+  " set grepprg=rg\ --color\ never\ --line-number\ --no-heading
+
   " let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
   " let g:ctrlp_user_command = 'rg %s --files --hidden --color never'
   let g:ctrlp_user_command = 'rg %s --files --color never'
