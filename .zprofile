@@ -96,9 +96,9 @@ alias tls='tmux ls'
 alias tkill='tmux kill-session -t'
 
 # convenience aliases for editing configs
-alias ev='nvim ~/.config/nvim/init.vim'
+alias ev='nvim ~/.config/nvim/init.vim ~/.config/nvim/configs/*'
 alias et='nvim ~/.tmux.conf'
-alias ez='nvim ~/.zshrc'
+alias ez='nvim ~/.zprofile ~/.zshrc'
 
 # Haskell
 alias ghc='stack exec -- ghc'
@@ -130,7 +130,9 @@ alias dockspec=inspectcontainer
 # Show all groups (sorted)
 alias allgroups='cut -d: -f1 /etc/group | sort'
 
-TMPPREFIX="${TMPDIR%/}/zsh"
+# nvm 
+export NVM_DIR="/home/blaque/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # FZF and Ripgrep ish
 # export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
@@ -138,3 +140,5 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 # if you want to access hidden files with alt-C and ctrl-t commands
 # export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 # export FZF_ALT_C_COMMAND=$FZF_DEFAULT_COMMAND
+
+TMPPREFIX="${TMPDIR%/}/zsh"
