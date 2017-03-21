@@ -134,7 +134,7 @@ alias allgroups='cut -d: -f1 /etc/group | sort'
 export NVM_DIR="/home/blaque/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# FZF and Ripgrep ish
+# FZF and Ripgrep ish --> move into .zshrc
 # export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
 # if you want to access hidden files with alt-C and ctrl-t commands
