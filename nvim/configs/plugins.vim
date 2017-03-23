@@ -80,16 +80,16 @@ Plug 'ctrlpvim/ctrlp.vim'
 " ====================================================================
 " Plug 'dag/vim2hs'
 " Plug 'bitc/vim-hdevtools'
-Plug 'eagletmt/neco-ghc'
+" Plug 'eagletmt/neco-ghc'
 " Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+" Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
 " ====================================================================
 " Tags
 " ====================================================================
 " Install ctags are exuberant ctags first
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'majutsushi/tagbar'
+" Plug 'ludovicchabant/vim-gutentags'
+" Plug 'majutsushi/tagbar'
 
 " ====================================================================
 " Rust

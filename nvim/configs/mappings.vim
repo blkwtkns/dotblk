@@ -19,8 +19,27 @@ inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual
 nnoremap <leader>g :Grepper -tool rg<cr>
 nnoremap <leader>gw :Grepper -tool rg -cword -noprompt<cr>
 nnoremap <leader>gb :Grepper -tool rg -buffers<cr>
-nmap <leader>gs <plug>(GrepperOperator)<cr>
-xmap <leader>gs <plug>(GrepperOperator)<cr>
+" nmap <leader>gs <plug>(GrepperOperator)<cr>
+xmap <leader>gv <plug>(GrepperOperator)<cr>
+
+" ====================================================================
+" Fugitive
+" ====================================================================
+nnoremap <space>gs :Gstatus<CR>
+" nnoremap <space>ga :Git add %:p<CR><CR>
+" nnoremap <space>gc :Gcommit -v -q<CR>
+" nnoremap <space>gt :Gcommit -v -q %:p<CR>
+" nnoremap <space>gd :Gdiff<CR>
+" nnoremap <space>ge :Gedit<CR>
+" nnoremap <space>gr :Gread<CR>
+" nnoremap <space>gw :Gwrite<CR><CR>
+" nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
+" nnoremap <space>gp :Ggrep<Space>
+" nnoremap <space>gm :Gmove<Space>
+" nnoremap <space>gb :Git branch<Space>
+" nnoremap <space>go :Git checkout<Space>
+" nnoremap <space>gps :Dispatch! git push<CR>
+" nnoremap <space>gpl :Dispatch! git pull<CR>
 
 " ====================================================================
 " Ctrlp
@@ -32,14 +51,13 @@ nnoremap <leader>b :CtrlPBuffer<CR>
 " Tags
 " ====================================================================
 " tagbar
-nnoremap <Leader>tg :TagbarToggle<CR>
+" nnoremap <Leader>tg :TagbarToggle<CR>
 
 " ====================================================================
 " Buffers
 " ====================================================================
 nnoremap gl :bnext<CR>
 nnoremap gh :bprevious<cr>
-" nnoremap <leader>bs :cex []<BAR>bufdo grepadd @@g %<BAR>cw<s-left><s-left><right>
 
 " ====================================================================
 " Terminal mode
