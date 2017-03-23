@@ -11,8 +11,10 @@ call plug#begin('~/nvim.local/plugged')
 " ====================================================================
 " Color schemes
 " ====================================================================
-" Gruvbox
 Plug 'morhetz/gruvbox'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-vividchalk'
+Plug 'tomasr/molokai'
 
 " ====================================================================
 " Visuals
@@ -21,6 +23,10 @@ Plug 'morhetz/gruvbox'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'elzr/vim-json'
 
+" Vim global plugin for dragging virtual blocks. By Damien Conway.
+" Select text in Visual Block mode (ctrl-v), use arrow keys to move it around!
+" https://github.com/rdlugosz/vim-dragvisuals
+Plug 'zirrostig/vim-schlepp'
 " ====================================================================
 " Completion
 " ====================================================================
@@ -45,7 +51,7 @@ Plug 'tyru/current-func-info.vim'
 " ====================================================================
 " Session management
 " ====================================================================
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
+" Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 
 " ====================================================================
 " Javascript
@@ -71,8 +77,8 @@ Plug 'tomtom/tcomment_vim'
 " Plug 'junegunn/fzf.vim'
 
 " Easy grep like searching - install ack-grep first
-" Plug 'mileszs/ack.vim'
-Plug 'mhinz/vim-grepper'
+Plug 'mileszs/ack.vim'
+" Plug 'mhinz/vim-grepper'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " ====================================================================

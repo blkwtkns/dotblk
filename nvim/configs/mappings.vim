@@ -10,36 +10,45 @@ inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual
 " ====================================================================
 " Ack
 " ====================================================================
-" vnoremap <Leader>a y:Ack! <C-r>=fnameescape(@")<CR><CR>
-" nnoremap <Leader>a :Ack!<space>
+vnoremap <Leader>g y:Ack! <C-r>=fnameescape(@")<CR><CR>
+nnoremap <Leader>g :Ack!<space>
 
 " ====================================================================
 " vim-grepper
 " ====================================================================
-nnoremap <leader>g :Grepper -tool rg<cr>
-nnoremap <leader>gw :Grepper -tool rg -cword -noprompt<cr>
-nnoremap <leader>gb :Grepper -tool rg -buffers<cr>
+" nnoremap <leader>g :Grepper -tool rg<cr>
+" nnoremap <leader>gw :Grepper -tool rg -cword -noprompt<cr>
+" nnoremap <leader>gb :Grepper -tool rg -buffers<cr>
 " nmap <leader>gs <plug>(GrepperOperator)<cr>
-xmap <leader>gv <plug>(GrepperOperator)<cr>
+" xmap <leader>gv <plug>(GrepperOperator)<cr>
+
+" ====================================================================
+" vim-schlepp
+" ====================================================================
+vmap <unique> <up>    <Plug>SchleppUp
+vmap <unique> <down>  <Plug>SchleppDown
+vmap <unique> <left>  <Plug>SchleppLeft
+vmap <unique> <right> <Plug>SchleppRight
 
 " ====================================================================
 " Fugitive
 " ====================================================================
-nnoremap <space>gs :Gstatus<CR>
-" nnoremap <space>ga :Git add %:p<CR><CR>
-" nnoremap <space>gc :Gcommit -v -q<CR>
-" nnoremap <space>gt :Gcommit -v -q %:p<CR>
-" nnoremap <space>gd :Gdiff<CR>
-" nnoremap <space>ge :Gedit<CR>
-" nnoremap <space>gr :Gread<CR>
-" nnoremap <space>gw :Gwrite<CR><CR>
-" nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
-" nnoremap <space>gp :Ggrep<Space>
-" nnoremap <space>gm :Gmove<Space>
-" nnoremap <space>gb :Git branch<Space>
-" nnoremap <space>go :Git checkout<Space>
-" nnoremap <space>gps :Dispatch! git push<CR>
-" nnoremap <space>gpl :Dispatch! git pull<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gb :Gblame<CR>
+" nnoremap <leader>ga :Git add %:p<CR><CR>
+" nnoremap <leader>gc :Gcommit -v -q<CR>
+" nnoremap <leader>gt :Gcommit -v -q %:p<CR>
+" nnoremap <leader>ge :Gedit<CR>
+" nnoremap <leader>gr :Gread<CR>
+" nnoremap <leader>gw :Gwrite<CR><CR>
+" nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
+" nnoremap <leader>gp :Ggrep<Space>
+" nnoremap <leader>gm :Gmove<Space>
+" nnoremap <leader>gb :Git branch<Space>
+" nnoremap <leader>go :Git checkout<Space>
+" nnoremap <leader>gps :Dispatch! git push<CR>
+" nnoremap <leader>gpl :Dispatch! git pull<CR>
 
 " ====================================================================
 " Ctrlp

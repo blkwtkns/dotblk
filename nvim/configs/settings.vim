@@ -154,13 +154,13 @@ let g:netrw_winsize = 25
 " {{{
 " ripgrep needs to be installed, use cargo(Rust)
 " let g:ackprg = 'rg -S --hidden --no-heading --vimgrep'
-" let g:ackprg = 'rg -S --no-heading --vimgrep'
+let g:ackprg = 'rg -S --no-heading --vimgrep'
 " }}}
 
 " 'mhinz/vim-grepper' - grep tool like ack.vim
 " {{{
-let g:grepper = {}
-let g:grepper.tools = ['rg']
+" let g:grepper = {}
+" let g:grepper.tools = ['rg']
 " }}}
 
 
@@ -169,7 +169,7 @@ let g:grepper.tools = ['rg']
 if executable('rg')
   " use for hidden files
   " set grepprg=rg\ --hidden\ --color\ never\ --line-number\ --no-heading
-  " set grepprg=rg\ --color\ never\ --line-number\ --no-heading
+  set grepprg=rg\ --color\ never\ --line-number\ --no-heading
 
   " let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
   " let g:ctrlp_user_command = 'rg %s --files --hidden --color never'
@@ -318,16 +318,23 @@ set showmatch
 
 " How many tenths of a second to blink when matching brackets
 set mat=2
+syntax enable
 
 " Set the color scheme
-syntax enable
-if $COLORTERM == 'gnome-terminal'
+" if $COLORTERM == 'gnome-terminal'
+"   set t_Co=256
+" endif
+
+" Set colorscheme
+" Allow color schemes to do bright colors without forcing bold.
+if &t_Co == 8 && $TERM !~# '^linux'
+  set t_Co=16
+endif
+if $TERM =~ "-256color"
   set t_Co=256
 endif
-" set t_ut=
-colorscheme gruvbox
-" colorscheme solarized
 set background=dark
+silent! colorscheme gruvbox
 let g:gruvbox_contrast_dark='hard'
 
 highlight Normal ctermbg=None
