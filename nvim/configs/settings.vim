@@ -70,9 +70,9 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
     " allows you to save and restore the current session (restart vim)
     " :SaveSession    -> save the session
     " :OpenSession    -> load the saved session
-    let g:session_autosave = 'no'
-    let g:session_autoload = 'no'
-    let g:session_directory = '~/nvim.local/sessions'
+    " let g:session_autosave = 'no'
+    " let g:session_autoload = 'no'
+    " let g:session_directory = '~/nvim.local/sessions'
 " }}}
 
 
@@ -141,13 +141,32 @@ let g:netrw_winsize = 25
 " Plugin outside ~/.config/nvim/plugged with post-update hook
 " 'junegunn/fzf.vim'
 "{{{
-    " ripgrep and fzf
-    " let g:rg_command = '
-    "       \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
-    "       \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
-    "       \ -g "!{.git,node_modules,vendor}/*" '
-    "
-    " command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+" ripgrep and fzf
+" work on making the quickfix window similar to ack
+" let g:fzf_action = {
+"       \ 'ctrl-t': 'tab split',
+"       \ 'ctrl-i': 'split',
+"       \ 'ctrl-s': 'vsplit' }
+" let g:fzf_layout = { 'down': '~20%' }
+"
+" let g:rg_command = '
+"       \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
+"       \ -g "*.{js,json,php,md,styl,pug,jade,html,config,py,cpp,c,go,hs,rb,conf,fa,lst}"
+"       \ -g "!{.git,node_modules,vendor,build,yarn.lock,*.sty}/*" '
+"
+" command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+
+    " --column: Show column number
+    " --line-number: Show line number
+    " --no-heading: Do not show file headings in results
+    " --fixed-strings: Search term as a literal string
+    " --ignore-case: Case insensitive search
+    " --no-ignore: Do not respect .gitignore, etc...
+    " --hidden: Search hidden files and folders
+    " --follow: Follow symlinks
+    " --glob: Additional conditions for search (in this case ignore everything
+    "  in the .git/ folder)
+    " --color: Search color options
 " }}}
 
 " 'mileszs/ack.vim' Easy grep like searching - install ack-grep first
@@ -169,7 +188,7 @@ let g:ackprg = 'rg -S --no-heading --vimgrep'
 if executable('rg')
   " use for hidden files
   " set grepprg=rg\ --hidden\ --color\ never\ --line-number\ --no-heading
-  set grepprg=rg\ --color\ never\ --line-number\ --no-heading
+  set grepprg=rg\ --vimgrep
 
   " let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
   " let g:ctrlp_user_command = 'rg %s --files --hidden --color never'
@@ -340,6 +359,7 @@ let g:gruvbox_contrast_dark='hard'
 highlight Normal ctermbg=None
 highlight SpecialKey ctermfg=132 guifg=Cyan
 " highlight NonText ctermfg=12 guifg=Blue
+highlight TermCursor ctermfg=red guifg=red
 
 " Use the vim wildmenu for command completion
 set wildmenu
@@ -347,6 +367,9 @@ set wildmode=longest:full,full
 
 " Ignore files in the wildmenu
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*node_modules*,*.jpg,*.png,*.svg,*.ttf,*.woff,*.woff3,*.eot
+
+" Session storage
+" let g:PathToSessions = $HOME . "/nvim.local/sessions"
 
 " HTML Autocomplete
 set omnifunc=htmlcomplete#CompleteTags

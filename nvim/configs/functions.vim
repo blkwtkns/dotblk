@@ -93,19 +93,23 @@ fun! RenameFile() " Thanks to Gary Bernhardt & Ben Orenstein
   endif
 endfun
 
-" fun! BuffersList()
-"   let all = range(0, bufnr('$'))
-"   let res = []
-"   for b in all
-"     if buflisted(b)
-"       call add(res, bufname(b))
-"     endif
-"   endfor
-"   return res
-" endfun
-"
-" fun! GrepBuffers (expression)
-"   exec 'grep!/ '.a:expression.'/ '.join(BuffersList())
-" endfun
-"
-" command! -nargs=+ GrepBufs call GrepBuffers(<q-args>)
+" Make ctrl-h/j/k/l move between windows and auto-insert in terminals
+fun! s:mapMoveToWindowInDirection(direction)
+    fun! s:maybeInsertMode(direction)
+        stopinsert
+        execute "wincmd" a:direction
+
+        if &buftype == 'terminal'
+            startinsert!
+        endif
+    endfun
+
+    execute "tnoremap" "<silent>" "<C-" . a:direction . ">"
+                \ "<C-\\><C-n>"
+                \ ":call <SID>maybeInsertMode(\"" . a:direction . "\")<CR>"
+    execute "nnoremap" "<silent>" "<C-" . a:direction . ">"
+                \ ":call <SID>maybeInsertMode(\"" . a:direction . "\")<CR>"
+endfun
+for dir in ["h", "j", "l", "k"]
+    call s:mapMoveToWindowInDirection(dir)
+endfor

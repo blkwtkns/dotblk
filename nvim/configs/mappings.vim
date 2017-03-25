@@ -10,17 +10,27 @@ inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual
 " ====================================================================
 " Ack
 " ====================================================================
-vnoremap <Leader>g y:Ack! <C-r>=fnameescape(@")<CR><CR>
+vnoremap <silent> <Leader>g y:Ack! <C-r>=fnameescape(@")<CR><CR>
 nnoremap <Leader>g :Ack!<space>
+
+" ====================================================================
+" FZF
+" ====================================================================
+" nnoremap <Leader>F :F<space>
 
 " ====================================================================
 " vim-grepper
 " ====================================================================
-" nnoremap <leader>g :Grepper -tool rg<cr>
-" nnoremap <leader>gw :Grepper -tool rg -cword -noprompt<cr>
-" nnoremap <leader>gb :Grepper -tool rg -buffers<cr>
+" nnoremap <leader>a :Grepper -tool rg<cr>
+" nnoremap <leader>aw :Grepper -tool rg -cword -noprompt<cr>
+" nnoremap <leader>ab :Grepper -tool rg -buffers<cr>
 " nmap <leader>gs <plug>(GrepperOperator)<cr>
-" xmap <leader>gv <plug>(GrepperOperator)<cr>
+" xmap <leader>a <plug>(GrepperOperator)<cr>
+
+" ====================================================================
+" vim-promiscuous
+" ====================================================================
+" nnoremap <Leader>ss :Promiscuous<CR>
 
 " ====================================================================
 " vim-schlepp

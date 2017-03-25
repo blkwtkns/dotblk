@@ -52,6 +52,7 @@ Plug 'tyru/current-func-info.vim'
 " Session management
 " ====================================================================
 " Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
+" Plug 'shuber/vim-promiscuous'
 
 " ====================================================================
 " Javascript
