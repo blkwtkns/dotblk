@@ -113,3 +113,119 @@ endfun
 for dir in ["h", "j", "l", "k"]
     call s:mapMoveToWindowInDirection(dir)
 endfor
+
+" This needs to be broken up into a couple more functions
+" NB these have a critical dependency on fugitive at the moment
+fun! FindProjectName()
+  let l:name = getcwd()
+  if !isdirectory(".git")
+    let l:name = substitute(finddir(".git", ".;"), "/.git", "", "")
+  end
+  if l:name != ""
+    let l:name = matchstr(l:name, ".*", strridx(l:name, "/") + 1)
+
+    if !isdirectory($HOME . "/nvim.local/sessions/" . l:name)
+      call mkdir($HOME . "/nvim.local/sessions/" . l:name, "p")
+    endif
+
+    let l:dir = l:name
+    let l:branch = GitInfo()
+    let l:name = l:name . '.' . l:branch
+  else
+    let l:name = getcwd()
+    let l:name = matchstr(l:name, ".*", strridx(l:name, "/") + 1)
+    let l:dir = l:name
+
+    if !isdirectory($HOME . "/nvim.local/sessions/" . l:name)
+      call mkdir($HOME . "/nvim.local/sessions/" . l:name, "p")
+    endif
+  end
+    echo l:dir . '/' . l:name . '.vim'
+    return l:dir . '/' . l:name . '.vim'
+endfun
+
+" Sessions only restored if we start Vim without args.
+function! RestoreSession(name)
+  if a:name != ""
+    if filereadable($HOME . "/nvim.local/sessions/" . a:name)
+      execute 'source ' . $HOME . "/nvim.local/sessions/" . a:name
+    end
+  end
+endfunction
+
+" Sessions only saved if we start Vim without args.
+function! SaveSession(name)
+  if a:name != ""
+    execute 'mksession! ' . $HOME . '/nvim.local/sessions/' . a:name
+  end
+endfunction
+
+" Depends on fugitive plugin
+fun! GitInfo()
+  let l:git = fugitive#head()
+  if l:git != ''
+    return l:git
+  else
+    return ''
+endfun
+
+command! SaveProject call SaveSession(FindProjectName())
+command! RestoreProject call RestoreSession(FindProjectName())
+
+" command! GitInfo call GitInfo()
+" command! FindProj call FindProjectName()
+
+" Restore and save sessions.
+" if argc() == 0
+  " autocmd VimEnter * call RestoreSession(FindProjectName())
+"   autocmd VimLeave * call SaveSession(FindProjectName())
+" end
+
+" Courtesy itchyny's vim-gitbranch - expand if fugitive dependency unwanted
+" fun! Gbranch_name() abort
+"   if get(b:, 'gitbranch_pwd', '') !=# expand('%:p:h') || !has_key(b:, 'gitbranch_path')
+"     echo 'calling detect'
+"     call Gbranch_detect(expand('%:p:h'))
+"   end
+"   if has_key(b:, 'gitbranch_path') && filereadable(b:gitbranch_path)
+"     let l:branch = get(readfile(b:gitbranch_path), 0, '')
+"     if l:branch =~# '^ref: '
+"       return substitute(l:branch, '^ref: \%(refs/\%(heads/\|remotes/\|tags/\)\=\)\=', '', '')
+"     elseif l:branch =~# '^\x\{20\}'
+"       return l:branch[:6]
+"     end
+"   end
+"   return ''
+" endfun
+"
+" fun! Gbranch_dir(path) abort
+"   let l:path = a:path
+"   let l:prev = ''
+"   while l:path !=# prev
+"     let l:dir = l:path . '/.git'
+"     let l:type = getftype(l:dir)
+"     if l:type ==# 'dir' && isdirectory(l:dir.'/objects') && isdirectory(l:dir.'/refs') && getfsize(l:dir.'/HEAD') > 10
+"       return l:dir
+"     elseif l:type ==# 'file'
+"       let l:reldir = get(readfile(l:dir), 0, '')
+"       if l:reldir =~# '^gitdir: '
+"         return simplify(l:path . '/' . l:reldir[8:])
+"       end
+"     end
+"     let l:prev = l:path
+"     let l:path = fnamemodify(l:path, ':h')
+"   endwhile
+"   return ''
+" endfun
+"
+" fun! Gbranch_detect(path) abort
+"   unlet! b:gitbranch_path
+"   let b:gitbranch_pwd = expand('%:p:h')
+"   let l:dir = Gbranch_dir(a:path)
+"   if l:dir !=# ''
+"     let l:path = l:dir . '/HEAD'
+"     if filereadable(l:path)
+"       let b:gitbranch_path = l:path
+"     end
+"   end
+" endfun
