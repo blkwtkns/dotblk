@@ -88,8 +88,8 @@ tnoremap <Leader><ESC> <C-\><C-n>
 " Commands
 " ====================================================================
 " See Save and Restore project functions in functions.vim
-nnoremap <leader>ss :SaveProject<CR>
-nnoremap <leader>rs :RestoreProject<CR>
+nnoremap <leader>ss :SaveSession<CR>
+nnoremap <leader>rs :RestoreSession<CR>
 
 " ====================================================================
 " Misc
