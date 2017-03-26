@@ -115,13 +115,64 @@ for dir in ["h", "j", "l", "k"]
 endfor
 
 " This needs to be broken up into a couple more functions
-" NB these have a critical dependency on fugitive at the moment
-fun! FindProjectName()
+" NB: these have a critical dependency on fugitive at the moment
+" Caveat: -c can't be used because of the dependency
+" This will be fore restore function
+fun! FindSession(...)
   let l:name = getcwd()
+  " Check if located within a repo
   if !isdirectory(".git")
     let l:name = substitute(finddir(".git", ".;"), "/.git", "", "")
   end
-  if l:name != ""
+
+  if l:name != "" && a:0 == 0
+    let l:name = matchstr(l:name, ".*", strridx(l:name, "/") + 1)
+    let l:dir = l:name
+    let l:branch = GitInfo()
+    let l:name = l:name . '.' . l:branch
+  else
+    let l:name = getcwd()
+    let l:name = matchstr(l:name, ".*", strridx(l:name, "/") + 1)
+    let l:dir = l:name
+
+    if a:1 != ""
+      let l:name = a:1
+    end
+  end
+    return l:dir . '/' . l:name . '.vim'
+endfun
+
+" Sessions only restored if we start Vim without args.
+fun! RestoreSession(...)
+  if a:0 == 0
+    let l:name = FindSession()
+  end
+  if a:0 > 0 && a:1 != ""
+    let l:name = FindSession(a:1)
+  end
+
+  if filereadable($HOME . "/nvim.local/sessions/" . l:name)
+    execute 'source ' . $HOME . "/nvim.local/sessions/" . l:name
+  else
+    echo 'No session found'
+  end
+endfun
+
+
+" This needs to be broken up into a couple more functions
+" NB these have a critical dependency on fugitive at the moment
+" This is for save function
+fun! CreateSession(...)
+  let l:name = getcwd()
+  " Check if located within a repo
+  if !isdirectory(".git")
+    let l:name = substitute(finddir(".git", ".;"), "/.git", "", "")
+  end
+
+  " Both sides of conditional create appropriate dir if not present
+  " If pass first check, do git branch naming (if no name given)
+  " If doesn't pass, do naming after directory or name given
+  if l:name != "" && a:0 == 0
     let l:name = matchstr(l:name, ".*", strridx(l:name, "/") + 1)
 
     if !isdirectory($HOME . "/nvim.local/sessions/" . l:name)
@@ -139,24 +190,29 @@ fun! FindProjectName()
     if !isdirectory($HOME . "/nvim.local/sessions/" . l:name)
       call mkdir($HOME . "/nvim.local/sessions/" . l:name, "p")
     endif
+
+    if a:1 != ""
+      let l:name = a:1
+    end
   end
-    echo l:dir . '/' . l:name . '.vim'
     return l:dir . '/' . l:name . '.vim'
 endfun
 
-" Sessions only restored if we start Vim without args.
-function! RestoreSession(name)
-  if a:name != ""
-    if filereadable($HOME . "/nvim.local/sessions/" . a:name)
-      execute 'source ' . $HOME . "/nvim.local/sessions/" . a:name
-    end
-  end
-endfunction
-
 " Sessions only saved if we start Vim without args.
-function! SaveSession(name)
-  if a:name != ""
-    execute 'mksession! ' . $HOME . '/nvim.local/sessions/' . a:name
+" TODO: figure out why it's not saving a given session name
+function! SaveSession(...)
+  if a:0 == 0 && !filereadable($HOME . "/nvim.local/sessions/" . FindSession())
+    let l:name = CreateSession()
+  elseif a:0 > 0 && a:1 != "" && !filereadable($HOME . "/nvim.local/sessions/" . FindSession(a:1))
+    let l:name = CreateSession(a:1)
+  else
+    let l:name = ""
+  end
+
+  if l:name != ""
+    execute 'mksession! ' . $HOME . '/nvim.local/sessions/' . l:name
+  else
+    echo 'Session already exists or Error occurred and this is a bad report'
   end
 endfunction
 
@@ -169,8 +225,8 @@ fun! GitInfo()
     return ''
 endfun
 
-command! SaveProject call SaveSession(FindProjectName())
-command! RestoreProject call RestoreSession(FindProjectName())
+command! SaveSession call SaveSession()
+command! RestoreSession call RestoreSession()
 
 " command! GitInfo call GitInfo()
 " command! FindProj call FindProjectName()
