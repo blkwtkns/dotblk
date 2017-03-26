@@ -368,9 +368,6 @@ set wildmode=longest:full,full
 " Ignore files in the wildmenu
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*node_modules*,*.jpg,*.png,*.svg,*.ttf,*.woff,*.woff3,*.eot
 
-" Session storage
-" let g:PathToSessions = $HOME . "/nvim.local/sessions"
-
 " HTML Autocomplete
 set omnifunc=htmlcomplete#CompleteTags
 
