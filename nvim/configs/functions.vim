@@ -114,10 +114,8 @@ for dir in ["h", "j", "l", "k"]
     call s:mapMoveToWindowInDirection(dir)
 endfor
 
-" This needs to be broken up into a couple more functions
-" NB: these have a critical dependency on fugitive at the moment
-" Caveat: -c can't be used because of the dependency
-" This will be fore restore function
+" Test Caveat: -c can't be used because of the dependency
+" This will be for restore function
 fun! FindSession(...)
   let l:name = getcwd()
   " Check if located within a repo
@@ -128,7 +126,8 @@ fun! FindSession(...)
   if l:name != "" && a:0 == 0
     let l:name = matchstr(l:name, ".*", strridx(l:name, "/") + 1)
     let l:dir = l:name
-    let l:branch = GitInfo()
+    " let l:branch = GitInfo()
+    let l:branch = Gbranch_name()
     let l:name = l:name . '.' . l:branch
   else
     let l:name = getcwd()
@@ -142,7 +141,6 @@ fun! FindSession(...)
     return l:dir . '/' . l:name . '.vim'
 endfun
 
-" Sessions only restored if we start Vim without args.
 fun! RestoreSession(...)
   if a:0 == 0
     let l:name = FindSession()
@@ -160,7 +158,6 @@ endfun
 
 
 " This needs to be broken up into a couple more functions
-" NB these have a critical dependency on fugitive at the moment
 " This is for save function
 fun! CreateSession(...)
   let l:name = getcwd()
@@ -180,7 +177,8 @@ fun! CreateSession(...)
     endif
 
     let l:dir = l:name
-    let l:branch = GitInfo()
+    " let l:branch = GitInfo()
+    let l:branch = Gbranch_name()
     let l:name = l:name . '.' . l:branch
   else
     let l:name = getcwd()
@@ -198,9 +196,7 @@ fun! CreateSession(...)
     return l:dir . '/' . l:name . '.vim'
 endfun
 
-" Sessions only saved if we start Vim without args.
-" TODO: figure out why it's not saving a given session name
-function! SaveSession(...)
+fun! SaveSession(...)
   if a:0 == 0 && !filereadable($HOME . "/nvim.local/sessions/" . FindSession())
     let l:name = CreateSession()
   elseif a:0 > 0 && a:1 != "" && !filereadable($HOME . "/nvim.local/sessions/" . FindSession(a:1))
@@ -214,74 +210,76 @@ function! SaveSession(...)
   else
     echo 'Session already exists or Error occurred and this is a bad report'
   end
-endfunction
-
-" Depends on fugitive plugin
-fun! GitInfo()
-  let l:git = fugitive#head()
-  if l:git != ''
-    return l:git
-  else
-    return ''
 endfun
 
-command! SaveSession call SaveSession()
-command! RestoreSession call RestoreSession()
+command! -nargs=? SaveSession call SaveSession(<f-args>)
+command! -nargs=? RestoreSession call RestoreSession(<f-args>)
+
+" Courtesy itchyny's vim-gitbranch - expand if fugitive dependency unwanted
+fun! Gbranch_name() abort
+  if get(b:, 'gitbranch_pwd', '') !=# expand('%:p:h') || !has_key(b:, 'gitbranch_path')
+    call Gbranch_detect(expand('%:p:h'))
+  end
+  if has_key(b:, 'gitbranch_path') && filereadable(b:gitbranch_path)
+    let l:branch = get(readfile(b:gitbranch_path), 0, '')
+    if l:branch =~# '^ref: '
+      return substitute(l:branch, '^ref: \%(refs/\%(heads/\|remotes/\|tags/\)\=\)\=', '', '')
+    elseif l:branch =~# '^\x\{20\}'
+      return l:branch[:6]
+    end
+  end
+  return ''
+endfun
+
+fun! Gbranch_dir(path) abort
+  let l:path = a:path
+  let l:prev = ''
+  while l:path !=# prev
+    let l:dir = l:path . '/.git'
+    let l:type = getftype(l:dir)
+    if l:type ==# 'dir' && isdirectory(l:dir.'/objects') && isdirectory(l:dir.'/refs') && getfsize(l:dir.'/HEAD') > 10
+      return l:dir
+    elseif l:type ==# 'file'
+      let l:reldir = get(readfile(l:dir), 0, '')
+      if l:reldir =~# '^gitdir: '
+        return simplify(l:path . '/' . l:reldir[8:])
+      end
+    end
+    let l:prev = l:path
+    let l:path = fnamemodify(l:path, ':h')
+  endwhile
+  return ''
+endfun
+
+fun! Gbranch_detect(path) abort
+  unlet! b:gitbranch_path
+  let b:gitbranch_pwd = expand('%:p:h')
+  let l:dir = Gbranch_dir(a:path)
+  if l:dir !=# ''
+    let l:path = l:dir . '/HEAD'
+    if filereadable(l:path)
+      let b:gitbranch_path = l:path
+    end
+  end
+endfun
+
+" command! GitBranch call Gbranch_name()
+
+" Depends on fugitive plugin
+" fun! GitInfo()
+"   let l:git = fugitive#head()
+"   if l:git != ''
+"     return l:git
+"   else
+"     return ''
+" endfun
 
 " command! GitInfo call GitInfo()
-" command! FindProj call FindProjectName()
+" command! FindProj call FindSession()
 
 " Restore and save sessions.
 " if argc() == 0
-  " autocmd VimEnter * call RestoreSession(FindProjectName())
-"   autocmd VimLeave * call SaveSession(FindProjectName())
+  " autocmd VimEnter * call RestoreSession()
+"   autocmd VimLeave * call SaveSession()
 " end
 
-" Courtesy itchyny's vim-gitbranch - expand if fugitive dependency unwanted
-" fun! Gbranch_name() abort
-"   if get(b:, 'gitbranch_pwd', '') !=# expand('%:p:h') || !has_key(b:, 'gitbranch_path')
-"     echo 'calling detect'
-"     call Gbranch_detect(expand('%:p:h'))
-"   end
-"   if has_key(b:, 'gitbranch_path') && filereadable(b:gitbranch_path)
-"     let l:branch = get(readfile(b:gitbranch_path), 0, '')
-"     if l:branch =~# '^ref: '
-"       return substitute(l:branch, '^ref: \%(refs/\%(heads/\|remotes/\|tags/\)\=\)\=', '', '')
-"     elseif l:branch =~# '^\x\{20\}'
-"       return l:branch[:6]
-"     end
-"   end
-"   return ''
-" endfun
-"
-" fun! Gbranch_dir(path) abort
-"   let l:path = a:path
-"   let l:prev = ''
-"   while l:path !=# prev
-"     let l:dir = l:path . '/.git'
-"     let l:type = getftype(l:dir)
-"     if l:type ==# 'dir' && isdirectory(l:dir.'/objects') && isdirectory(l:dir.'/refs') && getfsize(l:dir.'/HEAD') > 10
-"       return l:dir
-"     elseif l:type ==# 'file'
-"       let l:reldir = get(readfile(l:dir), 0, '')
-"       if l:reldir =~# '^gitdir: '
-"         return simplify(l:path . '/' . l:reldir[8:])
-"       end
-"     end
-"     let l:prev = l:path
-"     let l:path = fnamemodify(l:path, ':h')
-"   endwhile
-"   return ''
-" endfun
-"
-" fun! Gbranch_detect(path) abort
-"   unlet! b:gitbranch_path
-"   let b:gitbranch_pwd = expand('%:p:h')
-"   let l:dir = Gbranch_dir(a:path)
-"   if l:dir !=# ''
-"     let l:path = l:dir . '/HEAD'
-"     if filereadable(l:path)
-"       let b:gitbranch_path = l:path
-"     end
-"   end
-" endfun
