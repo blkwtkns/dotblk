@@ -99,6 +99,7 @@ alias tkill='tmux kill-session -t'
 alias ev='nvim ~/.config/nvim/init.vim ~/.config/nvim/configs/*'
 alias et='nvim ~/.tmux.conf'
 alias ez='nvim ~/.zprofile ~/.zshrc'
+alias visesh='nvim -c RestoreSession'
 
 # Haskell
 alias ghc='stack exec -- ghc'
