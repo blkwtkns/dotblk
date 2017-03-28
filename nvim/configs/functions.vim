@@ -197,18 +197,34 @@ fun! CreateSession(...)
 endfun
 
 fun! SaveSession(...)
-  if a:0 == 0 && !filereadable($HOME . "/nvim.local/sessions/" . FindSession())
-    let l:name = CreateSession()
-  elseif a:0 > 0 && a:1 != "" && !filereadable($HOME . "/nvim.local/sessions/" . FindSession(a:1))
-    let l:name = CreateSession(a:1)
-  else
-    let l:name = ""
+  if a:0 == 0
+    if filereadable($HOME . "/nvim.local/sessions/" . FindSession())
+      let l:choice = confirm("Overwrite session?", "&Yes\n&No", 1)
+      if l:choice == 1
+        let l:name = CreateSession()
+      else
+        let l:name = ""
+      end
+    else
+      let l:name = CreateSession()
+    end
+  elseif a:0 > 0 && a:1 != "" 
+    if filereadable($HOME . "/nvim.local/sessions/" . FindSession(a:1))
+      let l:choice = confirm("Overwrite session?", "&Yes\n&No", 1)
+      if l:choice == 1
+        let l:name = CreateSession(a:1)
+      else
+        let l:name = ""
+      end
+    else
+      let l:name = CreateSession(a:1)
+    end
   end
 
   if l:name != ""
     execute 'mksession! ' . $HOME . '/nvim.local/sessions/' . l:name
   else
-    echo 'Session already exists or Error occurred and this is a bad report'
+    echo 'Session save halted'
   end
 endfun
 
