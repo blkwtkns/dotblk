@@ -123,7 +123,7 @@ fun! FindSession(...)
     let l:name = substitute(finddir(".git", ".;"), "/.git", "", "")
   end
 
-  if l:name != "" && a:0 == 0
+  if l:name != "" && (a:0 == 0 || a:1 == "")
     let l:name = matchstr(l:name, ".*", strridx(l:name, "/") + 1)
     let l:dir = l:name
     " let l:branch = GitInfo()
@@ -133,14 +133,12 @@ fun! FindSession(...)
     let l:name = getcwd()
     let l:name = matchstr(l:name, ".*", strridx(l:name, "/") + 1)
     let l:dir = l:name
-
-    if a:1 != ""
-      let l:name = a:1
-    end
+    let l:name = a:1
   end
     return l:dir . '/' . l:name . '.vim'
 endfun
 
+" Add functionality to let user tab through sessions
 fun! RestoreSession(...)
   if a:0 == 0
     let l:name = FindSession()
@@ -169,7 +167,8 @@ fun! CreateSession(...)
   " Both sides of conditional create appropriate dir if not present
   " If pass first check, do git branch naming (if no name given)
   " If doesn't pass, do naming after directory or name given
-  if l:name != "" && a:0 == 0
+  " if l:name != "" && (a:0 == 0 || a:1 == "")
+  if l:name != "" && a:1 == ""
     let l:name = matchstr(l:name, ".*", strridx(l:name, "/") + 1)
 
     if !isdirectory($HOME . "/nvim.local/sessions/" . l:name)
@@ -189,36 +188,27 @@ fun! CreateSession(...)
       call mkdir($HOME . "/nvim.local/sessions/" . l:name, "p")
     endif
 
-    if a:1 != ""
-      let l:name = a:1
-    end
+    let l:name = a:1
   end
     return l:dir . '/' . l:name . '.vim'
 endfun
 
 fun! SaveSession(...)
   if a:0 == 0
-    if filereadable($HOME . "/nvim.local/sessions/" . FindSession())
-      let l:choice = confirm("Overwrite session?", "&Yes\n&No", 1)
-      if l:choice == 1
-        let l:name = CreateSession()
-      else
-        let l:name = ""
-      end
-    else
-      let l:name = CreateSession()
-    end
+    let l:arg = ""
   elseif a:0 > 0 && a:1 != "" 
-    if filereadable($HOME . "/nvim.local/sessions/" . FindSession(a:1))
-      let l:choice = confirm("Overwrite session?", "&Yes\n&No", 1)
-      if l:choice == 1
-        let l:name = CreateSession(a:1)
-      else
-        let l:name = ""
-      end
+    let l:arg = a:1
+  end
+
+  if filereadable($HOME . "/nvim.local/sessions/" . FindSession(l:arg))
+    let l:choice = confirm("Overwrite session?", "&Yes\n&No", 1)
+    if l:choice == 1
+      let l:name = CreateSession(l:arg)
     else
-      let l:name = CreateSession(a:1)
+      let l:name = ""
     end
+  else
+    let l:name = CreateSession(l:arg)
   end
 
   if l:name != ""
