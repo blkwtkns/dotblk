@@ -114,7 +114,6 @@ for dir in ["h", "j", "l", "k"]
     call s:mapMoveToWindowInDirection(dir)
 endfor
 
-" Test Caveat: -c can't be used because of the dependency
 " This will be for restore function
 fun! FindSession(...)
   let l:name = getcwd()
@@ -123,12 +122,15 @@ fun! FindSession(...)
     let l:name = substitute(finddir(".git", ".;"), "/.git", "", "")
   end
 
-  if l:name != "" && (a:0 == 0 || a:1 == "")
+  if l:name != ""
     let l:name = matchstr(l:name, ".*", strridx(l:name, "/") + 1)
-    let l:dir = l:name
-    " let l:branch = GitInfo()
     let l:branch = Gbranch_name()
-    let l:name = l:name . '.' . l:branch
+    let l:dir = l:name . "/" . l:branch
+    if a:0 == 0
+      let l:name = l:name . '.' . l:branch
+    else 
+      let l:name = a:1
+    end
   else
     let l:name = getcwd()
     let l:name = matchstr(l:name, ".*", strridx(l:name, "/") + 1)
@@ -138,7 +140,6 @@ fun! FindSession(...)
     return l:dir . '/' . l:name . '.vim'
 endfun
 
-" Add functionality to let user tab through sessions
 fun! RestoreSession(...)
   if a:0 == 0
     let l:name = FindSession()
@@ -154,8 +155,6 @@ fun! RestoreSession(...)
   end
 endfun
 
-
-" This needs to be broken up into a couple more functions
 " This is for save function
 fun! CreateSession(...)
   let l:name = getcwd()
@@ -164,21 +163,27 @@ fun! CreateSession(...)
     let l:name = substitute(finddir(".git", ".;"), "/.git", "", "")
   end
 
-  " Both sides of conditional create appropriate dir if not present
+  " Both sides of conditional create appropriate dirs if not present
   " If pass first check, do git branch naming (if no name given)
   " If doesn't pass, do naming after directory or name given
-  " if l:name != "" && (a:0 == 0 || a:1 == "")
-  if l:name != "" && a:1 == ""
+  if l:name != ""
     let l:name = matchstr(l:name, ".*", strridx(l:name, "/") + 1)
 
-    if !isdirectory($HOME . "/nvim.local/sessions/" . l:name)
-      call mkdir($HOME . "/nvim.local/sessions/" . l:name, "p")
+    " let l:dir = l:name
+    let l:branch = Gbranch_name()
+
+    if !isdirectory($HOME . "/nvim.local/sessions/" . l:name . "/" . l:branch)
+      call mkdir($HOME . "/nvim.local/sessions/" . l:name . "/" . l:branch, "p")
     endif
 
-    let l:dir = l:name
-    " let l:branch = GitInfo()
-    let l:branch = Gbranch_name()
-    let l:name = l:name . '.' . l:branch
+    let l:dir = l:name . "/" . l:branch
+
+    if a:1 == ""
+      let l:name = l:name . '.' . l:branch
+    else
+      let l:name = a:1
+    end
+
   else
     let l:name = getcwd()
     let l:name = matchstr(l:name, ".*", strridx(l:name, "/") + 1)
@@ -196,11 +201,13 @@ endfun
 fun! SaveSession(...)
   if a:0 == 0
     let l:arg = ""
+    let l:sesh = FindSession()
   elseif a:0 > 0 && a:1 != "" 
     let l:arg = a:1
+    let l:sesh = FindSession(l:arg)
   end
 
-  if filereadable($HOME . "/nvim.local/sessions/" . FindSession(l:arg))
+  if filereadable($HOME . "/nvim.local/sessions/" . l:sesh)
     let l:choice = confirm("Overwrite session?", "&Yes\n&No", 1)
     if l:choice == 1
       let l:name = CreateSession(l:arg)
