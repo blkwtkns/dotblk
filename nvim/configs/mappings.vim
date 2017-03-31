@@ -8,29 +8,30 @@ inoremap <Leader><Tab> <Space><Space>
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
 
 " ====================================================================
-" Ack
+" Grepping
 " ====================================================================
-vnoremap <silent> <Leader>g y:Ack! <C-r>=fnameescape(@")<CR><CR>
-nnoremap <Leader>g :Ack!<space>
 
+" Ack.vim
 " ====================================================================
+" vnoremap <silent> <Leader>g y:Ack! <C-r>=fnameescape(@")<CR><CR>
+" nnoremap <Leader>g :Ack!<space>
+
+" Native grep
+" ====================================================================
+" bind grep word under cursor
+vnoremap <silent> <Leader>g y:grep! <C-r>=fnameescape(@")<CR><CR>:cw<CR>
+" nnoremap <silent><Leader>g :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
+nnoremap <Leader>g :Rg<space>
+
 " FZF
 " ====================================================================
 " nnoremap <Leader>F :F<space>
 
+" vim-grepper - Determine how it befores buffer search
 " ====================================================================
-" vim-grepper
-" ====================================================================
-" nnoremap <leader>a :Grepper -tool rg<cr>
-" nnoremap <leader>aw :Grepper -tool rg -cword -noprompt<cr>
 " nnoremap <leader>ab :Grepper -tool rg -buffers<cr>
-" nmap <leader>gs <plug>(GrepperOperator)<cr>
-" xmap <leader>a <plug>(GrepperOperator)<cr>
-
-" ====================================================================
-" vim-promiscuous
-" ====================================================================
-" nnoremap <Leader>ss :Promiscuous<CR>
 
 " ====================================================================
 " vim-schlepp

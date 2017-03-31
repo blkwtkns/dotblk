@@ -186,9 +186,9 @@ let g:ackprg = 'rg -S --no-heading --vimgrep'
 " 'ctrlpvim/ctrlp.vim'
 " {{{
 if executable('rg')
-  " use for hidden files
-  " set grepprg=rg\ --hidden\ --color\ never\ --line-number\ --no-heading
-  set grepprg=rg\ --vimgrep
+  set grepprg=rg\ -S\ --hidden\ --line-number\ --no-heading\ --vimgrep
+  " set grepprg=rg\ --hidden\ --no-heading\ --ignore-case\ --vimgrep
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
 
   " let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
   " let g:ctrlp_user_command = 'rg %s --files --hidden --color never'
@@ -199,6 +199,23 @@ endif
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 " }}}
+
+" Ack.vim-esque quickfix mappings
+augroup autoquickfix
+    au!
+    " au QuickFixCmdPost [^l]* cwindow
+    " au QuickFixCmdPost    l* lwindow
+    au FileType qf nnoremap <buffer> <CR> <CR><C-W>p 
+    au FileType qf nnoremap <buffer> go <CR><C-W>p 
+    au FileType qf nnoremap <buffer> t <C-W><CR><C-W>T
+    au FileType qf nnoremap <buffer> T <C-W><CR><C-W>TgT<C-W>j
+    au FileType qf nnoremap <buffer> o <CR>
+    au FileType qf nnoremap <buffer> h <C-W><CR><C-W>K
+    au FileType qf nnoremap <buffer> H <C-W><CR><C-W>K<C-W>b
+    au FileType qf nnoremap <buffer> v <C-W><CR><C-W>H<C-W>b<C-W>J<C-W>t
+    au FileType qf nnoremap <buffer> gv <C-W><CR><C-W>H<C-W>b<C-W>J
+    au FileType qf nnoremap <buffer> q <C-W>q
+augroup END
 
 " ====================================================================
 " Haskell
