@@ -36,10 +36,10 @@ nnoremap <Leader>g :Rg<space>
 " ====================================================================
 " vim-schlepp
 " ====================================================================
-vmap <unique> <up>    <Plug>SchleppUp
-vmap <unique> <down>  <Plug>SchleppDown
-vmap <unique> <left>  <Plug>SchleppLeft
-vmap <unique> <right> <Plug>SchleppRight
+" vmap <unique> <up>    <Plug>SchleppUp
+" vmap <unique> <down>  <Plug>SchleppDown
+" vmap <unique> <left>  <Plug>SchleppLeft
+" vmap <unique> <right> <Plug>SchleppRight
 
 " ====================================================================
 " Fugitive
@@ -78,6 +78,8 @@ nnoremap <leader>b :CtrlPBuffer<CR>
 " ====================================================================
 nnoremap gl :bnext<CR>
 nnoremap gh :bprevious<cr>
+nnoremap <Leader>bd :bp<cr>:bd#<CR>
+nnoremap <Leader>bw :bp<cr>:bw#<CR>
 
 " ====================================================================
 " Terminal mode
@@ -107,3 +109,5 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " Treat long lines as break lines (useful when moving around in them)
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
+
+nnoremap <Leader>L :Lex<CR>
