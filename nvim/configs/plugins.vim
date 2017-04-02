@@ -26,7 +26,7 @@ Plug 'elzr/vim-json'
 " Vim global plugin for dragging virtual blocks. By Damien Conway.
 " Select text in Visual Block mode (ctrl-v), use arrow keys to move it around!
 " https://github.com/rdlugosz/vim-dragvisuals
-Plug 'zirrostig/vim-schlepp'
+" Plug 'zirrostig/vim-schlepp'
 " ====================================================================
 " Completion
 " ====================================================================
