@@ -219,6 +219,11 @@ fun! SaveSession(...)
   end
 
   if l:name != ""
+    " TODO: Need to save args first, then restore if deleted
+    " Execute 'arga' to add arguments to arglist
+    if(argc() > 0)
+      execute 'argd *'
+    end
     execute 'mksession! ' . $HOME . '/nvim.local/sessions/' . l:name
   else
     echo 'Session save halted'
