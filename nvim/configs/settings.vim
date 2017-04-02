@@ -186,8 +186,8 @@ let g:ackprg = 'rg -S --no-heading --vimgrep'
 " 'ctrlpvim/ctrlp.vim'
 " {{{
 if executable('rg')
-  set grepprg=rg\ -S\ --hidden\ --line-number\ --no-heading\ --vimgrep
-  " set grepprg=rg\ --hidden\ --no-heading\ --ignore-case\ --vimgrep
+  " set grepprg=rg\ -S\ --hidden\ --line-number\ --no-heading\ --vimgrep
+  set grepprg=rg\ --no-heading\ --ignore-case\ --vimgrep
   set grepformat=%f:%l:%c:%m,%f:%l:%m
 
   " let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
@@ -201,7 +201,7 @@ let g:ctrlp_cmd = 'CtrlP'
 " }}}
 
 " Ack.vim-esque quickfix mappings
-augroup autoquickfix
+aug autoquickfix
     au!
     " au QuickFixCmdPost [^l]* cwindow
     " au QuickFixCmdPost    l* lwindow
@@ -215,7 +215,13 @@ augroup autoquickfix
     au FileType qf nnoremap <buffer> v <C-W><CR><C-W>H<C-W>b<C-W>J<C-W>t
     au FileType qf nnoremap <buffer> gv <C-W><CR><C-W>H<C-W>b<C-W>J
     au FileType qf nnoremap <buffer> q <C-W>q
-augroup END
+aug END
+
+" Close quickfix window if no other buffers open
+aug QFClose
+  au!
+  au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
+aug END
 
 " ====================================================================
 " Haskell
