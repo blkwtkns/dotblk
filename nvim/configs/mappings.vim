@@ -91,8 +91,12 @@ tnoremap <Leader><ESC> <C-\><C-n>
 " Commands
 " ====================================================================
 " See Save and Restore project functions in functions.vim
-nnoremap <leader>ss :SaveSession<CR>
-nnoremap <leader>rs :RestoreSession<CR>
+" WARNING: This saves only to default at the moment probably better
+" to not include carriage return yet unitl resolved
+" nnoremap <leader>ss :SaveSession<space><CR>
+" nnoremap <leader>rs :RestoreSession<space><CR>
+nnoremap <leader>ss :SaveSession<space>
+nnoremap <leader>rs :RestoreSession<space>
 
 " ====================================================================
 " Misc
