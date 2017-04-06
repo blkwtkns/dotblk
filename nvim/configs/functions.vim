@@ -118,6 +118,7 @@ endfor
 " Make this return name, branch, and directory
 " TODO: Track current session, view .dotfiles, allow session directory
 " placement, allow particular sessions to be kept in actual project
+" DONE: .dotfiles
 fun! FindSession(...)
   let l:name = getcwd()
   " Check if located within a repo
@@ -150,7 +151,25 @@ endfun
 
 fun! RestoreSession(...)
   if a:0 == 0 || a:1 == ""
-    let l:info = FindSession()
+      let l:choice = confirm("Restore which session:", "&Default\n&Last\n&Cancel", 0)
+    " end
+
+    if l:choice == 1
+      let l:info = FindSession()
+    end
+
+    if l:choice == 2 && g:session_options[0] != ''
+      execute 'source ' . $HOME . "/nvim.local/sessions/" . g:session_options[0]
+      return
+    end
+
+    if l:choice == 2 && g:session_options[0] == ''
+      return
+    end
+
+    if l:choice == 3
+      return
+    end
   else
     " TODO: TEST TEST TEST
     let l:arglen = len(a:1)
@@ -170,8 +189,8 @@ fun! RestoreSession(...)
   end
 
   if filereadable($HOME . "/nvim.local/sessions/" . l:name)
-    " Allows for new sessions to be loaded and not overlap
-     %bwipeout
+    %bwipeout
+    let g:session_options[0] = l:name
     execute 'source ' . $HOME . "/nvim.local/sessions/" . l:name
   else
     echo 'No session found'
@@ -189,10 +208,33 @@ fun! CreateSession(info)
   end
 endfun
 
+" Create current session function to hook into this procedure
 fun! SaveSession(...)
+
   if a:0 == 0 || a:1 == ""
-    let l:arg = ""
-    let l:info = FindSession()
+    let l:current = confirm("Save session as:", "&Current\n&Default\n&Exit", 0)
+    echo l:current
+
+    if g:session_options[0] != '' && l:current == 1
+      if(argc() > 0)
+        execute 'argd *'
+      end
+      execute 'mksession! ' . $HOME . '/nvim.local/sessions/' . g:session_options[0]
+      return
+    end
+
+    if g:session_options[0] == '' && l:current == 1
+      return
+    end
+
+    if l:current == 2
+      let l:arg = ""
+      let l:info = FindSession()
+    end
+
+    if l:current == 3
+      return
+    end
   else
     " TODO: TEST TEST TEST
     let l:arglen = len(a:1)
@@ -212,7 +254,7 @@ fun! SaveSession(...)
   end
 
   if filereadable($HOME . "/nvim.local/sessions/" . l:name)
-    let l:choice = confirm("Overwrite session?", "&Yes\n&No", 1)
+    let l:choice = confirm("Overwrite session?", "&Yes\n&No", 2)
     if l:choice == 1
       let l:name = CreateSession(l:info)
     else
@@ -227,23 +269,37 @@ fun! SaveSession(...)
     if(argc() > 0)
       execute 'argd *'
     end
+    let g:session_options[0] = l:name
     execute 'mksession! ' . $HOME . '/nvim.local/sessions/' . l:name
   else
     echo 'Session save halted'
   end
 endfun
 
-" command! -nargs=? SaveSession call SaveSession(<f-args>)
-" command! -nargs=? RestoreSession call RestoreSession(<f-args>)
+fun! DoRedir(options)
+  let g:metasesh_options = a:options
+  call writefile(g:metasesh_options, expand(''.g:session_meta), "b")
+endfun
+
+fun! Test()
+  if g:session_options[0] == ''
+    echo 'yoyo'
+  end
+  call remove(g:session_options, 1)
+
+endfun
 
 fun! SeshComplete(ArgLead, CmdLine, CursorPos)
   " return ['one', 'two', 'three']
     let l:info = FindSession()
-    return map(split(glob($HOME . '/nvim.local/sessions/' . l:info[0] . '/' .'*.vim'), "\n"), 'fnamemodify(v:val, ":t")')
+    return map(split(glob($HOME . '/nvim.local/sessions/' . l:info[0] . '/.[^.]*'). "\n" . glob($HOME . '/nvim.local/sessions/' . l:info[0] . '/' .'*.vim')), 'fnamemodify(v:val, ":t")')
 endfun
 
 command! -nargs=* -complete=customlist,SeshComplete SaveSession call SaveSession(<f-args>)
 command! -nargs=* -complete=customlist,SeshComplete RestoreSession call RestoreSession(<f-args>)
+
+" command! -nargs=? SaveSession call SaveSession(<f-args>)
+" command! -nargs=? RestoreSession call RestoreSession(<f-args>)
 
 " Courtesy itchyny's vim-gitbranch - expand if fugitive dependency unwanted
 fun! Gbranch_name() abort
