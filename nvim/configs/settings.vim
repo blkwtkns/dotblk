@@ -75,35 +75,14 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
     " let g:session_directory = '~/nvim.local/sessions'
 " }}}
 
-let g:session_directory = expand($HOME.'/nvim.local/sessions')
-let g:session_meta = g:session_directory.'/'.'.metaseshrc'
-let g:session_options = ['']
-let g:session_sourced = 0
+" Homerolled plugin 'blkwtkns/vim-sesh'
+" {{{
 
-" Make metasesh file
-if !filereadable(g:session_meta)
-  call system('touch ' . g:session_meta)
-end
+  " let g:session_directory = expand($HOME.'/nvim.local/sessions')
+  " let g:session_meta = g:session_directory.'/'.'.metaseshrc'
+  " let g:session_autocmds = 0
 
-if filereadable(''. g:session_meta) && match(readfile(expand("".g:session_meta)),"text")
-  let g:sesh_option_check = readfile(expand("".g:session_meta), 'b')
-  if len(g:sesh_option_check) > 0 && g:sesh_option_check[0] != ''
-    " call add(g:session_options, g:sesh_option_check[0])
-    " call remove(g:session_options, 0)
-    let g:session_options[0] = g:sesh_option_check[0]
-    let g:session_sourced = 1
-  end
-end
-
-" Add logic for session deletion
-" Add logic for restore options to default
-
-aug PluginSession
-  au!
-  au VimEnter * if expand('<afile>') == "" | call RestoreSession()
-  au VimLeave * call SaveSession()
-  au VimLeave * call DoRedir(g:session_options)
-aug END
+" }}}
 
 " ====================================================================
 " Javascript
