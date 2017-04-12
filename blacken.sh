@@ -41,7 +41,6 @@ if [[ $platform == 'linux' ]]; then
 
   sudo apt-get install xclip
   sudo apt-get install tmux
-  sudo apt-get install exuberant-ctags
 
 elif [[ $platform == 'mac' ]]; then
   xcode-select –install

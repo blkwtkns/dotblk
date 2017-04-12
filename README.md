@@ -64,8 +64,8 @@ just use the file as reference.
 
 ### Tags
 * http://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
-* http://vi.stackexchange.com/questions/2944/can-i-load-different-tags-per-project
-* http://vim.wikia.com/wiki/Browsing_programs_with_tags
+* http://docs.ctags.io/en/latest/autotools.html
+* NB: check if pkg-config, and automake are installed
 
 ### Capslock to Ctrl
 $ sudo nvim /etc/default/keyboard
