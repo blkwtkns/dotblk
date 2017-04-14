@@ -233,6 +233,7 @@ aug autoquickfix
     au!
     " au QuickFixCmdPost [^l]* cwindow
     " au QuickFixCmdPost    l* lwindow
+    au FileType qf wincmd J
     au FileType qf nnoremap <buffer> <CR> <CR><C-W>p 
     au FileType qf nnoremap <buffer> go <CR><C-W>p 
     au FileType qf nnoremap <buffer> t <C-W><CR><C-W>T

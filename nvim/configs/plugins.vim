@@ -83,6 +83,7 @@ Plug 'tomtom/tcomment_vim'
 " Plug 'mhinz/vim-grepper'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
+" Plug 'inside/vim-grep-operator'
 
 " ====================================================================
 " Haskell
