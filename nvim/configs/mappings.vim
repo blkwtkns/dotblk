@@ -1,3 +1,6 @@
+" Exit insert mode
+inoremap <Leader><Leader> <esc>
+
 " ====================================================================
 " Deoplete
 " ====================================================================
@@ -18,12 +21,12 @@ inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual
 
 " Native grep
 " ====================================================================
-" bind grep word under cursor
-vnoremap <silent> <Leader>g y:grep! <C-r>=fnameescape(@")<CR><CR>:cw<CR>
-" nnoremap <silent><Leader>g :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
 command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
 nnoremap <Leader>g :Rg<space>
+" grep visual selection
+vnoremap <Leader>g y:Rg <C-r>=fnameescape(@")<CR><CR>:cw<CR>
+" grep word under cursor
+nnoremap <silent><Leader>gw :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " FZF
 " ====================================================================
@@ -45,8 +48,8 @@ nnoremap <Leader>g :Rg<space>
 " Fugitive
 " ====================================================================
 nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gb :Gblame<CR>
+" nnoremap <leader>gb :Gblame<CR>
+" nnoremap <leader>gd :Gdiff<CR>
 " nnoremap <leader>ga :Git add %:p<CR><CR>
 " nnoremap <leader>gc :Gcommit -v -q<CR>
 " nnoremap <leader>gt :Gcommit -v -q %:p<CR>
@@ -76,8 +79,8 @@ nnoremap <leader>b :CtrlPBuffer<CR>
 " ====================================================================
 " Buffers
 " ====================================================================
-nnoremap gl :bnext<CR>
-nnoremap gh :bprevious<cr>
+nnoremap bl :bnext<CR>
+nnoremap bh :bprevious<cr>
 nnoremap <Leader>bd :bp<cr>:bd#<CR>
 nnoremap <Leader>bw :bp<cr>:bw#<CR>
 
