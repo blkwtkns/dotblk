@@ -26,7 +26,7 @@ nnoremap <Leader>g :Rg<space>
 " grep visual selection
 vnoremap <Leader>g y:Rg <C-r>=fnameescape(@")<CR><CR>:cw<CR>
 " grep word under cursor
-nnoremap <silent><Leader>gw :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" nnoremap <silent><Leader>gw :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " FZF
 " ====================================================================
@@ -79,8 +79,8 @@ nnoremap <leader>b :CtrlPBuffer<CR>
 " ====================================================================
 " Buffers
 " ====================================================================
-nnoremap bl :bnext<CR>
-nnoremap bh :bprevious<cr>
+nnoremap gl :bnext<CR>
+nnoremap gh :bprevious<cr>
 nnoremap <Leader>bd :bp<cr>:bd#<CR>
 nnoremap <Leader>bw :bp<cr>:bw#<CR>
 

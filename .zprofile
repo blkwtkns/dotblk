@@ -21,14 +21,33 @@ export EDITOR='nano'
 export VISUAL='nano'
 export PAGER='less'
 
-export MYVIMRC='.config/nvim/init.vim'
-# Make neovim default
-# export EDITOR='/usr/bin/nvim'
-# export VISUAL='/usr/bin/nvim'
+# neovim specifics
+if [ -x "$(command -v nvim)" ]; then
 
-# Set up local bins
-# export PATH=$HOME/.local/bin:$PATH
-# export PATH=$HOME/.cargo/bin:$PATH
+  # Make vimrc var
+  export MYVIMRC='.config/nvim/init.vim'
+
+  # Make neovim default
+  export EDITOR='/usr/bin/nvim'
+  export VISUAL='/usr/bin/nvim'
+
+  # open neovim on vi and vim commands
+  alias vim='nvim'
+  alias vi='nvim'
+
+  # convenience aliases for editing configs
+  alias ev='nvim ~/.config/nvim/init.vim ~/.config/nvim/configs/*'
+  alias et='nvim ~/.tmux.conf'
+  alias ez='nvim ~/.zprofile ~/.zshrc'
+  alias visesh='nvim -c RestoreSession'
+fi
+
+# if cargo present add to path
+if [ -x "$(command -v cargo)" ]; then
+  # Set up local bins
+  export PATH=$HOME/.local/bin:$PATH
+  export PATH=$HOME/.cargo/bin:$PATH
+fi
 
 #
 # Language
@@ -81,12 +100,9 @@ if [[ ! -d "$TMPDIR" ]]; then
 fi
 
 # cursor shape
-echo -ne '\e[5 q'
+# echo -ne '\e[5 q'
 
 # Aliases
-# open neovim on vi and vim commands
-alias vim='nvim'
-alias vi='nvim'
 
 # aliases for Tmux
 alias tmux='tmux -2'
@@ -95,51 +111,56 @@ alias tnew='tmux new -s'
 alias tls='tmux ls'
 alias tkill='tmux kill-session -t'
 
-# convenience aliases for editing configs
-alias ev='nvim ~/.config/nvim/init.vim ~/.config/nvim/configs/*'
-alias et='nvim ~/.tmux.conf'
-alias ez='nvim ~/.zprofile ~/.zshrc'
-alias visesh='nvim -c RestoreSession'
-
 # Haskell
-alias ghc='stack exec -- ghc'
-alias ghci='stack exec -- ghci'
+if [ -x "$(command -v stack)" ]; then
+  alias ghc='stack exec -- ghc'
+  alias ghci='stack exec -- ghci'
+fi
 
 # git alias (should move to gitconfig)
 alias gflog='git reflog | grep -A1 pull | head -2'
 
-# Kill all running Docker containers
-alias dock-killa='docker kill $(docker ps -q)'
+# Docker
+if [ -x "$(command -v docker)" ]; then
+  # Kill all running Docker containers
+  alias dock-killa='docker kill $(docker ps -q)'
 
-# Remove all Docker containers
-alias dock-rm='docker rm $(docker ps -a -q)'
+  # Remove all Docker containers
+  alias dock-rm='docker rm $(docker ps -a -q)'
 
-# Remove all Docker images
-alias dock-rmi='docker rmi $(docker images -q)'
+  # Remove all Docker images
+  alias dock-rmi='docker rmi $(docker images -q)'
 
-# Automatize search for Docker container
-function docks() {
-  docker ps | grep "$1" | cut -d ' ' -f1
-}
-#
-function inspectcontainer() {
-  docker exec -it `docks $1` sh
-}
-#
-alias dockspec=inspectcontainer
+  # Automatize search for Docker container
+  function docks() {
+    docker ps | grep "$1" | cut -d ' ' -f1
+  }
+  #
+  function inspectcontainer() {
+    docker exec -it `docks $1` sh
+  }
+  #
+  alias dockspec=inspectcontainer
+fi
 
 # Show all groups (sorted)
 alias allgroups='cut -d: -f1 /etc/group | sort'
 
-# nvm 
-export NVM_DIR="/home/blaque/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# nvm
+if [ -x "$(command -v nvm)" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+fi
 
-# FZF and Ripgrep ish --> move into .zshrc
-# export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+# fzf
+if [ -x "$(command -v rg)" ]; then
+  if [ -x "$(command -v fzf)" ]; then
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    # FZF and Ripgrep ish --> move into .zshrc
+    export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+    export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+  fi
+fi
 
-# if you want to access hidden files with alt-C and ctrl-t commands
-# export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
-# export FZF_ALT_C_COMMAND=$FZF_DEFAULT_COMMAND
 
 TMPPREFIX="${TMPDIR%/}/zsh"
