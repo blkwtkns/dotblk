@@ -78,14 +78,14 @@ path=(
 )
 
 # if cargo present add to path
-if [ -x "$(command -v cargo)" ]; then
+# if [ -x "$(command -v cargo)" ]; then
   # Set up local bins
   export PATH=$HOME/.local/bin:$PATH
   export PATH=$HOME/.cargo/bin:$PATH
-fi
+# fi
 
 # add ~/bin to path if it exists
-[ -d $HOME/bin ] && export PATH=${PATH}:${HOME}/bin
+# [ -d $HOME/bin ] && export PATH=${PATH}:${HOME}/bin
 
 
 # Set the default Less options.
@@ -109,19 +109,16 @@ fi
 # echo -ne '\e[5 q'
 
 # nvm
-if [ -x "$(command -v nvm)" ]; then
+# if [ -x "$(command -v nvm)" ]; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-fi
+# fi
 
 # fzf
 if [ -x "$(command -v rg)" ]; then
-  if [ -x "$(command -v fzf)" ]; then
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
     # FZF and Ripgrep ish --> move into .zshrc
     export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
     export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
-  fi
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"

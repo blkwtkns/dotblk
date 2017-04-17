@@ -1,7 +1,7 @@
 bindkey -v
 
-vim_ins_mode="%{$fg[yellow]%}[INS]%{$reset_color%}"
-vim_cmd_mode="%{$fg[cyan]%}[CMD]%{$reset_color%}"
+vim_ins_mode="%{$fg[yellow]%}❯%{$reset_color%}"
+vim_cmd_mode="%{$fg[cyan]%}❯%{$reset_color%}"
 vim_mode=$vim_ins_mode
 
 function zle-keymap-select {
