@@ -1,15 +1,20 @@
 #!/bin/zsh --no-rcs
-# cbarrick's awesome prompt theme
+# from cbarrick's awesome prompt theme
+source "${0:h}/git_prompt.zsh"
+source "${0:h}/blaenk.zsh"
 
-function prompt_cbarrick_help {
+function prompt_blaquer_help {
   cat<<'EOF'
-Usage: prompt cbarrick [<prompt-color=green> [<info-color=blue> [<error-color=red>]]]
+Usage: prompt blaquer [<prompt-color=green> [<info-color=blue> [<error-color=red>]]]
 EOF
 }
 
-function prompt_cbarrick_setup {
+function prompt_blaquer_setup {
   autoload -Uz add-zsh-hook
   autoload -Uz vcs_info
+  # Workaround for zsh 5.2 release 
+  autoload +X VCS_INFO_nvcsformats
+  functions[VCS_INFO_nvcsformats]=${functions[VCS_INFO_nvcsformats]/local -a msgs/}
 
   # The colors
   prompt_csb_color_main=${1:-'green'}
@@ -28,25 +33,25 @@ function prompt_cbarrick_setup {
   # The prompt is reset to `$vcs_info_msg_0_` after every command--these options set the prompt.
 
   ## Determines the value when inside a version controled directory
-  zstyle ':vcs_info:*:cbarrick:*' formats \
+  zstyle ':vcs_info:*:blaquer:*' formats \
     "${project}:${branch} ${vcs_path}"
 
   ## Determines the value during a merge, rebase, etc
-  zstyle ':vcs_info:*:cbarrick:*' actionformats \
+  zstyle ':vcs_info:*:blaquer:*' actionformats \
     "${project}:${branch}${action} ${vcs_path}"
 
   ## Determines the value when outside of version control
-  zstyle ':vcs_info:*:cbarrick:*' nvcsformats \
+  zstyle ':vcs_info:*:blaquer:*' nvcsformats \
     "${non_vcs_path}"
 
   # To avoid conflicts with other uses of vcs_info, we reset the $PROMPT for every command
   function set_prompt {
-    local main="%(?.%(1j.%F{${prompt_csb_color_info}}[:%j].).%F{${prompt_csb_color_err}}[%?%(1j.:%j.)])%#%f "
-    vcs_info cbarrick
-    PROMPT="${vcs_info_msg_0_} ${main}"
-    RPROMPT=${SSH_CONNECTION:+ %m}
+    vcs_info blaquer
+    PROMPT="${vcs_info_msg_0_} ${vim_mode}$(p_arrow) "
+    RPROMPT='$(git_prompt_string)'
   }
   add-zsh-hook precmd set_prompt
 }
 
-prompt_cbarrick_setup "$@"
+prompt_blaquer_setup "$@"
+
