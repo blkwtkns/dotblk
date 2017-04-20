@@ -15,6 +15,7 @@ alias allgroups='cut -d: -f1 /etc/group | sort'
 alias b='${(z)BROWSER}'
 alias bower='noglob bower'
 alias cd='nocorrect cd'
+alias cdg='cd $(git rev-parse --show-toplevel)'
 alias cdf='cd "$(pfd)"'
 alias cp='nocorrect cp -i'
 alias d='dirs -v'
@@ -37,7 +38,7 @@ if [ -x "$(command -v nvim)" ]; then
   # convenience aliases for editing configs
   alias ev='nvim ~/.config/nvim/init.vim ~/.config/nvim/configs/*'
   alias et='nvim ~/.tmux.conf'
-  alias ez='nvim ~/.zsh/*'
+  alias ez='nvim ~/.zsh/**/*.zsh'
   alias visesh='nvim -c RestoreSession'
 else
   alias ev='vim ~/.vimrc'

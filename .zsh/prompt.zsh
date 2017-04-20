@@ -7,7 +7,8 @@ if [ "$USER" = "root" ]; then
     color="red"         # root is red, user is blue
 fi;
 
-export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o (a)bort (e)dit]? "
+# export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o (a)bort (e)dit]? "
+export SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 
 # RPROMPT='$(git_prompt_string)'
 # source "${0:h}/prompts/git_prompt.zsh"
