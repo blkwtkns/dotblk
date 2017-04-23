@@ -1,5 +1,30 @@
 # prompt
 # setopt prompt_subst
+autoload -Uz add-zsh-hook
+autoload -Uz vcs_info
+autoload +X VCS_INFO_nvcsformats
+functions[VCS_INFO_nvcsformats]=${functions[VCS_INFO_nvcsformats]/local -a msgs/}
+
+# The colors
+prompt_csb_color_main=${1:-'green'}
+prompt_csb_color_info=${2:-'blue'}
+prompt_csb_color_err=${3:-'red'}
+
+# These variables are composed into the $vcs_info_msg_0_ environment variable
+project="%F{${prompt_csb_color_main}}%r%f"
+branch="%F{${prompt_csb_color_main}}%b%f"
+action="%F{${prompt_csb_color_info}}(%a)%f"
+vcs_path="%S"       # The path relative to the root of the project
+non_vcs_path="%1~"  # The name of the current directory
+
+zstyle ':vcs_info:*:blaquer:*' formats \
+  "${project} ${vcs_path}"
+
+zstyle ':vcs_info:*:blaquer:*' actionformats \
+  "${project}:${action} ${vcs_path}"
+
+zstyle ':vcs_info:*:blaquer:*' nvcsformats \
+  "${non_vcs_path}"
 
 # mode-aware arrow
 function p_arrow {
@@ -17,10 +42,10 @@ function p_colored_path {
 }
 
 # git info
-# function p_vcs {
-#   vcs_info
-#   echo $vcs_info_msg_0_
-# }
+function p_vcs {
+  vcs_info
+  echo $vcs_info_msg_0_
+}
 
 # environments:
 #  - ssh
@@ -51,10 +76,15 @@ function p_exit_code {
 
 # PROMPT='
 # %F{blue}λ%f %{$fg[$color]%}%n%{$reset_color%} $(p_colored_path)$(p_hostname)$(p_envs) $(p_exit_code)
-# $(p_arrow) '
+# ${vim_mode} '
 
 function p_continuation {
   echo "%1(_.%_.contd)"
 }
 
 # PS2='$(p_continuation) $(p_arrow) '
+
+function set_prompt {
+  vcs_info blaquer
+}
+add-zsh-hook precmd set_prompt

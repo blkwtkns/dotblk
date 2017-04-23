@@ -106,4 +106,15 @@ Plug 'FelikZ/ctrlp-py-matcher'
 " ====================================================================
 " Plug 'rust-lang/rust.vim'
 
+" ====================================================================
+" Plugins to test
+" ====================================================================
+" Plug 'christoomey/vim-tmux-navigator'
+" Plug 'janko-m/vim-test'
+" Plug 'xolox/vim-misc'
+" Plug 'gregsexton/gitv'
+" Plug 'jceb/vim-orgmode'
+" Plug 'easymotion/vim-easymotion'
+" Plug 'mbbill/undotree'
+
 call plug#end()    " vim-plug
