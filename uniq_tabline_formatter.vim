@@ -7,9 +7,9 @@
 
 " Ref function! airline#extensions#tabline#tabs#get() for intel
 fun! airline#extensions#tabline#formatters#uniq_tabline_formatter#format(bufnr, buffers)
-  let uniq_buf = bufnr('%')
-  let uniq_tab = tabpagenr()
-  let buffers = tabpagebuflist(uniq_tab)
+  let uniq_buf = bufnr('%') " returns integer(active buffer)
+  let uniq_tab = tabpagenr() " returns integer(active tab)
+  let buffers = tabpagebuflist(uniq_tab) " returns list of integers(buffers)
   return fnamemodify(bufname(a:bufnr), ':t')
 endfun
 let g:airline#extensions#tabline#formatter = 'uniq_tabline_formatter'
