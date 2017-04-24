@@ -40,7 +40,7 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
     " \ 'errorformat': '%f: line %l\, col %c\, %m',
     " \ }
 
-    " install eslint via npm
+    " install eslint via npm (or use jshint/jscs)
     let g:neomake_javascript_enabled_makers = ['eslint']
     " let g:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
     " let g:neomake_javascript_eslint_exe=substitute(g:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
@@ -80,7 +80,7 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
   " let g:session_directory = expand($HOME.'/nvim.local/sessions')
   " let g:session_meta = g:session_directory.'/'.'.metaseshrc'
-  " let g:session_autocmds = 0
+  let g:session_autocmds = 0
 
 " }}}
 
@@ -100,16 +100,6 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " ====================================================================
 " 'vim-airline/vim-airline' & 'vim-airline/vim-airline-themes'
 " {{{
-  " https://github.com/vim-airline/vim-airline
-  " let distro = system("cat /etc/issue | head -1 | cut -f 1 -d ' '")
-  " if distro == "Manjaro\n"
-  "     set termguicolors
-  " else
-  "     " Ubuntu
-  "     set termguicolors
-  "     " let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-  " endif
-  " set termguicolors
   " also install the system package 'powerline-fonts'
   " let g:airline_powerline_fonts = 1
   " Enable the list of buffers
@@ -117,9 +107,13 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
   let g:airline#extensions#tabline#buffer_nr_show = 1
   " Show just the filename
   " let g:airline#extensions#tabline#fnamemod = ':t'
+  let g:airline#extensions#tabline#show_splits = 1
+
+  " let g:airline#extensions#tabline#tab_nr_type = 0 " # of splits (default)
+  " let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+  let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
 
   let g:airline#extensions#tabline#left_sep = ''
-  " let g:python_host_prog='/usr/local/bin/python'
   let g:airline#extensions#tabline#left_alt_sep = '|'
 
   " Always display status line
