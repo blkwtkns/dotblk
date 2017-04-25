@@ -220,6 +220,9 @@ let g:ctrlp_open_multiple_files = '1vj'
 " let g:ctrlp_arg_map = 1
 
 let g:ctrlp_working_path_mode = 'ra'
+
+" set ctrlp window size
+let g:ctrlp_match_window = 'min:1,max:999'
 " }}}
 
 " Ack.vim-esque quickfix mappings
