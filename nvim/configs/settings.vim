@@ -129,12 +129,23 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
   let g:airline_theme = 'dark'
 " }}}
 
+" ====================================================================
+" Explore
+" ====================================================================
+" vim-dirvish
+let g:loaded_netrwPlugin = 1
+autocmd! FileType dirvish setlocal relativenumber
+" command! -nargs=? -complete=dir Vexplore leftabove vsplit | vertical resize 25 | silent Dirvish <args>
+" nnoremap - :Vexplore<CR>
+command! VleftDirvish leftabove vsplit | vertical resize 25 | silent Dirvish <args>
+nnoremap - :VleftDirvish<CR>
+
 " Netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 0
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
+" let g:netrw_banner = 0
+" let g:netrw_liststyle = 0
+" let g:netrw_browse_split = 4
+" let g:netrw_altv = 1
+" let g:netrw_winsize = 25
 " augroup ProjectDrawer
 "   autocmd!
 "   autocmd VimEnter * :Vexplore
