@@ -117,4 +117,5 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 
-nnoremap <Leader>L :Lex<CR>
+noremap <silent><Leader>l :call VexToggle(getcwd())<CR>
+noremap <silent><Leader>L :call VexToggle("")<CR>

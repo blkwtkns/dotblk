@@ -109,7 +109,7 @@ Plug 'FelikZ/ctrlp-py-matcher'
 " ====================================================================
 " Plugins to test
 " ====================================================================
-Plug 'justinmk/vim-dirvish'
+" Plug 'justinmk/vim-dirvish'
 " Plug 'christoomey/vim-tmux-navigator'
 " Plug 'janko-m/vim-test'
 " Plug 'xolox/vim-misc'
