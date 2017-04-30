@@ -67,7 +67,7 @@ nnoremap <leader>gs :Gstatus<CR>
 " ====================================================================
 " Ctrlp
 " ====================================================================
-nnoremap <leader>ct :CtrlPTag<CR>
+" nnoremap <leader>ct :CtrlPTag<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
 
 " ====================================================================
@@ -117,5 +117,12 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 
-noremap <silent><Leader>l :call VexToggle(getcwd())<CR>
-noremap <silent><Leader>L :call VexToggle("")<CR>
+if g:stop_netrw == 1
+  " vim-dirvish
+  noremap <silent><Leader>l :call DirvToggle(getcwd())<CR>
+  noremap <silent><Leader>L :call DirvToggle("")<CR>
+else
+  " netrw
+  noremap <silent><Leader>l :call VexToggle(getcwd())<CR>
+  noremap <silent><Leader>L :call VexToggle("")<CR>
+endif

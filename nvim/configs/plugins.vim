@@ -12,9 +12,9 @@ call plug#begin('~/nvim.local/plugged')
 " Color schemes
 " ====================================================================
 Plug 'morhetz/gruvbox'
-Plug 'altercation/vim-colors-solarized'
-Plug 'tpope/vim-vividchalk'
-Plug 'tomasr/molokai'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'tpope/vim-vividchalk'
+" Plug 'tomasr/molokai'
 
 " ====================================================================
 " Visuals
@@ -109,7 +109,7 @@ Plug 'FelikZ/ctrlp-py-matcher'
 " ====================================================================
 " Plugins to test
 " ====================================================================
-" Plug 'justinmk/vim-dirvish'
+Plug 'justinmk/vim-dirvish'
 " Plug 'christoomey/vim-tmux-navigator'
 " Plug 'janko-m/vim-test'
 " Plug 'xolox/vim-misc'

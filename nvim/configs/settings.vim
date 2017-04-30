@@ -132,25 +132,57 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " ====================================================================
 " Explore
 " ====================================================================
-" Netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 0
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 15
+" vim-dirvish or netrw:
+" Either change the value, or comment out let statement, and pass the
+" variable and its binary state in the vim execution with --cmd
+let g:stop_netrw = 1
 
-aug NetrwGroup
-  au!
-  " au FileType netrw setlocal relativenumber
-  au FileType netrw setl bufhidden=wipe
-  " au FileType netrw nnoremap <buffer> x <C-w>q
-  au BufEnter * call NormalizeWidths()
-aug END
+if g:stop_netrw == 1
+  let g:loaded_netrwPlugin = 1
+endif
 
-" aug NetrwClose
-"   au!
-"   au WinLeave * :call Quit_netrw()
-" aug END
+" Check which explorer to setup configs for
+if g:stop_netrw == 1
+
+  aug DirvishGroup
+    au!
+    au FileType dirvish setlocal relativenumber
+    au FileType dirvish setl bufhidden=wipe
+    au FileType dirvish nnoremap <buffer><silent> v   yy<c-w>p:vs <c-r>=fnameescape(getreg('"',1,1)[0])<cr><cr>
+    au FileType dirvish nnoremap <buffer><silent> h   yy<c-w>p:sp <c-r>=fnameescape(getreg('"',1,1)[0])<cr><cr>
+    " au FileType dirvish nnoremap <buffer> x <C-w>q
+    au BufEnter * call NormalizeWidths()
+  aug END
+  " command! -nargs=? -complete=dir Vexplore leftabove vsplit | vertical resize 25 | silent Dirvish <args>
+  " nnoremap - :Vexplore<CR>
+  command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
+
+else
+
+  " Netrw
+  let g:netrw_banner = 0
+  let g:netrw_liststyle = 0
+  let g:netrw_browse_split = 4
+  let g:netrw_altv = 1
+  let g:netrw_winsize = 15
+
+  " wtf are these settings
+  " let g:netrw_fastbrowse = 2
+  " let g:netrw_keepdir = 0
+  " let g:netrw_retmap = 1
+  " let g:netrw_silent = 1
+  " let g:netrw_special_syntax = 1
+
+  " how to enable number line?
+  aug NetrwGroup
+    au!
+    au FileType netrw setl bufhidden=wipe
+    " au FileType netrw nnoremap <buffer> x <C-w>q
+    "   au WinLeave * :call Quit_netrw()
+    au BufEnter * call NormalizeWidths()
+  aug END
+
+endif
 
 " Plugin outside ~/.config/nvim/plugged with post-update hook
 " 'junegunn/fzf.vim'
@@ -324,9 +356,7 @@ set relativenumber
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " show location of cursor using a horizontal line.
-set cursorline
-" autocmd InsertEnter * highlight CursorLine guifg=white guibg=blue ctermfg=white ctermbg=blue
-" autocmd InsertLeave * highlight CursorLine guifg=white guibg=darkblue ctermfg=yellow ctermbg=darkblue
+" set cursorline
 
 " keep cursor in the middle of the screen while scrolling up and down.
 set scrolloff=999
