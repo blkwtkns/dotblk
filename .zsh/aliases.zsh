@@ -40,11 +40,16 @@ if [ -x "$(command -v nvim)" ]; then
   alias et='nvim ~/.tmux.conf'
   alias ez='nvim ~/.zsh/**/*.zsh'
   alias visesh='nvim -c RestoreSession'
+  # if vim-dirvish/netrw toggle config is setup
+  alias netvim='nvim --cmd "let g:stop_netrw=0"'
 else
+  alias vi='vim'
   alias ev='vim ~/.vimrc'
   alias et='vim ~/.tmux.conf'
-  alias ez='vim ~/.zsh/*'
+  alias ez='vim ~/.zsh/**/*.zsh'
   alias visesh='vim -c RestoreSession'
+  # if vim-dirvish/netrw toggle config is setup
+  alias netvim='vim --cmd "let g:stop_netrw=0"'
 fi
 
 # -------------------------------------------------------------------

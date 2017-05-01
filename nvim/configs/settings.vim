@@ -135,10 +135,15 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " vim-dirvish or netrw:
 " Either change the value, or comment out let statement, and pass the
 " variable and its binary state in the vim execution with --cmd
-let g:stop_netrw = 1
+if !exists('g:stop_netrw')
+  let g:stop_netrw = 1
+endif
 
 if g:stop_netrw == 1
   let g:loaded_netrwPlugin = 1
+" endif
+else
+  let g:loaded_dirvish = 1
 endif
 
 " Check which explorer to setup configs for
@@ -150,7 +155,7 @@ if g:stop_netrw == 1
     au FileType dirvish setl bufhidden=wipe
     au FileType dirvish nnoremap <buffer><silent> v   yy<c-w>p:vs <c-r>=fnameescape(getreg('"',1,1)[0])<cr><cr>
     au FileType dirvish nnoremap <buffer><silent> h   yy<c-w>p:sp <c-r>=fnameescape(getreg('"',1,1)[0])<cr><cr>
-    " au FileType dirvish nnoremap <buffer> x <C-w>q
+    au FileType dirvish nnoremap <buffer> Q <C-w>q
     au BufEnter * call NormalizeWidths()
   aug END
   " command! -nargs=? -complete=dir Vexplore leftabove vsplit | vertical resize 25 | silent Dirvish <args>
@@ -177,8 +182,7 @@ else
   aug NetrwGroup
     au!
     au FileType netrw setl bufhidden=wipe
-    " au FileType netrw nnoremap <buffer> x <C-w>q
-    "   au WinLeave * :call Quit_netrw()
+    au FileType netrw nnoremap <buffer> Q <C-w>q
     au BufEnter * call NormalizeWidths()
   aug END
 

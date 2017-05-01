@@ -138,15 +138,15 @@ function! OpenChangedFiles()
     endfor
 endfunction
 
-function! Quit_netrw()
-    for i in range(1, bufnr('$'))
-        if buflisted(i)
-            if getbufvar(i, '&filetype') == "netrw"
-                silent exe 'bwipeout ' . i
-            endif
-        endif
-    endfor
-endfunction
+" function! Quit_netrw()
+"     for i in range(1, bufnr('$'))
+"         if buflisted(i)
+"             if getbufvar(i, '&filetype') == "netrw"
+"                 silent exe 'bwipeout ' . i
+"             endif
+"         endif
+"     endfor
+" endfunction
 
 fun! VexToggle(dir)
   if exists("t:vex_buf_nr")
