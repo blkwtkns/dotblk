@@ -185,6 +185,49 @@ fun! VexSize(vex_width)
   call NormalizeWidths()
 endf
 
+" vim-dirvish specific functions
+fun! DirvToggle(dir)
+  if exists("t:dirv_buf_nr")
+    call DirvClose()
+  else
+    call DirvOpen(a:dir)
+  endif
+endfun
+
+fun DirvOpen(dir)
+  let dirv_width = 15
+  1wincmd w
+
+  if a:dir == "" 
+    exe 'Vexplore %:p'.repeat(':h',v:count1)
+  else
+    exe "Vexplore " . a:dir
+  endif
+
+  let t:dirv_buf_nr = bufnr("%")
+  wincmd H
+
+  call DirvSize(dirv_width)
+endf
+
+fun! DirvClose()
+  let cur_win_nr = winnr()
+  let target_nr = ( cur_win_nr == 1 ? winnr("#") : cur_win_nr )
+
+  1wincmd w
+  close
+  unlet t:dirv_buf_nr
+
+  execute (target_nr - 1) . "wincmd w"
+  call NormalizeWidths()
+endf
+
+fun! DirvSize(dirv_width)
+  execute "vertical resize" . a:dirv_width
+  set winfixwidth
+  call NormalizeWidths()
+endf
+
 fun! NormalizeWidths()
   let eadir_pref = &eadirection
   set eadirection=hor

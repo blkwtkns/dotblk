@@ -158,8 +158,6 @@ if g:stop_netrw == 1
     au FileType dirvish nnoremap <buffer> Q <C-w>q
     au BufEnter * call NormalizeWidths()
   aug END
-  " command! -nargs=? -complete=dir Vexplore leftabove vsplit | vertical resize 25 | silent Dirvish <args>
-  " nnoremap - :Vexplore<CR>
   command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 
 else
@@ -603,7 +601,7 @@ autocmd BufReadPost *
 " automatically change window's cwd to file's dir
 " set autochdir
 
-" remove trailing whitespaces {{{
+" remove trailing whitespaces {{{ 
     " autocmd BufWritePre *.txt :%s/\s\+$//e
     " autocmd BufWritePre *.py :%s/\s\+$//e
     " autocmd BufWritePre *.php :%s/\s\+$//e

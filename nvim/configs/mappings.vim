@@ -99,7 +99,7 @@ tnoremap <Leader><ESC> <C-\><C-n>
 " nnoremap <leader>ss :SaveSession<space><CR>
 " nnoremap <leader>rs :RestoreSession<space><CR>
 nnoremap <leader>ss :SaveSession<space>
-nnoremap <leader>rs :RestoreSession<space>
+nnoremap <leader>sr :RestoreSession<space>
 
 " ====================================================================
 " Misc
@@ -108,7 +108,7 @@ nnoremap <leader>rs :RestoreSession<space>
 nnoremap <leader><space> :noh<CR>
 
 " Strips whitespace
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+nnoremap <leader>sw :%s/\s\+$//<cr>:let @/=''<CR>
 
 " nnoremap <C-n> :call NumberToggle()<cr>
 " nnoremap M :call ToggleMouse()<cr>
