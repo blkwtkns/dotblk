@@ -2,6 +2,7 @@
 " indentLine conceals quotes in json files; this puts them back:
 let g:vim_json_syntax_conceal = 0
 
+
 " ====================================================================
 " Completion
 " ====================================================================
@@ -21,118 +22,103 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " tern
 " autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
-" }}}
+
 
 " ====================================================================
 " Syntax
 " ====================================================================
 " 'neomake/neomake'
-" {{{
-    "neomake error
-    " let g:neomake_verbose=3
 
-    " run neomake on the current file on every write:
-    autocmd! BufWritePost * Neomake
+"neomake error
+" let g:neomake_verbose=3
 
-    " let g:neomake_javascript_jscs_maker = {
-    " \ 'exe': 'jscs',
-    " \ 'args': ['--no-color', '--preset', 'airbnb', '--reporter', 'inline', '--esnext'],
-    " \ 'errorformat': '%f: line %l\, col %c\, %m',
-    " \ }
+" run neomake on the current file on every write:
+autocmd! BufWritePost * Neomake
 
-    " install eslint via npm (or use jshint/jscs)
-    let g:neomake_javascript_enabled_makers = ['eslint']
-    " let g:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
-    " let g:neomake_javascript_eslint_exe=substitute(g:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+" let g:neomake_javascript_jscs_maker = {
+" \ 'exe': 'jscs',
+" \ 'args': ['--no-color', '--preset', 'airbnb', '--reporter', 'inline', '--esnext'],
+" \ 'errorformat': '%f: line %l\, col %c\, %m',
+" \ }
 
-    let g:neomake_open_list = 0
+" install eslint via npm
+let g:neomake_javascript_enabled_makers = ['eslint']
+" let g:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
+" let g:neomake_javascript_eslint_exe=substitute(g:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
-    " Disable inherited syntastic
-    let g:syntastic_mode_map = {
+let g:neomake_open_list = 0
+
+" Disable inherited syntastic
+let g:syntastic_mode_map = {
       \ "mode": "passive",
       \ "active_filetypes": [],
       \ "passive_filetypes": [] }
 
-    let g:neomake_serialize = 1
-    let g:neomake_serialize_abort_on_error = 1
-    " setlocal makeprg=jscs\ %
-    " setlocal errorformat=%-P%f,
-    "                 \%A%>%\\s%\\?#%*\\d\ %m,%Z%.%#Line\ %l\\,\ Pos\ %c,
-    "                 \%-G%f\ is\ OK.,%-Q
+let g:neomake_serialize = 1
+let g:neomake_serialize_abort_on_error = 1
+" setlocal makeprg=jscs\ %
+" setlocal errorformat=%-P%f,
+"                 \%A%>%\\s%\\?#%*\\d\ %m,%Z%.%#Line\ %l\\,\ Pos\ %c,
+"                 \%-G%f\ is\ OK.,%-Q
 
-" }}}
 
 " ====================================================================
 " Session management
 " ====================================================================
-" 'xolox/vim-misc' | 'xolox/vim-session'
-" {{{
-    " allows you to save and restore the current session (restart vim)
-    " :SaveSession    -> save the session
-    " :OpenSession    -> load the saved session
-    " let g:session_autosave = 'no'
-    " let g:session_autoload = 'no'
-    " let g:session_directory = '~/nvim.local/sessions'
-" }}}
-
 " Homerolled plugin 'blkwtkns/vim-sesh'
-" {{{
+" start testing autosave feature
+" let g:session_directory = expand($HOME.'/nvim.local/sessions')
+" let g:session_meta = g:session_directory.'/'.'.metaseshrc'
+let g:session_autocmds = 0
 
-  " let g:session_directory = expand($HOME.'/nvim.local/sessions')
-  " let g:session_meta = g:session_directory.'/'.'.metaseshrc'
-  let g:session_autocmds = 0
-
-" }}}
 
 " ====================================================================
 " Javascript
 " ====================================================================
-" 'mxw/vim-jsx'
-" {{{
-    " JavaScript and JSX highlighting
-    "
-    " Allow JSX in normal JS files
-    let g:jsx_ext_required = 0
-" }}}
+" 'mxw/vim-jsx': JavaScript and JSX highlighting
+" Allow JSX in normal JS files
+let g:jsx_ext_required = 0
+
 
 " ====================================================================
 " Appearance
 " ====================================================================
 " 'vim-airline/vim-airline' & 'vim-airline/vim-airline-themes'
-" {{{
-  " also install the system package 'powerline-fonts'
-  " let g:airline_powerline_fonts = 1
-  " Enable the list of buffers
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#buffer_nr_show = 1
-  " Show just the filename
-  " let g:airline#extensions#tabline#fnamemod = ':t'
-  let g:airline#extensions#tabline#show_splits = 1
 
-  " let g:airline#extensions#tabline#tab_nr_type = 0 " # of splits (default)
-  " let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-  let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
+" also install the system package 'powerline-fonts'
+" let g:airline_powerline_fonts = 1
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+" Enable buffer numbers
+let g:airline#extensions#tabline#buffer_nr_show = 1
+" Show just the filename
+" let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline#extensions#tabline#show_splits = 1
 
-  let g:airline#extensions#tabline#left_sep = ''
-  let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline#extensions#tabline#tab_nr_type = 0 " # of splits (default)
+" let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
 
-  " Always display status line
-  set laststatus=2
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" Always display status line
+set laststatus=2
 
 
-  if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
 
-  let g:airline_symbols.space = "\ua0"
+let g:airline_symbols.space = "\ua0"
 
-  let g:airline_theme = 'dark'
-" }}}
+let g:airline_theme = 'dark'
+
 
 " ====================================================================
 " Explore
 " ====================================================================
-" vim-dirvish or netrw:
+" vim-dirvish or netrw
 " Either change the value, or comment out let statement, and pass the
 " variable and its binary state in the vim execution with --cmd
 if !exists('g:stop_netrw')
@@ -141,7 +127,7 @@ endif
 
 if g:stop_netrw == 1
   let g:loaded_netrwPlugin = 1
-" endif
+  " endif
 else
   let g:loaded_dirvish = 1
 endif
@@ -152,12 +138,14 @@ if g:stop_netrw == 1
   aug DirvishGroup
     au!
     au FileType dirvish setlocal relativenumber
-    au FileType dirvish setl bufhidden=wipe
+    au FileType dirvish setlocal bufhidden=wipe
     au FileType dirvish nnoremap <buffer><silent> v   yy<c-w>p:vs <c-r>=fnameescape(getreg('"',1,1)[0])<cr><cr>
     au FileType dirvish nnoremap <buffer><silent> h   yy<c-w>p:sp <c-r>=fnameescape(getreg('"',1,1)[0])<cr><cr>
     au FileType dirvish nnoremap <buffer> Q <C-w>q
     au BufEnter * call NormalizeWidths()
   aug END
+  " command! -nargs=? -complete=dir Vexplore leftabove vsplit | vertical resize 25 | silent Dirvish <args>
+  " nnoremap - :Vexplore<CR>
   command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 
 else
@@ -165,7 +153,7 @@ else
   " Netrw
   let g:netrw_banner = 0
   let g:netrw_liststyle = 0
-  let g:netrw_browse_split = 4
+  let g:netrw_browse_split = 3
   let g:netrw_altv = 1
   let g:netrw_winsize = 15
 
@@ -176,10 +164,9 @@ else
   " let g:netrw_silent = 1
   " let g:netrw_special_syntax = 1
 
-  " how to enable number line?
   aug NetrwGroup
     au!
-    au FileType netrw setl bufhidden=wipe
+    au FileType netrw setlocal bufhidden=wipe
     au FileType netrw nnoremap <buffer> Q <C-w>q
     au BufEnter * call NormalizeWidths()
   aug END
@@ -188,7 +175,8 @@ endif
 
 " Plugin outside ~/.config/nvim/plugged with post-update hook
 " 'junegunn/fzf.vim'
-"{{{
+" ====================================================================
+
 " ripgrep and fzf
 " work on making the quickfix window similar to ack
 " let g:fzf_action = {
@@ -196,6 +184,7 @@ endif
 "       \ 'ctrl-i': 'split',
 "       \ 'ctrl-s': 'vsplit' }
 " let g:fzf_layout = { 'down': '~20%' }
+" let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 "
 " let g:rg_command = '
 "       \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
@@ -204,35 +193,62 @@ endif
 "
 " command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
-    " --column: Show column number
-    " --line-number: Show line number
-    " --no-heading: Do not show file headings in results
-    " --fixed-strings: Search term as a literal string
-    " --ignore-case: Case insensitive search
-    " --no-ignore: Do not respect .gitignore, etc...
-    " --hidden: Search hidden files and folders
-    " --follow: Follow symlinks
-    " --glob: Additional conditions for search (in this case ignore everything
-    "  in the .git/ folder)
-    " --color: Search color options
-" }}}
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything
+"  in the .git/ folder)
+" --color: Search color options
+
+
+" ====================================================================
+" Search
+" ====================================================================
 
 " 'mileszs/ack.vim' Easy grep like searching - install ack-grep first
-" {{{
+" ====================================================================
+if !exists('g:use_grep_plugin')
+  let g:use_grep_plugin = 1
+endif
+
+if g:use_grep_plugin == 0
+  " don't load ack.vim
+  let g:loaded_ack = 1
+
+  "quickfix mappings
+  aug autoquickfix
+    au!
+    au FileType qf wincmd J
+    au FileType qf nnoremap <buffer> <CR> <CR><C-W>p 
+    au FileType qf nnoremap <buffer> go <CR><C-W>p 
+    au FileType qf nnoremap <buffer> t <C-W><CR><C-W>T
+    au FileType qf nnoremap <buffer> T <C-W><CR><C-W>TgT<C-W>j
+    au FileType qf nnoremap <buffer> o <CR>
+    au FileType qf nnoremap <buffer> h <C-W><CR><C-W>K
+    au FileType qf nnoremap <buffer> H <C-W><CR><C-W>K<C-W>b
+    au FileType qf nnoremap <buffer> v <C-W><CR><C-W>H<C-W>b<C-W>J<C-W>t
+    au FileType qf nnoremap <buffer> gv <C-W><CR><C-W>H<C-W>b<C-W>J
+    au FileType qf nnoremap <buffer> q <C-W>q
+  aug END
+endif
+
 " ripgrep needs to be installed, use cargo(Rust)
 " let g:ackprg = 'rg -S --hidden --no-heading --vimgrep'
-let g:ackprg = 'rg -S --no-heading --vimgrep'
-" }}}
+let g:ackprg = 'rg -S --ignore-case --no-heading --vimgrep'
+
 
 " 'mhinz/vim-grepper' - grep tool like ack.vim
-" {{{
+" ====================================================================
 " let g:grepper = {}
 " let g:grepper.tools = ['rg']
-" }}}
-
 
 " 'ctrlpvim/ctrlp.vim'
-" {{{
+" ====================================================================
 if executable('rg')
   " set grepprg=rg\ -S\ --hidden\ --line-number\ --no-heading\ --vimgrep
   set grepprg=rg\ --no-heading\ --ignore-case\ --vimgrep
@@ -267,27 +283,6 @@ let g:ctrlp_open_multiple_files = '1vj'
 
 let g:ctrlp_working_path_mode = 'ra'
 
-" set ctrlp window size
-let g:ctrlp_match_window = 'min:1,max:999'
-" }}}
-
-" Ack.vim-esque quickfix mappings
-aug autoquickfix
-    au!
-    " au QuickFixCmdPost [^l]* cwindow
-    " au QuickFixCmdPost    l* lwindow
-    au FileType qf wincmd J
-    au FileType qf nnoremap <buffer> <CR> <CR><C-W>p 
-    au FileType qf nnoremap <buffer> go <CR><C-W>p 
-    au FileType qf nnoremap <buffer> t <C-W><CR><C-W>T
-    au FileType qf nnoremap <buffer> T <C-W><CR><C-W>TgT<C-W>j
-    au FileType qf nnoremap <buffer> o <CR>
-    au FileType qf nnoremap <buffer> h <C-W><CR><C-W>K
-    au FileType qf nnoremap <buffer> H <C-W><CR><C-W>K<C-W>b
-    au FileType qf nnoremap <buffer> v <C-W><CR><C-W>H<C-W>b<C-W>J<C-W>t
-    au FileType qf nnoremap <buffer> gv <C-W><CR><C-W>H<C-W>b<C-W>J
-    au FileType qf nnoremap <buffer> q <C-W>q
-aug END
 
 " Close quickfix window if no other buffers open
 aug QFClose
@@ -295,14 +290,14 @@ aug QFClose
   au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
 aug END
 
+
 " ====================================================================
 " Haskell
 " ====================================================================
 " 'bitc/vim-hdevtools'
-"{{{
 "au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
 "au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
-"}}}
+
 
 "############################################################################
 "#  START: Blakes's own config :)
@@ -323,6 +318,7 @@ set encoding=utf-8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -331,9 +327,17 @@ set nobackup
 set nowb
 set noswapfile
 
-" ctags optimization
+" tell it to use an undo file
+" set undofile
+" set a directory to store the undo history
+" set undodir="~/nvim.local/undo/"
+
+" set path=**
+" set path+=**
+
 " Look for tags in current and above directories
-" set tags=./tags;/,tags;/
+" set tags=./tags,tags;
+
 
 "=========
 " General
@@ -345,6 +349,7 @@ filetype indent on
 
 "Always show current position
 set ruler
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Numbering
@@ -372,6 +377,7 @@ set clipboard=unnamedplus
 "key time delays
 set timeoutlen=1000
 set ttimeoutlen=1
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -464,6 +470,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*node_modules*,*.jpg,*.png,*.svg,*.ttf,
 " HTML Autocomplete
 set omnifunc=htmlcomplete#CompleteTags
 
+
 """"""""""""""""""""""""""""""
 " => Folding
 """"""""""""""""""""""""""""""
@@ -471,9 +478,9 @@ set omnifunc=htmlcomplete#CompleteTags
 "set fdc=4
 "set fdl=1
 " augroup remember_folds
-  " autocmd!
-  " autocmd BufWinLeave *.* mkview
-  " autocmd BufWinEnter *.* loadview
+" autocmd!
+" autocmd BufWinLeave *.* mkview
+" autocmd BufWinEnter *.* loadview
 " augroup END
 
 
@@ -486,30 +493,31 @@ set omnifunc=htmlcomplete#CompleteTags
 " Format the status line
 " set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetypes
 "
 " Force *.md files to be recognized as markdown
 " autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 augroup file_types
-    autocmd!
-    autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
-    autocmd BufRead,BufNewFile *.md set filetype=markdown
-    autocmd BufRead,BufNewFile *.txt set filetype=markdown
-    autocmd BufRead,BufNewFile *.module set filetype=php
-    autocmd BufRead,BufNewFile *.install set filetype=php
-    autocmd BufRead,BufNewFile *.test set filetype=php
-    autocmd BufRead,BufNewFile *.inc set filetype=php
-    autocmd BufRead,BufNewFile *.profile set filetype=php
-    autocmd BufRead,BufNewFile *.view set filetype=php
-    autocmd BufNewFile,BufRead *.less set filetype=less
-    autocmd BufRead,BufNewFile *.js set ft=javascript syntax=javascript
-    autocmd BufRead,BufNewFile *.ts set ft=typescript syntax=typescript
-    autocmd BufRead,BufNewFile *.es6 set ft=javascript syntax=javascript
-    autocmd BufRead,BufNewFile *.json set ft=json syntax=javascript
-    autocmd BufRead,BufNewFile *.twig set ft=htmldjango
-    autocmd BufRead,BufNewFile *.rabl set ft=ruby
-    autocmd BufRead,BufNewFile *.jade set ft=jade
+  autocmd!
+  autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
+  autocmd BufRead,BufNewFile *.txt set filetype=markdown
+  autocmd BufRead,BufNewFile *.module set filetype=php
+  autocmd BufRead,BufNewFile *.install set filetype=php
+  autocmd BufRead,BufNewFile *.test set filetype=php
+  autocmd BufRead,BufNewFile *.inc set filetype=php
+  autocmd BufRead,BufNewFile *.profile set filetype=php
+  autocmd BufRead,BufNewFile *.view set filetype=php
+  autocmd BufNewFile,BufRead *.less set filetype=less
+  autocmd BufRead,BufNewFile *.js set ft=javascript syntax=javascript
+  autocmd BufRead,BufNewFile *.ts set ft=typescript syntax=typescript
+  autocmd BufRead,BufNewFile *.es6 set ft=javascript syntax=javascript
+  autocmd BufRead,BufNewFile *.json set ft=json syntax=javascript
+  autocmd BufRead,BufNewFile *.twig set ft=htmldjango
+  autocmd BufRead,BufNewFile *.rabl set ft=ruby
+  autocmd BufRead,BufNewFile *.jade set ft=jade
 augroup END
 
 " Stop Automatic insert of comment leader when hitting <Enter> in insert mode
@@ -542,33 +550,32 @@ augroup END
 
 " allows cursor change in tmux mode
 if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
 
-" mouse {{{
-    " set mouse=a
-" "}}}
+" mouse
+" set mouse=a
 
 " disable automatic comment insertion
 " autocmd FileType * setlocal formatoptions-=c  formatoptions-=r formatoptions-=o
 
-" highlight the current line {{{
-    " set cursorline
-    " autocmd WinEnter * setlocal cursorline
-    " autocmd WinLeave * setlocal nocursorline
-" }}}
+" highlight the current line
+" set cursorline
+" autocmd WinEnter * setlocal cursorline
+" autocmd WinLeave * setlocal nocursorline
 
 
 " when re-opening a file, jump back to the previous position
 autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal g`\"" |
+      \ endif
+
 
 "############################################################################
 "#  Function keys
@@ -584,6 +591,7 @@ autocmd BufReadPost *
 "change number
 " noremap <F7> :set number!<cr>
 
+
 "############################################################################
 "#  other
 "############################################################################
@@ -591,27 +599,25 @@ autocmd BufReadPost *
 " don't outdent hashes
 " inoremap # #
 
-"====[ Make the 81st column stand out ]==================== {{{
-    highlight ColorColumn ctermbg=magenta
-    call matchadd('ColorColumn', '\%101v', 100)    " I set it to 100
-    call matchadd('ColorColumn', '\%121v', 100)   " column 120
-    call matchadd('ColorColumn', '\%81v', 100)    " column 80
-" }}}
+"====[ Make the 81st column stand out ]====================
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%101v', 100)    " I set it to 100
+call matchadd('ColorColumn', '\%121v', 100)   " column 120
+call matchadd('ColorColumn', '\%81v', 100)    " column 80
 
 " automatically change window's cwd to file's dir
 " set autochdir
 
-" remove trailing whitespaces {{{ 
-    " autocmd BufWritePre *.txt :%s/\s\+$//e
-    " autocmd BufWritePre *.py :%s/\s\+$//e
-    " autocmd BufWritePre *.php :%s/\s\+$//e
-    " autocmd BufWritePre *.java :%s/\s\+$//e
-    " autocmd BufWritePre *.md :%s/\s\+$//e
-    " autocmd BufWritePre *.h :%s/\s\+$//e
-    " autocmd BufWritePre *.tex :%s/\s\+$//e
-    " autocmd BufWritePre *.vim :%s/\s\+$//e
-    " autocmd BufWritePre *.nfo :%s/\s\+$//e
-" }}}
+" remove trailing whitespaces
+" autocmd BufWritePre *.txt :%s/\s\+$//e
+" autocmd BufWritePre *.py :%s/\s\+$//e
+" autocmd BufWritePre *.php :%s/\s\+$//e
+" autocmd BufWritePre *.java :%s/\s\+$//e
+" autocmd BufWritePre *.md :%s/\s\+$//e
+" autocmd BufWritePre *.h :%s/\s\+$//e
+" autocmd BufWritePre *.tex :%s/\s\+$//e
+" autocmd BufWritePre *.vim :%s/\s\+$//e
+" autocmd BufWritePre *.nfo :%s/\s\+$//e
 
 " when going back to a terminal, switch to insert mode automatically
 " autocmd BufWinEnter,WinEnter term://* startinsert

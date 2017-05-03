@@ -79,7 +79,7 @@ Plug 'tomtom/tcomment_vim'
 " Plug 'junegunn/fzf.vim'
 
 " Easy grep like searching - install ack-grep first
-" Plug 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 " Plug 'mhinz/vim-grepper'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'FelikZ/ctrlp-py-matcher'

@@ -14,19 +14,25 @@ inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual
 " Grepping
 " ====================================================================
 
-" Ack.vim
-" ====================================================================
-" vnoremap <silent> <Leader>g y:Ack! <C-r>=fnameescape(@")<CR><CR>
-" nnoremap <Leader>g :Ack!<space>
+if g:use_grep_plugin == 0
 
-" Native grep
-" ====================================================================
-command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
-nnoremap <Leader>g :Rg<space>
-" grep visual selection
-vnoremap <Leader>g y:Rg <C-r>=fnameescape(@")<CR><CR>:cw<CR>
-" grep word under cursor
-" nnoremap <silent><Leader>gw :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+  " Native grep
+  " ====================================================================
+  command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
+  nnoremap <Leader>a :Rg<space>
+  " grep visual selection
+  vnoremap <Leader>a y:Rg <C-r>=fnameescape(@")<CR><CR>:cw<CR>
+  " grep word under cursor
+  " nnoremap <silent><Leader>rw :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+else
+
+  " Ack.vim
+  " ====================================================================
+  vnoremap <silent><Leader>a y:Ack! <C-r>=fnameescape(@")<CR><CR>
+  nnoremap <Leader>a :Ack!<space>
+
+endif
 
 " FZF
 " ====================================================================
