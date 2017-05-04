@@ -19,18 +19,18 @@ if g:use_grep_plugin == 0
   " Native grep
   " ====================================================================
   command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
-  nnoremap <Leader>a :Rg<space>
+  nnoremap <Leader>r :Rg<space>
   " grep visual selection
-  vnoremap <Leader>a y:Rg <C-r>=fnameescape(@")<CR><CR>:cw<CR>
+  vnoremap <Leader>r y:Rg <C-r>=fnameescape(@")<CR><CR>:cw<CR>
   " grep word under cursor
-  " nnoremap <silent><Leader>rw :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+  nnoremap <silent><Leader>rw :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 else
 
   " Ack.vim
   " ====================================================================
-  vnoremap <silent><Leader>a y:Ack! <C-r>=fnameescape(@")<CR><CR>
-  nnoremap <Leader>a :Ack!<space>
+  vnoremap <silent><Leader>r y:Ack! <C-r>=fnameescape(@")<CR><CR>
+  nnoremap <Leader>r :Ack!<space>
 
 endif
 
@@ -79,9 +79,9 @@ nnoremap <leader>b :CtrlPBuffer<CR>
 " ====================================================================
 " Ctrlp-funky
 " ====================================================================
-nnoremap <Leader>fu :CtrlPFunky<Cr>
+" nnoremap <Leader>fu :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
-nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+" nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 " ====================================================================
 " Tags

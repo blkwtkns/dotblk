@@ -292,9 +292,9 @@ aug END
 
 " CtrlPFunky
 " ====================================================================
-let g:ctrlp_funky_matchtype = 'path'
-let g:ctrlp_funky_syntax_highlight = 1
-let g:ctrlp_funky_multi_buffers = 1
+" let g:ctrlp_funky_matchtype = 'path'
+" let g:ctrlp_funky_syntax_highlight = 1
+" let g:ctrlp_funky_multi_buffers = 1
 
 
 " ====================================================================

@@ -82,8 +82,8 @@ Plug 'tomtom/tcomment_vim'
 Plug 'mileszs/ack.vim'
 " Plug 'mhinz/vim-grepper'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
 Plug 'FelikZ/ctrlp-py-matcher'
+" Plug 'tacahiroy/ctrlp-funky'
 " Plug 'inside/vim-grep-operator'
 
 " ====================================================================
