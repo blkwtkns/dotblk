@@ -69,7 +69,7 @@ let g:neomake_serialize_abort_on_error = 1
 " start testing autosave feature
 " let g:session_directory = expand($HOME.'/nvim.local/sessions')
 " let g:session_meta = g:session_directory.'/'.'.metaseshrc'
-let g:session_autocmds = 0
+let g:sesh_autocmds = 0
 
 
 " ====================================================================
@@ -210,32 +210,21 @@ endif
 " Search
 " ====================================================================
 
-" 'mileszs/ack.vim' Easy grep like searching - install ack-grep first
-" ====================================================================
-if !exists('g:use_grep_plugin')
-  let g:use_grep_plugin = 1
-endif
-
-if g:use_grep_plugin == 0
-  " don't load ack.vim
-  let g:loaded_ack = 1
-
-  "quickfix mappings
-  aug autoquickfix
-    au!
-    au FileType qf wincmd J
-    au FileType qf nnoremap <buffer> <CR> <CR><C-W>p 
-    au FileType qf nnoremap <buffer> go <CR><C-W>p 
-    au FileType qf nnoremap <buffer> t <C-W><CR><C-W>T
-    au FileType qf nnoremap <buffer> T <C-W><CR><C-W>TgT<C-W>j
-    au FileType qf nnoremap <buffer> o <CR>
-    au FileType qf nnoremap <buffer> h <C-W><CR><C-W>K
-    au FileType qf nnoremap <buffer> H <C-W><CR><C-W>K<C-W>b
-    au FileType qf nnoremap <buffer> v <C-W><CR><C-W>H<C-W>b<C-W>J<C-W>t
-    au FileType qf nnoremap <buffer> gv <C-W><CR><C-W>H<C-W>b<C-W>J
-    au FileType qf nnoremap <buffer> q <C-W>q
-  aug END
-endif
+"native quickfix mappings
+aug autoquickfix
+  au!
+  au FileType qf wincmd J
+  au FileType qf nnoremap <buffer> <CR> <CR><C-W>p 
+  au FileType qf nnoremap <buffer> go <CR><C-W>p 
+  au FileType qf nnoremap <buffer> t <C-W><CR><C-W>T
+  au FileType qf nnoremap <buffer> T <C-W><CR><C-W>TgT<C-W>j
+  au FileType qf nnoremap <buffer> o <CR>
+  au FileType qf nnoremap <buffer> h <C-W><CR><C-W>K
+  au FileType qf nnoremap <buffer> H <C-W><CR><C-W>K<C-W>b
+  au FileType qf nnoremap <buffer> v <C-W><CR><C-W>H<C-W>b<C-W>J<C-W>t
+  au FileType qf nnoremap <buffer> gv <C-W><CR><C-W>H<C-W>b<C-W>J
+  au FileType qf nnoremap <buffer> q <C-W>q
+aug END
 
 " ripgrep needs to be installed, use cargo(Rust)
 " let g:ackprg = 'rg -S --hidden --no-heading --vimgrep'

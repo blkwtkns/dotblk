@@ -14,25 +14,19 @@ inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual
 " Grepping
 " ====================================================================
 
-if g:use_grep_plugin == 0
+" Native grep
+" ====================================================================
+" command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
+" nnoremap <Leader>r :Rg<space>
+" " grep visual selection
+" vnoremap <Leader>r y:Rg <C-r>=fnameescape(@")<CR><CR>:cw<CR>
+" " grep word under cursor
+" nnoremap <silent><Leader>rw :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-  " Native grep
-  " ====================================================================
-  command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
-  nnoremap <Leader>r :Rg<space>
-  " grep visual selection
-  vnoremap <Leader>r y:Rg <C-r>=fnameescape(@")<CR><CR>:cw<CR>
-  " grep word under cursor
-  nnoremap <silent><Leader>rw :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-else
-
-  " Ack.vim
-  " ====================================================================
-  vnoremap <silent><Leader>r y:Ack! <C-r>=fnameescape(@")<CR><CR>
-  nnoremap <Leader>r :Ack!<space>
-
-endif
+" Ack.vim
+" ====================================================================
+vnoremap <silent><Leader>r y:Ack! <C-r>=fnameescape(@")<CR><CR>
+nnoremap <Leader>r :Ack!<space>
 
 " FZF
 " ====================================================================
@@ -111,8 +105,8 @@ tnoremap <Leader><ESC> <C-\><C-n>
 " to not include carriage return yet unitl resolved
 " nnoremap <leader>ss :SaveSession<space><CR>
 " nnoremap <leader>rs :RestoreSession<space><CR>
-nnoremap <leader>ss :SaveSession<space>
-nnoremap <leader>sr :RestoreSession<space>
+nnoremap <leader>ss :SaveSesh<space>
+nnoremap <leader>sr :RestoreSesh<space>
 
 " ====================================================================
 " Misc
