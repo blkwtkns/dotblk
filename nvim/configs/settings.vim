@@ -69,7 +69,7 @@ let g:neomake_serialize_abort_on_error = 1
 " start testing autosave feature
 " let g:session_directory = expand($HOME.'/nvim.local/sessions')
 " let g:session_meta = g:session_directory.'/'.'.metaseshrc'
-let g:sesh_autocmds = 0
+" let g:sesh_autocmds = 0
 
 
 " ====================================================================
