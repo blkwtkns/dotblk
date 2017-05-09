@@ -25,12 +25,19 @@ inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual
 
 " Ack.vim
 " ====================================================================
-vnoremap <silent><Leader>r y:Ack! <C-r>=fnameescape(@")<CR><CR>
-nnoremap <Leader>r :Ack!<space>
+" vnoremap <silent><Leader>r y:Ack! <C-r>=fnameescape(@")<CR><CR>
+" nnoremap <Leader>r :Ack!<space>
 
 " FZF
 " ====================================================================
-" nnoremap <Leader>F :F<space>
+" nnoremap <Leader>fz :Files<CR>
+" nnoremap <Leader>fs :Buffers<CR>
+" nnoremap <Leader>fb :Lines<CR>
+" nnoremap <Leader>fg :Fg<CR>
+nnoremap <M-s> :Buffers<CR>
+nnoremap <M-b> :Lines<CR>
+nnoremap <M-g> :Fg<CR>
+nnoremap <M-p> :Files<cr>
 
 " vim-grepper - Determine how it befores buffer search
 " ====================================================================
@@ -68,7 +75,7 @@ nnoremap <leader>gs :Gstatus<CR>
 " Ctrlp
 " ====================================================================
 " nnoremap <leader>ct :CtrlPTag<CR>
-nnoremap <leader>b :CtrlPBuffer<CR>
+" nnoremap <leader>b :CtrlPBuffer<CR>
 
 " ====================================================================
 " Ctrlp-funky

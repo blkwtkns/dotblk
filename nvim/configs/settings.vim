@@ -177,21 +177,22 @@ endif
 " 'junegunn/fzf.vim'
 " ====================================================================
 
-" ripgrep and fzf
-" work on making the quickfix window similar to ack
 " let g:fzf_action = {
 "       \ 'ctrl-t': 'tab split',
 "       \ 'ctrl-i': 'split',
 "       \ 'ctrl-s': 'vsplit' }
 " let g:fzf_layout = { 'down': '~20%' }
-" let g:fzf_nvim_statusline = 0 " disable statusline overwriting
-"
-" let g:rg_command = '
-"       \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
-"       \ -g "*.{js,json,php,md,styl,pug,jade,html,config,py,cpp,c,go,hs,rb,conf,fa,lst}"
-"       \ -g "!{.git,node_modules,vendor,build,yarn.lock,*.sty}/*" '
-"
-" command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+
+" ripgrep and fzf
+let g:rg_command = 'rg --column --line-number --no-heading --ignore-case --color=always '
+
+command! -bang -nargs=* Fg
+      \ call fzf#vim#grep(
+      \   g:rg_command .shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
 
 " --column: Show column number
 " --line-number: Show line number
@@ -228,7 +229,7 @@ aug END
 
 " ripgrep needs to be installed, use cargo(Rust)
 " let g:ackprg = 'rg -S --hidden --no-heading --vimgrep'
-let g:ackprg = 'rg -S --ignore-case --no-heading --vimgrep'
+" let g:ackprg = 'rg -S --ignore-case --no-heading --vimgrep'
 
 
 " 'mhinz/vim-grepper' - grep tool like ack.vim
@@ -245,8 +246,8 @@ if executable('rg')
 
   " let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
   " let g:ctrlp_user_command = 'rg %s --files --hidden --color never'
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
+  " let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  " let g:ctrlp_use_caching = 0
 endif
 
 " Set delay to prevent extra search
@@ -259,18 +260,18 @@ endif
 " Set no file limit, we are building a big project
 " let g:ctrlp_max_files = 0
 
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+" let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_cmd = 'CtrlP'
 
 " set behavior for opening multiple files with <c-z> and <c-o>
-let g:ctrlp_open_multiple_files = '1vj'
+" let g:ctrlp_open_multiple_files = '1vj'
 
 " let <c-o> and <c-y> accept one extra key arg for behavior
 " let g:ctrlp_arg_map = 1
 
-let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_working_path_mode = 'ra'
 
 
 " Close quickfix window if no other buffers open
