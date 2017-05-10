@@ -177,22 +177,60 @@ endif
 " 'junegunn/fzf.vim'
 " ====================================================================
 
+" This is the default extra key bindings
 " let g:fzf_action = {
-"       \ 'ctrl-t': 'tab split',
-"       \ 'ctrl-i': 'split',
-"       \ 'ctrl-s': 'vsplit' }
-" let g:fzf_layout = { 'down': '~20%' }
+"   \ 'ctrl-t': 'tab split',
+"   \ 'ctrl-x': 'split',
+"   \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+" let g:fzf_layout = { 'down': '~40%' }
+
+" In Neovim, you can set up fzf window using a Vim command
+" let g:fzf_layout = { 'window': 'enew' }
+" let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 
 " ripgrep and fzf
-let g:rg_command = 'rg --column --line-number --no-heading --ignore-case --color=always '
+let g:rg_command = 'rg --column --line-number --no-heading --ignore-case --color=always -g "!{.git,node_modules}/*" '
 
+" Augmenting Ag command using fzf#vim#with_preview function
+"   * fzf#vim#with_preview([[options], preview window, [toggle keys...]])
+"     * For syntax-highlighting, Ruby and any of the following tools are required:
+"       - Highlight: http://www.andre-simon.de/doku/highlight/en/highlight.php
+"       - CodeRay: http://coderay.rubychan.de/
+"       - Rouge: https://github.com/jneen/rouge
+"
+"   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
+"   :Ag! - Start fzf in fullscreen and display the preview window above
 command! -bang -nargs=* Fg
       \ call fzf#vim#grep(
       \   g:rg_command .shellescape(<q-args>), 1,
       \   <bang>0 ? fzf#vim#with_preview('up:60%')
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
       \   <bang>0)
+
+" Likewise, Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+      \ call fzf#vim#files(
+      \   <q-args>,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+
+" Likewise, Lines command with preview window
+command! -bang -nargs=* Lines
+      \ call fzf#vim#lines(
+      \   <q-args>,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
 
 " --column: Show column number
 " --line-number: Show line number
@@ -206,6 +244,11 @@ command! -bang -nargs=* Fg
 "  in the .git/ folder)
 " --color: Search color options
 
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " ====================================================================
 " Search

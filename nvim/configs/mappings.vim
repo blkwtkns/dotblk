@@ -30,14 +30,20 @@ inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual
 
 " FZF
 " ====================================================================
-" nnoremap <Leader>fz :Files<CR>
-" nnoremap <Leader>fs :Buffers<CR>
-" nnoremap <Leader>fb :Lines<CR>
-" nnoremap <Leader>fg :Fg<CR>
-nnoremap <M-s> :Buffers<CR>
-nnoremap <M-b> :Lines<CR>
-nnoremap <M-g> :Fg<CR>
-nnoremap <M-p> :Files<cr>
+nnoremap <Leader>ff :Files<CR>
+nnoremap <Leader>fb :Buffers<CR>
+nnoremap <Leader>fl :Lines<CR>
+
+nnoremap <Leader>fg :Fg<CR>
+nnoremap <silent> <Leader>FG       :Fg <C-R><C-A><CR>
+xnoremap <silent> <Leader>fg       y:Fg <C-R>"<CR>
+
+nnoremap <Leader>fm :Marks<cr>
+nnoremap <Leader>fw :Windows<cr>
+nnoremap <Leader>fc :Commands<cr>
+nnoremap <Leader>fh :History<cr>
+nnoremap <Leader>fG :GFiles<cr>
+nnoremap <Leader>f? :GFiles?<cr>
 
 " vim-grepper - Determine how it befores buffer search
 " ====================================================================
