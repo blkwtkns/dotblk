@@ -25,8 +25,8 @@ inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual
 
 " Ack.vim
 " ====================================================================
-" vnoremap <silent><Leader>r y:Ack! <C-r>=fnameescape(@")<CR><CR>
-" nnoremap <Leader>r :Ack!<space>
+vnoremap <silent><Leader>r y:Ack! <C-r>=fnameescape(@")<CR><CR>
+nnoremap <Leader>r :Ack!<space>
 
 " FZF
 " ====================================================================
