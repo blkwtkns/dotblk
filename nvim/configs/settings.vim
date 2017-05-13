@@ -191,9 +191,14 @@ endif
 " let g:fzf_layout = { 'window': 'enew' }
 " let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+" let $FZF_DEFAULT_OPTS .= ' --inline-info'
 
 " ripgrep and fzf
 let g:rg_command = 'rg --column --line-number --no-heading --ignore-case --color=always -g "!{.git,node_modules}/*" '
+
+" let g:fzf_preview_opts = {'options': '--preview-window right:50%:hidden:wrap --bind "?:toggle-preview" --bind "alt-j:preview-down,alt-k:preview-up" --preview "echo {} 2> /dev/null | head -'.&lines.'"'}
+
+let g:fzf_prev_opts = {'options': '--bind "alt-j:preview-down,alt-k:preview-up"'}
 
 " Augmenting Ag command using fzf#vim#with_preview function
 "   * fzf#vim#with_preview([[options], preview window, [toggle keys...]])
@@ -204,27 +209,29 @@ let g:rg_command = 'rg --column --line-number --no-heading --ignore-case --color
 "
 "   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
 "   :Ag! - Start fzf in fullscreen and display the preview window above
+
 command! -bang -nargs=* Fg
       \ call fzf#vim#grep(
       \   g:rg_command .shellescape(<q-args>), 1,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0 ? fzf#vim#with_preview(g:fzf_prev_opts, 'up:60%:wrap')
+      \           : fzf#vim#with_preview(g:fzf_prev_opts, 'right:50%:hidden:wrap', '?'),
       \   <bang>0)
 
 " Likewise, Files command with preview window
 command! -bang -nargs=? -complete=dir Files
       \ call fzf#vim#files(
       \   <q-args>,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0 ? fzf#vim#with_preview(g:fzf_prev_opts, 'up:60%:wrap')
+      \           : fzf#vim#with_preview(g:fzf_prev_opts, 'right:50%:hidden:wrap', '?'),
       \   <bang>0)
 
 " Likewise, Lines command with preview window
+" preview not working
 command! -bang -nargs=* Lines
       \ call fzf#vim#lines(
       \   <q-args>,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0 ? fzf#vim#with_preview(g:fzf_prev_opts, 'up:60%:wrap')
+      \           : fzf#vim#with_preview(g:fzf_prev_opts, 'right:50%:hidden:wrap', '?'),
       \   <bang>0)
 
 " Command for git grep
@@ -233,7 +240,7 @@ command! -bang -nargs=* GGrep
       \ call fzf#vim#grep(
       \   'git grep --line-number '.shellescape(<q-args>), 0,
       \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \           : fzf#vim#with_preview(g:fzf_prev_opts, 'right:50%:hidden:wrap', '?'),
       \   <bang>0)
 
 " --column: Show column number
