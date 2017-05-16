@@ -195,9 +195,6 @@ let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 
 " ripgrep and fzf
 let g:rg_command = 'rg --column --line-number --no-heading --ignore-case --color=always -g "!{.git,node_modules}/*" '
-
-" let g:fzf_preview_opts = {'options': '--preview-window right:50%:hidden:wrap --bind "?:toggle-preview" --bind "alt-j:preview-down,alt-k:preview-up" --preview "echo {} 2> /dev/null | head -'.&lines.'"'}
-
 let g:fzf_prev_opts = {'options': '--bind "alt-j:preview-down,alt-k:preview-up"'}
 
 " Augmenting Ag command using fzf#vim#with_preview function
@@ -226,7 +223,6 @@ command! -bang -nargs=? -complete=dir Files
       \   <bang>0)
 
 " Likewise, Lines command with preview window
-" preview not working
 command! -bang -nargs=* Lines
       \ call fzf#vim#lines(
       \   <q-args>,

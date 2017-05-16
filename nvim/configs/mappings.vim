@@ -127,6 +127,9 @@ nnoremap <leader>sr :RestoreSesh<space>
 " Toggle search highlighting
 nnoremap <leader><space> :noh<CR>
 
+" google it
+xnoremap <leader>FF y:Go<space><C-r>"<CR>
+
 " Strips whitespace
 nnoremap <leader>sw :%s/\s\+$//<cr>:let @/=''<CR>
 

@@ -48,28 +48,28 @@ command! Google exec 'silent !xdg-open http://www.google.com'
 
 
 " Firefox bookmarks (works with other browsers too) {{{
-fun! Firefox(params)
-  let d = {
-        \ 'go': 'http://www.google.com',
-        \ 'wp': 'https://en.wikipedia.org',
-        \ 'red': 'http://www.reddit.com',
-        \ 'py': 'http://www.reddit.com/r/python',
-        \ 'prog': 'http://www.reddit.com/r/programming',
-        \ 'vim': 'http://www.reddit.com/r/vim',
-        \ 'nvim': 'http://www.reddit.com/r/neovim',
-        \ 'hn': 'https://news.ycombinator.com',
-        \ 'index': 'http://index.hu',
-        \ 'hup': 'http://hup.hu',
-        \ }
-  if has_key(d, a:params)
-    let url = d[a:params]
-    exec 'silent !xdg-open "' . url . '"'
-  else
-    echo "bookmark not found"
-  endif
-endfun
-
-command! -nargs=1 FF call Firefox(<f-args>)
+" fun! Firefox(params)
+"   let d = {
+"         \ 'go': 'http://www.google.com',
+"         \ 'wp': 'https://en.wikipedia.org',
+"         \ 'red': 'http://www.reddit.com',
+"         \ 'py': 'http://www.reddit.com/r/python',
+"         \ 'prog': 'http://www.reddit.com/r/programming',
+"         \ 'vim': 'http://www.reddit.com/r/vim',
+"         \ 'nvim': 'http://www.reddit.com/r/neovim',
+"         \ 'hn': 'https://news.ycombinator.com',
+"         \ 'index': 'http://index.hu',
+"         \ 'hup': 'http://hup.hu',
+"         \ }
+"   if has_key(d, a:params)
+"     let url = d[a:params]
+"     exec 'silent !xdg-open "' . url . '"'
+"   else
+"     echo "bookmark not found"
+"   endif
+" endfun
+"
+" command! -nargs=1 FF call Firefox(<f-args>)
 " }}}
 
 

@@ -119,8 +119,7 @@ if [ -x "$(command -v rg)" ]; then
     # FZF and Ripgrep ish --> move into .zshrc
     export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
     export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
-    export FZF_CTRL_T_OPTS="--preview 'cat {}' --preview-window right:70%:hidden:wrap --bind '?:toggle-preview' --bind 'alt-j:preview-down,alt-k:preview-up'"
-    # export FZF_CTRL_R_OPTS="--preview 'echo {} | head -$LINES' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+    export FZF_CTRL_T_OPTS="--preview '(coderay {} || cat {}) | head -200' --preview-window right:70%:hidden:wrap --bind '?:toggle-preview' --bind 'alt-j:preview-down,alt-k:preview-up'"
     # command -v blsd > /dev/null && export FZF_ALT_C_COMMAND='blsd'
     command -v tree > /dev/null && export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200' --preview-window right:70%:hidden:wrap --bind '?:toggle-preview' --bind 'alt-j:preview-down,alt-k:preview-up'"
 fi

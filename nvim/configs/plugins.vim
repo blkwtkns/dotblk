@@ -76,7 +76,8 @@ Plug 'tomtom/tcomment_vim'
 
 " Plugin outside ~/.config/nvim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf.vim'
+Plug 'blkwtkns/fzf.vim'
 
 " Easy grep like searching - install ack-grep first
 Plug 'mileszs/ack.vim'
