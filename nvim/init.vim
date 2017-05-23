@@ -123,7 +123,7 @@ endif
 " }}}
 
 " source all the files in configs
-source ~/.config/nvim/configs/functions.vim
 source ~/.config/nvim/configs/plugins.vim
+source ~/.config/nvim/configs/functions.vim
 source ~/.config/nvim/configs/settings.vim
 source ~/.config/nvim/configs/mappings.vim

@@ -43,6 +43,7 @@ autocmd! BufWritePost * Neomake
 
 " install eslint via npm
 let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_elixir_enabled_makers = ['mix', 'credo']
 " let g:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
 " let g:neomake_javascript_eslint_exe=substitute(g:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
@@ -79,6 +80,11 @@ let g:neomake_serialize_abort_on_error = 1
 " Allow JSX in normal JS files
 let g:jsx_ext_required = 0
 
+
+" Elixir:
+" ====================================================================
+let g:alchemist_tag_disable = 1
+" ====================================================================
 
 " ====================================================================
 " Appearance
@@ -279,7 +285,7 @@ aug END
 
 " ripgrep needs to be installed, use cargo(Rust)
 " let g:ackprg = 'rg -S --hidden --no-heading --vimgrep'
-" let g:ackprg = 'rg -S --ignore-case --no-heading --vimgrep'
+let g:ackprg = 'rg -S --ignore-case --no-heading --vimgrep'
 
 
 " 'mhinz/vim-grepper' - grep tool like ack.vim
@@ -331,23 +337,24 @@ aug QFClose
 aug END
 
 " CtrlPFunky
-" ====================================================================
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " let g:ctrlp_funky_matchtype = 'path'
 " let g:ctrlp_funky_syntax_highlight = 1
 " let g:ctrlp_funky_multi_buffers = 1
-
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ====================================================================
-" Haskell
+
+
+" Haskell:
 " ====================================================================
 " 'bitc/vim-hdevtools'
 "au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
 "au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+" ====================================================================
 
 
-"############################################################################
-"#  START: Blakes's own config :)
-"############################################################################
+" START: Blakes's own config :)
+" ====================================================================
 
 " Allow hidden buffers
 set hidden
@@ -547,17 +554,18 @@ set omnifunc=htmlcomplete#CompleteTags
 " autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 augroup file_types
   autocmd!
-  autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
+  " autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile *.txt set filetype=markdown
-  autocmd BufRead,BufNewFile *.module set filetype=php
-  autocmd BufRead,BufNewFile *.install set filetype=php
-  autocmd BufRead,BufNewFile *.test set filetype=php
-  autocmd BufRead,BufNewFile *.inc set filetype=php
-  autocmd BufRead,BufNewFile *.profile set filetype=php
-  autocmd BufRead,BufNewFile *.view set filetype=php
+  " autocmd BufRead,BufNewFile *.module set filetype=php
+  " autocmd BufRead,BufNewFile *.install set filetype=php
+  " autocmd BufRead,BufNewFile *.test set filetype=php
+  " autocmd BufRead,BufNewFile *.inc set filetype=php
+  " autocmd BufRead,BufNewFile *.profile set filetype=php
+  " autocmd BufRead,BufNewFile *.view set filetype=php
   autocmd BufNewFile,BufRead *.less set filetype=less
   autocmd BufRead,BufNewFile *.js set ft=javascript syntax=javascript
+  autocmd BufRead,BufNewFile *.jsx set ft=javascript syntax=javascript
   autocmd BufRead,BufNewFile *.ts set ft=typescript syntax=typescript
   autocmd BufRead,BufNewFile *.es6 set ft=javascript syntax=javascript
   autocmd BufRead,BufNewFile *.json set ft=json syntax=javascript
@@ -623,33 +631,14 @@ autocmd BufReadPost *
       \ endif
 
 
-"############################################################################
-"#  Function keys
-"############################################################################
-
-"switch spell check on/off (grammar check)
-" setlocal spell spelllang=en_us      "let's use English by default
-" set nospell                         "by default spell is off
-
-"change wrap
-" noremap <F6> :set wrap!<cr>
-
-"change number
-" noremap <F7> :set number!<cr>
-
-
-"############################################################################
-"#  other
-"############################################################################
-
-" don't outdent hashes
-" inoremap # #
+" other
+" ====================================================================
 
 "====[ Make the 81st column stand out ]====================
 highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%101v', 100)    " I set it to 100
-call matchadd('ColorColumn', '\%121v', 100)   " column 120
-call matchadd('ColorColumn', '\%81v', 100)    " column 80
+" call matchadd('ColorColumn', '\%101v', 100)    " I set it to 100
+" call matchadd('ColorColumn', '\%121v', 100)   " column 120
+" call matchadd('ColorColumn', '\%81v', 100)    " column 80
 
 " automatically change window's cwd to file's dir
 " set autochdir
@@ -670,3 +659,4 @@ call matchadd('ColorColumn', '\%81v', 100)    " column 80
 
 " This makes the cursor a pipe in insert-mode, and a block in normal-mode.
 " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+" ====================================================================

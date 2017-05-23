@@ -11,7 +11,7 @@ and what others do to get these things tuned to one's liking.
 ### Clone repo
 $ git clone https://github.com/blkwtkns/dotfiles.git ~/.you_choose_folder_name (I suggest to prefix '.')
 
-### Zsh
+### Zsh (script)
 * Prezto: https://github.com/sorin-ionescu/prezto 
 * Remember to change shell: chsh -s /usr/bin/zsh (or chsh -s /bin/zsh)
 Then logout of desktop session and log back in!
@@ -21,7 +21,7 @@ Then logout of desktop session and log back in!
 >    export TERM=xterm-256color
 >  fi
 
-### Neovim (Ubuntu):
+### Neovim (Ubuntu, script):
 * https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu
 * https://github.com/neovim/neovim
 
@@ -40,22 +40,26 @@ just use the file as reference.
 #### Run sh script: 
 * $ . ~/path/to/dotfile/directory/scripts.sh
 
-### Tmux
+### Tmux (script)
 * https://tomordonez.com/install-tmux-ubuntu/
 
 ### Haskell setup: 
 * http://www.stephendiehl.com/posts/vim_2016.html
 * http://lonelyproton.com/posts/26-getting-started-with-haskell-development-3
 
-### Rust
+### Rust (script)
 * http://doc.crates.io/index.html
 
-### Ripgrep
+### Ripgrep (script)
 * http://blog.burntsushi.net/ripgrep/
+
+### Elixir
+* http://elixir-lang.org/install.html
 
 ### FZF
 * Install: https://github.com/junegunn/fzf
 * Powerup: https://www.reddit.com/r/linux/comments/5rrpyy/turbo_charge_bash_with_fzf_ripgrep/
+* install tee, coderay, and ruby for preview
 
 ### Linux Links:
 * https://github.com/thezerobit/asus-zenbook-ux305fa
@@ -78,7 +82,6 @@ $ setxkbmap -layout us -option ctrl:nocaps
 
 ### Other Links:
 * https://github.com/greg-js/dotfiles
-* wikimatze.de/better-zsh-with-prezto
 * Docker installation (ubuntu): https://docs.docker.com/engine/installation/linux/ubuntu/
 * (linux) https://github.com/raelgc/scudcloud/
 

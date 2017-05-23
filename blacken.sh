@@ -14,33 +14,30 @@ cd $HOME
 
 # Install the good stuff - OS dependent
 if [[ $platform == 'linux' ]]; then
-  sudo apt-get update
-  sudo apt-get upgrade
+  sudo apt-get -y update
+  sudo apt-get -y upgrade
 
-  sudo apt-get install zsh
+  sudo apt-get -y install zsh
   # chsh -s /usr/bin/zsh
 
-  git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-  setopt EXTENDED_GLOB
-  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-    ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-  done
+  sudo apt-get -y install curl
 
-  sudo apt-get install curl
-
-  sudo apt-get install build essentials
-  sudo apt-get install make
-  sudo apt-get install libtool autoconf automake cmake libncurses5-dev g++
-  sudo apt-get install python-dev python-pip python3-dev python3-pip
-  sudo apt-get install software-properties-common
+  sudo apt-get -y install build essentials
+  sudo apt-get -y install make
+  sudo apt-get -y install libtool autoconf automake cmake libncurses5-dev g++
+  sudo apt-get -y install python-dev python-pip python3-dev python3-pip
+  sudo apt-get -y install software-properties-common
   sudo add-apt-repository ppa:neovim-ppa/unstable
-  sudo apt-get update
-  sudo apt-get install neovim
-  sudo pip2 install neovim -U
-  sudo pip3 install neovim -U
+  sudo apt-get -y update
+  sudo apt-get -y install neovim
+  sudo pip2 -y install neovim -U
+  sudo pip3 -y install neovim -U
 
-  sudo apt-get install xclip
-  sudo apt-get install tmux
+  sudo apt-get -y install xclip
+  sudo apt-get -y install tmux
+  sudo apt-get -y install tee
+  sudo apt-get -y install coderay
+  sudo apt-get -y install ruby-full
 
 elif [[ $platform == 'mac' ]]; then
   xcode-select –install
@@ -65,8 +62,6 @@ pip install --upgrade pip
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 tmux source-file ~/.tmux.conf
 
-# tags for mac?
-
 # Install nvm and newest node version
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
 nvm install node
@@ -79,29 +74,17 @@ cargo install ripgrep
 
 # Create variable to find path to script
 dotDir=$(dirname "$(readlink -f "$0")")
-# echo $dotDir
 
 # symlinks
-# ln -sv $dotDir/nvim $HOME/.config
-# ln -sv $dotDir/.eslintrc
-# ln -sv $dotDir/.gitconfig
-# ln -sv $dotDir/.jscsrc
-# ln -sv $dotDir/.tmux.conf
-# ln -sv $dotDir/jsdev.conf $HOME/.tmux/jsdev.conf
-# ln -sf $dotDir/.zpreztorc $HOME/.zpreztorc
-# ln -sf $dotDir/.zprofile $HOME/.zprofile
-
-# try out copy instead so that dotfile repo isn't mutating from
-# local configurations
-cp $dotDir/nvim $HOME/.config
-cp $dotDir/.eslintrc $HOME/.eslintrc
-cp $dotDir/.gitconfig $HOME/.gitconfig
-cp $dotDir/.jscsrc $HOME/.jscsrc
-cp $dotDir/.tmux.conf $HOME/.tmux.conf
-cp $dotDir/jsdev.conf $HOME/.tmux/jsdev.conf
-cp $dotDir/.zpreztorc $HOME/.zpreztorc
-cp $dotDir/.zprofile $HOME/.zprofile
-cp $dotDir/.global_ignore $HOME/.global_ignore
+ln -sv $dotDir/nvim $HOME/.config
+ln -sv $dotDir/.eslintrc
+ln -sv $dotDir/.gitconfig
+ln -sv $dotDir/.jscsrc
+ln -sv $dotDir/.tmux.conf
+ln -sv $dotDir/jsdev.conf $HOME/.tmux/jsdev.conf
+ln -sf $dotDir/.zshrc $HOME/.zshrc
+ln -sf $dotDir/.zsh $HOME/.zsh
+ln -sv $dotDir/.global_ignore $HOME/.global_ignore
 
 git config --global core.excludesfile $HOME/.global_ignore
 

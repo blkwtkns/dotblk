@@ -1,7 +1,15 @@
-" for deoplete
-fun! DoRemote(arg)
-  UpdateRemotePlugins
-endfun
+" Show contents of registers and paste selected into the buffer
+function! Reg()
+  reg
+  echo "Register: "
+  let char = nr2char(getchar())
+  if char != "\<Esc>"
+    execute "normal! \"".char."p"
+  endif
+  redraw
+endfunction
+
+command! -nargs=0 Reg call Reg()
 
 
 "function that clears all registers with ClearRegister command
@@ -31,6 +39,20 @@ command! ClearReg call ClearRegisters()
 " endfun
 " "}}}
 
+set colorcolumn=0
+let s:color_column_old = 101
+
+fun! s:ToggleColorColumn()
+    if s:color_column_old == 0
+        let s:color_column_old = &colorcolumn
+        windo let &colorcolumn = 0
+    else
+        windo let &colorcolumn=s:color_column_old
+        let s:color_column_old = 0
+    endif
+endfun
+
+command! -nargs=0 ToggleColorColumn call <SID>ToggleColorColumn()
 
 " Google with (or without) search {{{
 fun! Google(params)
