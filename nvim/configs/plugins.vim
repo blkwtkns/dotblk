@@ -103,21 +103,21 @@ Plug 'mileszs/ack.vim'
 " ====================================================================
 " Plug 'dag/vim2hs'
 " Plug 'bitc/vim-hdevtools'
-Plug 'eagletmt/neco-ghc'
+" Plug 'eagletmt/neco-ghc'
 " Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+" Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 " ====================================================================
 
 
 " Elixir:
 " ====================================================================
 " Polyglot: A collection of language packs, loaded on demand
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 
-Plug 'slashmili/alchemist.vim'
+" Plug 'slashmili/alchemist.vim'
 " Plug 'powerman/vim-plugin-AnsiEsc'
 "
-Plug 'c-brenn/phoenix.vim'
+" Plug 'c-brenn/phoenix.vim'
 " Plug 'tpope/vim-projectionist'
 " ====================================================================
 
