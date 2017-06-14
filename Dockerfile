@@ -1,12 +1,9 @@
 # Dockerfile for testing sh scripting in container
-FROM node:7.10-alpine
+# FROM node:7.10-alpine
+FROM alpine:edge
 MAINTAINER Blake Watkins "blakemwatkins@gmail.com"
 ENV CMAKE_EXTRA_FLAGS=-DENABLE_JEMALLOC=OFF
 RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
-
-# RUN apk add --update \
-#   git \
-#   vim 
 
 RUN apk add --update-cache --virtual build-deps --no-cache \
     curl \
@@ -25,14 +22,17 @@ RUN apk add --update-cache --virtual build-deps --no-cache \
     lua-sec
 
 RUN apk add --update-cache \
+    curl \
     git \
     zsh \
     less \
     libtermkey \
-    unibilium \
-    tee \
-    coderay \
-    ruby-full
+    unibilium
+
+RUN apk add --update-cache \
+    ruby ruby-irb ruby-rake ruby-io-console ruby-bigdecimal ruby-json ruby-bundler \
+    libstdc++ tzdata bash ca-certificates \
+    &&  echo 'gem: --no-document' > /etc/gemrc
 
 RUN git clone https://github.com/neovim/libvterm.git && \
     cd libvterm && \
@@ -61,6 +61,12 @@ ENV HOME /home/dev
 RUN curl -sSf https://static.rust-lang.org/rustup.sh | sh
 # install ripgrep
 RUN cargo install ripgrep
+# install coderay
+RUN gem install coderay
+
+# Install nvm and newest node version
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+RUN nvm install node
 
 # RUN git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # RUN tmux source-file ~/.tmux.conf
