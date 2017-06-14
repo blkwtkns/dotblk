@@ -101,6 +101,15 @@ $ setxkbmap -layout us -option ctrl:nocaps
 * Finish Dockerfile for portable dev environment (DON'T USE YET!!)
 * Default to gnome terminal (no, urxvt is direction, soon)
 
+### Install list
+* elm
+* apex
+* aws
+* cargo
+* docker
+* ghc
+* vue
+
 ### Thanks
 Many thanks to effort all those who crafted these awesome tools and others 
 who took time to document their environments and preferences. I'm definitely
