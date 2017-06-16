@@ -1,4 +1,4 @@
-default: install-packages add-repositories enable-services link-config set-shell install-nvm install-rust sync-neovim show-notes
+default: install-packages add-repositories enable-services link-config set-shell install-nvm set-node install-rust install-ripgrep show-notes
 
 install-packages:
 	sudo pacman -Sy yaourt
@@ -29,9 +29,6 @@ install-rust:
 
 install-ripgrep:
 	cargo install ripgrep
-
-sync-neovim:
-	./neovim/.config/nvim/sync.sh
 
 show-notes:
 	cat ./post-install.txt
