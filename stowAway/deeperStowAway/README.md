@@ -107,8 +107,14 @@ $ setxkbmap -layout us -option ctrl:nocaps
 * aws
 * cargo
 * docker
-* ghc
+* ghc/Haskell
 * vue
+* rtv
+* urlview
+* scudcloud
+* elixir
+* fzf
+* VirtualBox
 
 ### Thanks
 Many thanks to effort all those who crafted these awesome tools and others 
