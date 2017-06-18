@@ -8,7 +8,6 @@ dmenu
 dunst
 feh
 file-roller
-git
 gnome-keyring
 gnome-themes-standard
 gnupg
@@ -30,8 +29,6 @@ lightdm-gtk-greeter
 neovim
 network-manager-applet
 networkmanager
-nodejs
-npm
 openssh
 p7zip
 pa-applet-git
@@ -44,7 +41,6 @@ python-xdg
 python2-neovim
 qt4
 redshift
-reflector
 ruby
 rustup
 stow

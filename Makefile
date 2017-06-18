@@ -1,4 +1,4 @@
-default: install-packages add-repositories enable-services link-config set-shell install-nvm set-node install-rust install-ripgrep show-notes
+default: install-packages add-repositories enable-services link-config set-shell install-nvm set-node install-ripgrep show-notes
 
 install-packages:
 	sudo pacman -Sy yaourt
@@ -23,9 +23,6 @@ install-nvm:
 
 set-node:
 	nvm install node
-
-install-rust:
-	curl -sSf https://static.rust-lang.org/rustup.sh | sh
 
 install-ripgrep:
 	cargo install ripgrep
