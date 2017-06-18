@@ -1,4 +1,3 @@
-base-devel
 chromium
 ruby-coderay
 cowsay
@@ -42,4 +41,3 @@ unrar
 xclip
 xcwd-git
 xorg-server
-yaourt
