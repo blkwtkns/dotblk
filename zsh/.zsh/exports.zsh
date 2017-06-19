@@ -8,13 +8,16 @@ else
   export TERM="xterm-256color"
 fi
 
-# launch tmux if not already in a session
-if [ $TERM != "screen-256color" ] && [ $TERM != "screen" ]; then
+if ! pgrep -x "i3" > /dev/null
+then
+  # launch tmux if not already in a session
+  if [ $TERM != "screen-256color" ] && [ $TERM != "screen" ]; then
     if tmux has-session -t main 2>/dev/null; then
-        tmux attach -t main
+      tmux attach -t main
     else
-        tmux new -s main
+      tmux new -s main
     fi
+  fi
 fi
 
 # if [ -x /usr/bin/dircolors ]; then
