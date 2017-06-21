@@ -1,4 +1,4 @@
-All done with top level make! You'll need to make sure that Xorg, lightdm, i3 and NetworkManager are
+All done with the manjaro make, don't forget the top level make now! You'll need to make sure that Xorg, lightdm, i3 and NetworkManager are
 all working first of all. You'll need to select a graphics driver too, the Xorg
 wiki page can help with that.
 
@@ -16,4 +16,5 @@ rtv
 urlview
 scudcloud
 elixir
+fzf
 VirtualBox

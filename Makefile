@@ -1,16 +1,4 @@
-default: install-packages add-repositories enable-services link-config set-shell install-nvm sync-neovim sync-tmux show-notes
-
-install-packages:
-	sudo pacman -Sy yaourt
-	yaourt -S --needed --noconfirm `cat packages.txt`
-
-add-repositories:
-	cat repositories.txt | sudo tee -a /etc/pacman.conf
-
-enable-services:
-	sudo systemctl enable lightdm NetworkManager tlp tlp-sleep
-	sudo systemctl disable systemd-rfkill
-	sudo tlp start
+default: link-config set-shell install-nvm sync-neovim sync-tmux show-notes
 
 link-config:
 	stow --restow `ls -d */`
