@@ -1,0 +1,23 @@
+xrdb:  "XTerm*background" on line 188 overrides entry on line 31
+xrdb:  "XTerm*foreground" on line 189 overrides entry on line 32
+xrdb:  "XTerm*faceName" on line 191 overrides entry on line 34
+cp: cannot create regular file '/home/blkman/.local/share/icons/default/index.theme': No such file or directory
+i3status: trying to auto-detect output_format setting
+i3status: auto-detected "i3bar"
+conky: desktop window (281) is root window
+conky: window type - override
+conky: drawing to created window (0x2200001)
+conky: drawing to double buffer
+conky: forked to background, pid is 739
+
+conky: desktop window (281) is root window
+conky: window type - override
+conky: drawing to created window (0x2800001)
+conky: drawing to double buffer
+conky: forked to background, pid is 766
+
+[../../i3-4.13/i3bar/src/xcb.c:722] ERROR: Error getting _XEMBED_INFO property: error_code 3
+
+(pamac-tray:689): Gdk-CRITICAL **: gdk_window_thaw_toplevel_updates: assertion 'window->update_and_descendants_freeze_count > 0' failed
+Gtk-Message: GtkDialog mapped without a transient parent. This is discouraged.
+unable to connect to the rxvt-unicode daemon: Connection refused
