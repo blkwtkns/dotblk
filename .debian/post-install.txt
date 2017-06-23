@@ -1,0 +1,15 @@
+All done with debian make! Restart lightdm.
+
+Also don't forget to install these:
+elm
+apex
+aws
+cargo
+docker
+ghc/Haskell
+vue
+rtv
+urlview
+scudcloud
+elixir
+VirtualBox
