@@ -7,13 +7,13 @@ set-shell:
 	chsh -s `which zsh`
 
 install-nvm:
-	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | $SHELL
 
 sync-neovim:
-	./neovim/.config/nvim/sync.sh
+	$SHELL $HOME/.config/nvim/sync.sh
 
 sync-tmux:
-	./tmux/.tmux/sync.sh
+	$SHELL $HOME/.tmux/sync.sh
 
 show-notes:
 	cat ./post-install.txt
