@@ -58,11 +58,22 @@ URxvt*saveLines:                      5000
 ! URxvt*transparent:                    true
 ! URxvt*shading:                        138
 
-! other possible settings:
-! Rxvt.perl-ext-common: ...,clipboard
-! URxvt.keysym.M-C-c:   perl:clipboard:copy
-! URxvt.keysym.M-v:   perl:clipboard:paste
-! URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.perl-ext-common: default,keyboard-select,clipboard,clipboard-osc,url-select
+URxvt.keysym.M-C-c:   perl:clipboard:copy
+URxvt.keysym.M-v:   perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.clipboard.autocopy: true
+
+! keyboard-select settings
+URxvt.keysym.M-bracketleft: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+
+! url-select. We can middle-click on any url and this will launch the browser
+! defined by `URxvt.url-select.launcher`.
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.underline: true
+URxvt.url-select.launcher: chromium
+
 ! URxvt*termName:                       string
 ! URxvt*geometry:                       geometry
 ! URxvt*chdir:                          string
@@ -186,7 +197,3 @@ URxvt*saveLines:                      5000
 ! URxvt*tabbar-bg:                      colour
 ! URxvt*tabbar-fg:                      colour
 ! URxvt*url-launcher:                   string
-
-! keyboard-select settings
-URxvt.perl-ext-common: ...,keyboard-select
-URxvt.keysym.M-bracketleft: perl:keyboard-select:activate
