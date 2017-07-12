@@ -17,3 +17,4 @@ stow
 tmux
 unrar
 xclip
+qutebrowser-git
