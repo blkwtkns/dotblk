@@ -1,4 +1,4 @@
-default: link-config set-shell install-nvm sync-neovim sync-tmux show-notes
+default: link-config set-shell install-nvm sync-neovim sync-tmux show-notes install-powerline
 
 link-config:
 	stow --restow `ls -d */`
@@ -14,6 +14,9 @@ sync-neovim:
 
 sync-tmux:
 	$SHELL $HOME/.tmux/sync.sh
+
+install-powerline:
+	git clone https://github.com/powerline/fonts.git && cd fonts | ./install.sh
 
 show-notes:
 	cat ./post-install.txt

@@ -306,7 +306,8 @@ bar {
 
 	bindsym button4 nop
 	bindsym button5 nop
-	font xft:Noto Sans 10.5
+	# font xft:Noto Sans 10.5
+	font xft:NotoMono 11
 	strip_workspace_numbers yes
 
 	colors {
