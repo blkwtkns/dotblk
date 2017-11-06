@@ -2,6 +2,80 @@
 " indentLine conceals quotes in json files; this puts them back:
 let g:vim_json_syntax_conceal = 0
 
+" ====================================================================
+" Haskell
+" ====================================================================
+" ----- neovimhaskell/haskell-vim -----
+
+" Align 'then' two spaces after 'if'
+let g:haskell_indent_if = 2
+" Indent 'where' block two spaces under previous body
+let g:haskell_indent_before_where = 2
+" Allow a second case indent style (see haskell-vim README)
+let g:haskell_indent_case_alternative = 1
+" Only next under 'let' if there's an equals sign
+let g:haskell_indent_let_no_in = 0
+
+" ----- hindent & stylish-haskell -----
+
+" Indenting on save is too aggressive for me
+let g:hindent_on_save = 0
+
+" Helper function, called below with mappings
+function! HaskellFormat(which) abort
+  if a:which ==# 'hindent' || a:which ==# 'both'
+    :Hindent
+  endif
+  if a:which ==# 'stylish' || a:which ==# 'both'
+    silent! exe 'undojoin'
+    silent! exe 'keepjumps %!stylish-haskell'
+  endif
+endfunction
+
+" Key bindings
+augroup haskellStylish
+  au!
+  " Just hindent
+  au FileType haskell nnoremap <leader>hi :Hindent<CR>
+  " Just stylish-haskell
+  au FileType haskell nnoremap <leader>hs :call HaskellFormat('stylish')<CR>
+  " First hindent, then stylish-haskell
+  au FileType haskell nnoremap <leader>hf :call HaskellFormat('both')<CR>
+augroup END
+
+" ----- w0rp/ale -----
+
+" let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
+
+" ----- parsonsmatt/intero-neovim -----
+
+" Prefer starting Intero manually (faster startup times)
+let g:intero_start_immediately = 0
+" Use ALE (works even when not using Intero)
+" let g:intero_use_neomake = 0
+
+augroup interoMaps
+  au!
+
+  au FileType haskell nnoremap <silent> <leader>io :InteroOpen<CR>
+  au FileType haskell nnoremap <silent> <leader>iov :InteroOpen<CR><C-W>H
+  au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
+  au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
+  au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
+
+  au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
+  au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentModule<CR>
+  au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
+
+  au FileType haskell map <leader>t <Plug>InteroGenericType
+  au FileType haskell map <leader>T <Plug>InteroType
+  au FileType haskell nnoremap <silent> <leader>it :InteroTypeInsert<CR>
+
+  au FileType haskell nnoremap <silent> <leader>jd :InteroGoToDef<CR>
+  au FileType haskell nnoremap <silent> <leader>iu :InteroUses<CR>
+  au FileType haskell nnoremap <leader>ist :InteroSetTargets<SPACE>
+augroup END
+
 
 " ====================================================================
 " Completion
@@ -43,9 +117,8 @@ autocmd! BufWritePost * Neomake
 
 " install eslint via npm
 let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_haskell_enabled_makers = ['hlint', 'ghc-mod']
 let g:neomake_elixir_enabled_makers = ['mix', 'credo']
-" let g:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
-" let g:neomake_javascript_eslint_exe=substitute(g:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
 let g:neomake_open_list = 0
 
@@ -57,10 +130,6 @@ let g:syntastic_mode_map = {
 
 let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
-" setlocal makeprg=jscs\ %
-" setlocal errorformat=%-P%f,
-"                 \%A%>%\\s%\\?#%*\\d\ %m,%Z%.%#Line\ %l\\,\ Pos\ %c,
-"                 \%-G%f\ is\ OK.,%-Q
 
 
 " ====================================================================
@@ -115,6 +184,8 @@ set laststatus=2
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
+
+let g:airline_powerline_fonts = 1
 
 let g:airline_symbols.space = "\ua0"
 

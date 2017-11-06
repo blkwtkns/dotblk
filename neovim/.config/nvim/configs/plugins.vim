@@ -51,6 +51,7 @@ Plug 'airblade/vim-gitgutter'
 
 " Syntax
 " ====================================================================
+" Plug 'w0rp/ale'
 Plug 'neomake/neomake'
 Plug 'tyru/current-func-info.vim'
 " ====================================================================
@@ -106,6 +107,9 @@ Plug 'mileszs/ack.vim'
 " Plug 'eagletmt/neco-ghc'
 " Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 " Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+Plug 'neovimhaskell/haskell-vim'
+Plug 'alx741/vim-hindent'
+Plug 'parsonsmatt/intero-neovim'
 " ====================================================================
 
 

@@ -45,9 +45,7 @@ fi
 
 # neovim specifics
 if [ -x "$(command -v nvim)" ]; then
-  # Make vimrc var
   export MYVIMRC='.config/nvim/init.vim'
-  # Make neovim default
   export EDITOR='/usr/bin/nvim'
   export VISUAL='/usr/bin/nvim'
 else
@@ -81,11 +79,11 @@ path=(
 )
 
 # if cargo present add to path
-# if [ -x "$(command -v cargo)" ]; then
+if [ -x "$(command -v cargo)" ]; then
   # Set up local bins
   export PATH=$HOME/.local/bin:$PATH
   export PATH=$HOME/.cargo/bin:$PATH
-# fi
+fi
 
 # add ~/bin to path if it exists
 # [ -d $HOME/bin ] && export PATH=${PATH}:${HOME}/bin
