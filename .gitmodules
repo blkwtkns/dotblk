@@ -1,0 +1,3 @@
+[submodule ".manjaro"]
+	path = .manjaro
+	url = https://github.com/blkwtkns/dotManjaro.git
