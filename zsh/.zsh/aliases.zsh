@@ -136,3 +136,18 @@ fi
 
 # Show all groups (sorted)
 alias allgroups='cut -d: -f1 /etc/group | sort'
+
+# -------------------------------------------------------------------
+# Manjaro specific
+# -------------------------------------------------------------------
+if [[ -f /etc/manjaro-release ]]; then
+  alias con='$EDITOR $HOME/.i3/config'
+  alias comp='$EDITOR $HOME/.config/compton.conf'
+  alias fixit='sudo rm -f /var/lib/pacman/db.lck'
+  alias inst='sudo pacman -S'
+  # alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+  # alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+  alias mirrors='sudo pacman-mirrors -g'
+  alias printer='system-config-printer'
+  alias update='yaourt -Syua'
+fi
