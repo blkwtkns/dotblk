@@ -2,8 +2,8 @@
 	name = Blake Watkins
 	email = iamsoblake@gmail.com
 [core]
-	autocrlf = input
-	safecrlf = true
+	autocrlf = false
+	safecrlf = false
 [color]
 	ui = true
 [merge]

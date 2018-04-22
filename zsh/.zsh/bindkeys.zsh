@@ -5,8 +5,11 @@
 # bindkey -v
 
 # ❯❯❯
-vim_ins_mode="%B%F{1}❯%F{3}❯%F{2}❯%f%b"
-vim_cmd_mode="%B%F{2}❮%F{3}❮%F{1}❮%f%b"
+# vim_ins_mode="%B%F{1}❯%F{3}❯%F{2}❯%f%b"
+# vim_cmd_mode="%B%F{2}❮%F{3}❮%F{1}❮%f%b"
+# >>>
+vim_ins_mode="%B%F{1}>%F{3}>%F{2}>%f%b"
+vim_cmd_mode="%B%F{2}<%F{3}<%F{1}<%f%b"
 vim_mode=$vim_ins_mode
 
 function zle-keymap-select {
@@ -27,3 +30,9 @@ zle -N zle-line-finish
 TRAPWINCH() {
   zle &&  zle -R
 }
+
+# Open a new window in this term's cwd
+nwZle() { zle push-line; BUFFER="setsid urxvt"; zle accept-line; }
+zle -N nwZle
+# CTRL+n
+bindkey '^n' nwZle
