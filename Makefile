@@ -1,7 +1,7 @@
 default: link-config set-shell install-nvm sync-neovim sync-tmux show-notes install-powerline
 
 link-config:
-	stow --restow `ls -d */`
+	stow -t $HOME -R `ls -d */`
 
 set-shell:
 	chsh -s `which zsh`
