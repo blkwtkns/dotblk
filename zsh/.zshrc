@@ -9,3 +9,6 @@ source ~/.zsh/history.zsh
 source ~/.zsh/functions.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+powerline-daemon -q
+# . /usr/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh
