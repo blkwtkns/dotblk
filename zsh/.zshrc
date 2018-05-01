@@ -12,3 +12,5 @@ source ~/.zsh/functions.zsh
 
 powerline-daemon -q
 # . /usr/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
