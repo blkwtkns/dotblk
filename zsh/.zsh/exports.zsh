@@ -85,6 +85,11 @@ if [ -x "$(command -v cargo)" ]; then
   export PATH=$HOME/.cargo/bin:$PATH
 fi
 
+# https://wiki.archlinux.org/index.php/Go
+if [ -x "$(command -v go)" ]; then
+  export PATH="$PATH:$HOME/go/bin"
+fi
+
 # add ~/bin to path if it exists
 # [ -d $HOME/bin ] && export PATH=${PATH}:${HOME}/bin
 
