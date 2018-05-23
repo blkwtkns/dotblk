@@ -36,6 +36,16 @@ function find-exec() {
   find . -type f -iname "*${1:-}*" -exec "${2:-file}" '{}' \;
 }
 
+
+# -------------------------------------------------------------------
+# Display ports being listened on.
+# -------------------------------------------------------------------
+function listening() {
+  if [ -x "$(command -v netstat)" ]; then
+    netstat -tulpn | grep LISTEN
+  fi
+}
+
 # -------------------------------------------------------------------
 # Count code lines in some directory.
 # $ loc py js css
@@ -272,6 +282,25 @@ vf() {
      print -l $files[1]
   fi
 }
+
+# vfg - fzf list of files that match grep to open with vim
+# ex: vfg string
+# zsh autoload function
+vrg () {
+  if [ -x "$(command -v rg)" ]; then
+
+    echo $1
+    local files
+    files=($(rg -l $1))
+    #
+    if [[ -n $files ]]
+    then
+       vim -- $files
+       print -l $files[1]
+    fi
+  fi
+}
+
 
 # --------------------------------------------------------------------
 # FZF - Changing Directories

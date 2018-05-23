@@ -5,8 +5,10 @@ bindkey -M vicmd 'v' edit-command-line
 bindkey -v
 
 # ❯❯❯
-vim_ins_mode="%B%F{1}❯%F{3}❯%F{2}❯%f%b"
-vim_cmd_mode="%B%F{2}❮%F{3}❮%F{1}❮%f%b"
+# vim_ins_mode="%B%F{1}❯%F{3}❯%F{2}❯%f%b"
+# vim_cmd_mode="%B%F{2}❮%F{3}❮%F{1}❮%f%b"
+vim_ins_mode="%B%F{1}>%F{3}>%F{2}>%f%b"
+vim_cmd_mode="%B%F{2}<%F{3}<%F{1}<%f%b"
 vim_mode=$vim_ins_mode
 
 function zle-keymap-select {

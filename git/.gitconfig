@@ -2,14 +2,14 @@
 	name = Blake Watkins
 	email = iamsoblake@gmail.com
 [core]
-	autocrlf = input
+	autocrlf = false
 	safecrlf = true
 [color]
 	ui = true
 [merge]
   tool = vimdiff
 [mergetool]
-  prompt = true
+  prompt = false
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [difftool]

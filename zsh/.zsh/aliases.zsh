@@ -115,6 +115,18 @@ if [ -x "$(command -v stack)" ]; then
   alias ghci='stack exec -- ghci'
 fi
 
+
+# -------------------------------------------------------------------
+# Node
+# -------------------------------------------------------------------
+# vim bindings
+alias nodevim='node ~/node-rdln/.readline.config.js'
+
+# update node with nvm
+if [ -x "$(command -v nvm)" ]; then
+  alias nodeup='nvm install node --reinstall-packages-from=node'
+fi
+
 # -------------------------------------------------------------------
 # Docker
 # -------------------------------------------------------------------

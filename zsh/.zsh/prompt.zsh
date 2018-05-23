@@ -12,7 +12,7 @@ export SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 
 source "${0:h}/prompts/blaenk.zsh"
 PROMPT='
-%F{blue}λ%f %{$fg[$color]%}%n%{$reset_color%} ${vcs_info_msg_0_} $(p_hostname) $(p_envs) $(p_exit_code)
+%F{yellow}λ%f %{$fg[$color]%}%n%{$reset_color%} ${vcs_info_msg_0_} $(p_hostname) $(p_envs) $(p_exit_code)
 ${vim_mode} '
 source "${0:h}/prompts/git_prompt.zsh"
 RPROMPT='$(git_prompt_string)'

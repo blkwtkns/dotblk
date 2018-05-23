@@ -85,6 +85,7 @@ path=(
   # Set up local bins
   export PATH=$HOME/.local/bin:$PATH
   export PATH=$HOME/.cargo/bin:$PATH
+  export PATH=$HOME/go/bin:$PATH
 # fi
 
 # add ~/bin to path if it exists
@@ -126,5 +127,11 @@ if [ -x "$(command -v rg)" ]; then
     # command -v blsd > /dev/null && export FZF_ALT_C_COMMAND='blsd'
     command -v tree > /dev/null && export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200' --preview-window right:70%:hidden:wrap --bind '?:toggle-preview' --bind 'alt-j:preview-down,alt-k:preview-up'"
 fi
+
+# Open a new window in this term's cwd
+nwZle() { zle push-line; BUFFER="setsid urxvt"; zle accept-line; }
+zle -N nwZle
+# CTRL+n
+bindkey '^n' nwZle
 
 TMPPREFIX="${TMPDIR%/}/zsh"

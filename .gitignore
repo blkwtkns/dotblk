@@ -1,3 +1,6 @@
 .README.md.swp
 tags
 nvim/.netrwhist
+zsh/.zsh/cache/
+zsh/.zsh/dirhist/
+tmux/.tmux/plugins/
