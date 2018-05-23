@@ -47,6 +47,8 @@ Plug 'tpope/vim-surround'
 " ====================================================================
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'sodapopcan/vim-twiggy'
+Plug 'tpope/vim-rhubarb'
 " ====================================================================
 
 " Syntax
@@ -61,7 +63,7 @@ Plug 'tyru/current-func-info.vim'
 " ====================================================================
 " Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 " Plug 'shuber/vim-promiscuous'
-Plug 'blkwtkns/vim-sesh'
+Plug 'blkwtkns/vim-sesh', { 'branch': 'develop' }
 " ====================================================================
 
 

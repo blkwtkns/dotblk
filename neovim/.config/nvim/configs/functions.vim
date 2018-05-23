@@ -256,3 +256,27 @@ fun! NormalizeWidths()
   set equalalways! equalalways!
   let &eadirection = eadir_pref
 endf
+
+" ====================================================================
+" Global variables and setup
+" ====================================================================
+fun! Find_versioning_dir(path)
+  let l:path = a:path
+  let l:prev = ''
+  while l:path !=# prev
+    let l:dir = l:path . '/.git'
+    let l:type = getftype(l:dir)
+    if l:type ==# 'dir' && isdirectory(l:dir.'/objects') && isdirectory(l:dir.'/refs') && getfsize(l:dir.'/HEAD') > 10
+      let l:reldir = get(readfile(l:dir), 0, '')
+      return simplify(l:path . '/' . l:reldir[8:])
+    elseif l:type ==# 'file'
+      let l:reldir = get(readfile(l:dir), 0, '')
+      if l:reldir =~# '^gitdir: '
+        return simplify(l:path . '/' . l:reldir[8:])
+      end
+    end
+    let l:prev = l:path
+    let l:path = fnamemodify(l:path, ':h')
+  endwhile
+  return ''
+endf
