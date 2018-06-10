@@ -1,3 +1,6 @@
 .README.md.swp
 tags
 nvim/.netrwhist
+neovim/.config/nvim/autoload/
+neovim/.config/nvim/snapshot.vim
+tmux/.tmux/plugins/
