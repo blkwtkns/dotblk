@@ -1,5 +1,5 @@
-autoload -U compinit && 
-compinit 
+autoload -U compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
 
 zmodload -i zsh/complist
 

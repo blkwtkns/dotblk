@@ -1,4 +1,17 @@
 # -------------------------------------------------------------------
+# markdown viewer
+# (first download https://daringfireball.net/projects/markdown/)
+# -------------------------------------------------------------------
+mdv() {
+  if [ -x "$(command -v ~/bin/Markdown.pl)" ]; then
+    ~/bin/Markdown.pl $1 | w3m -T text/html
+  else
+    echo "Markdown perl script not found"
+    echo "Download at https://daringfireball.net/projects/markdown/"
+  fi
+}
+
+# -------------------------------------------------------------------
 # compressed file expander
 # (from https://github.com/myfreeweb/zshuery/blob/master/zshuery.sh)
 # -------------------------------------------------------------------
@@ -118,6 +131,48 @@ path() {
            sub(\"/.rvm\",  \"$fg_no_bold[red]/.rvm$reset_color\"); \
            print }"
 }
+
+# -------------------------------------------------------------------
+# Note taking function and command completion
+# -------------------------------------------------------------------
+_n() {
+  local lis cur
+
+  lis=$(find "${NOTE_DIR}" -regex ".*\.\(js\|md\)" | \
+    sed -e "s|${NOTE_DIR}/||" | \
+    sed 's/\.[^.]*$//')
+  cur=${COMP_WORDS[COMP_CWORD]}
+  COMPREPLY=( $(compgen -W "$lis" -- "$cur") )
+}
+n() {
+  : "${NOTE_DIR:?'NOTE_DIR ENV Var not set'}"
+  if [ $# -eq 0 ]; then
+    local file
+    file=$(find "${NOTE_DIR}" -regex ".*\.\(js\|md\)" | \
+      sed -e "s|${NOTE_DIR}/||" | \
+      fzf \
+        --multi \
+        --select-1 \
+        --exit-0 \
+        --preview="cat ${NOTE_DIR}/{}" \
+        --preview-window=right:70%:wrap)
+    [[ -n $file ]] && \
+      $EDITOR "${NOTE_DIR}/${file}"
+  else
+    case "$1" in
+      "-d")
+        rm "${NOTE_DIR}"/"$2".*
+        ;;
+      "-js")
+        $EDITOR "${NOTE_DIR}"/"$2".js
+        ;;
+      *)
+        $EDITOR "${NOTE_DIR}"/"$*".md
+        ;;
+    esac
+  fi
+}
+complete -F _n n
 
 # -------------------------------------------------------------------
 # Mac specific functions
