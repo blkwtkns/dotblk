@@ -90,6 +90,15 @@ if [ -x "$(command -v go)" ]; then
   export PATH="$PATH:$HOME/go/bin"
 fi
 
+if which ruby >/dev/null && which gem >/dev/null; then
+  export PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+fi
+
+
+if [ -x "$(command -v google-chrome-unstable)" ]; then
+  export BROWSER='/usr/bin/google-chrome-unstable'
+fi
+
 # add ~/bin to path if it exists
 # [ -d $HOME/bin ] && export PATH=${PATH}:${HOME}/bin
 
@@ -111,6 +120,12 @@ if [[ ! -d "$TMPDIR" ]]; then
   mkdir -p -m 700 "$TMPDIR"
 fi
 
+# Notes
+if [[ ! -d "$NOTE_DIR" ]]; then
+  export NOTE_DIR="$HOME/.local/Notes"
+  mkdir -p -m 700 "$NOTE_DIR"
+fi
+
 # cursor shape
 # echo -ne '\e[5 q'
 
@@ -119,6 +134,8 @@ fi
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 # fi
+
+
 
 # fzf
 if [ -x "$(command -v rg)" ]; then

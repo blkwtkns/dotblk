@@ -42,6 +42,8 @@ if [ -x "$(command -v nvim)" ]; then
   alias visesh='nvim -c RestoreSesh'
   # if vim-dirvish/netrw toggle config is setup
   alias vimrw='nvim --cmd "let g:stop_netrw=0"'
+  alias vfcs='nvim `git diff-tree --no-commit-id --name-only -r "$(fcs)"`'
+  alias vlog="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | nvim -R -c 'set hidden nowrap keywordprg=:enew\ \|\ terminal\ \git\ --no-pager\ show | nnoremap q :bd!<cr>' -"
 else
   alias vi='vim'
   alias ev='vim ~/.vimrc'
@@ -50,6 +52,8 @@ else
   alias visesh='vim -c RestoreSesh'
   # if vim-dirvish/netrw toggle config is setup
   alias vimrw='vim --cmd "let g:stop_netrw=0"'
+  alias vfcs='vim `git diff-tree --no-commit-id --name-only -r "$(fcs)"`'
+  alias vlog="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c 'set filetype=git nowrap' -"
 fi
 
 # -------------------------------------------------------------------

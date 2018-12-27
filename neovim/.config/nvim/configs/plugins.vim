@@ -49,6 +49,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'sodapopcan/vim-twiggy'
 Plug 'tpope/vim-rhubarb'
+" show git history in vim
+Plug 'junegunn/gv.vim'
 " ====================================================================
 
 " Syntax
@@ -63,6 +65,7 @@ Plug 'tyru/current-func-info.vim'
 " ====================================================================
 " Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 " Plug 'shuber/vim-promiscuous'
+" Plug 'blkwtkns/vim-sesh'
 Plug 'blkwtkns/vim-sesh', { 'branch': 'develop' }
 " ====================================================================
 
@@ -89,7 +92,7 @@ Plug 'tomtom/tcomment_vim'
 " Plugin outside ~/.config/nvim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Plug 'junegunn/fzf.vim'
-Plug 'blkwtkns/fzf.vim'
+Plug 'blkwtkns/fzf.vim', { 'branch': 'upstream-color' }
 
 " Easy grep like searching - install ack-grep first
 Plug 'mileszs/ack.vim'
@@ -153,9 +156,6 @@ Plug 'parsonsmatt/intero-neovim'
 " Plug 'jceb/vim-orgmode'
 " Plug 'easymotion/vim-easymotion'
 " Plug 'mbbill/undotree'
-
-" show git history in vim
-" Plug 'junegunn/gv.vim'
 
 " Align all the stuff
 " Plug 'junegunn/vim-easy-align'
