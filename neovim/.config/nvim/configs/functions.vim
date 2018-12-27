@@ -137,7 +137,7 @@ for dir in ["h", "j", "l", "k"]
 endfor
 
 " Needs testing, found on reddit
-function! OpenChangedFiles()
+fun! OpenChangedFiles()
     only " Close all windows, unless they're modified
 
     let status = system('git status -s | grep "^ \?\(M\|A\)" | cut -d " " -f 3')
@@ -158,7 +158,21 @@ function! OpenChangedFiles()
             exec "sp " . topdir . "/" . filename
         endif
     endfor
-endfunction
+endfun
+
+fun! s:WriteCreatingDirs()
+  let l:file=expand("%")
+  if empty(getbufvar(bufname("%"), '&buftype')) && l:file !~# '\v^\w+\:\/'
+    let dir=fnamemodify(l:file, ':h')
+    if !isdirectory(dir)
+      call mkdir(dir, 'p')
+    endif
+  endif
+  write
+endfun
+
+command! W call s:WriteCreatingDirs()
+
 
 " function! Quit_netrw()
 "     for i in range(1, bufnr('$'))
@@ -256,3 +270,28 @@ fun! NormalizeWidths()
   set equalalways! equalalways!
   let &eadirection = eadir_pref
 endf
+
+"Description:
+"   Opens all the files in the quickfix list for editing.
+"
+"Usage:
+"   1. Perform a vimgrep search
+"       :vimgrep /def/ *.rb
+"   2. Issue QuickFixOpenAll command
+"       :QuickFixOpenAll
+
+fun! QuickFixOpenAll()
+    if empty(getqflist())
+        return
+    endif
+    let s:prev_val = ""
+    for d in getqflist()
+        let s:curr_val = bufname(d.bufnr)
+        if (s:curr_val != s:prev_val)
+            exec "edit " . s:curr_val
+        endif
+        let s:prev_val = s:curr_val
+    endfor
+endfun
+
+command! QuickFixOpenAll call QuickFixOpenAll()

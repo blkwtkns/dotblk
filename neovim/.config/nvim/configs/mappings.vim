@@ -43,8 +43,8 @@ nnoremap <Leader>fm :Marks<cr>
 nnoremap <Leader>fw :Windows<cr>
 nnoremap <Leader>fc :Commands<cr>
 nnoremap <Leader>fh :History<cr>
-nnoremap <Leader>fG :GFiles<cr>
-nnoremap <Leader>f? :GFiles?<cr>
+" nnoremap <Leader>fG :GFiles<cr>
+" nnoremap <Leader>f? :GFiles?<cr>
 " nnoremap <Leader>fgg :GGrep<cr>
 " ====================================================================
 
@@ -124,6 +124,12 @@ tnoremap <Leader><ESC> <C-\><C-n>
 " nnoremap <leader>rs :RestoreSession<space><CR>
 nnoremap <leader>ss :SaveSesh<space>
 nnoremap <leader>sr :RestoreSesh<space>
+" ====================================================================
+
+" Undo:
+" ====================================================================
+" simnalamburt/vim-mundo
+nnoremap <leader>U :MundoToggle<CR>
 " ====================================================================
 
 " Misc:

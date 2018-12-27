@@ -2,80 +2,6 @@
 " indentLine conceals quotes in json files; this puts them back:
 let g:vim_json_syntax_conceal = 0
 
-" ====================================================================
-" Haskell
-" ====================================================================
-" ----- neovimhaskell/haskell-vim -----
-
-" Align 'then' two spaces after 'if'
-let g:haskell_indent_if = 2
-" Indent 'where' block two spaces under previous body
-let g:haskell_indent_before_where = 2
-" Allow a second case indent style (see haskell-vim README)
-let g:haskell_indent_case_alternative = 1
-" Only next under 'let' if there's an equals sign
-let g:haskell_indent_let_no_in = 0
-
-" ----- hindent & stylish-haskell -----
-
-" Indenting on save is too aggressive for me
-let g:hindent_on_save = 0
-
-" Helper function, called below with mappings
-function! HaskellFormat(which) abort
-  if a:which ==# 'hindent' || a:which ==# 'both'
-    :Hindent
-  endif
-  if a:which ==# 'stylish' || a:which ==# 'both'
-    silent! exe 'undojoin'
-    silent! exe 'keepjumps %!stylish-haskell'
-  endif
-endfunction
-
-" Key bindings
-augroup haskellStylish
-  au!
-  " Just hindent
-  au FileType haskell nnoremap <leader>hi :Hindent<CR>
-  " Just stylish-haskell
-  au FileType haskell nnoremap <leader>hs :call HaskellFormat('stylish')<CR>
-  " First hindent, then stylish-haskell
-  au FileType haskell nnoremap <leader>hf :call HaskellFormat('both')<CR>
-augroup END
-
-" ----- w0rp/ale -----
-
-" let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
-
-" ----- parsonsmatt/intero-neovim -----
-
-" Prefer starting Intero manually (faster startup times)
-let g:intero_start_immediately = 0
-" Use ALE (works even when not using Intero)
-" let g:intero_use_neomake = 0
-
-augroup interoMaps
-  au!
-
-  au FileType haskell nnoremap <silent> <leader>io :InteroOpen<CR>
-  au FileType haskell nnoremap <silent> <leader>iov :InteroOpen<CR><C-W>H
-  au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
-  au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
-  au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
-
-  au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
-  au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentModule<CR>
-  au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
-
-  au FileType haskell map <leader>t <Plug>InteroGenericType
-  au FileType haskell map <leader>T <Plug>InteroType
-  au FileType haskell nnoremap <silent> <leader>it :InteroTypeInsert<CR>
-
-  au FileType haskell nnoremap <silent> <leader>jd :InteroGoToDef<CR>
-  au FileType haskell nnoremap <silent> <leader>iu :InteroUses<CR>
-  au FileType haskell nnoremap <leader>ist :InteroSetTargets<SPACE>
-augroup END
-
 
 " ====================================================================
 " Completion
@@ -97,6 +23,32 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " tern
 " autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 
+" Neosnippet
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/nvim.local/plugged/vim-snippets/snippets'
+
 
 " ====================================================================
 " Syntax
@@ -107,30 +59,46 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " let g:neomake_verbose=3
 
 " run neomake on the current file on every write:
-autocmd! BufWritePost * Neomake
+" autocmd! BufWritePost * Neomake
+"
+" " install eslint via npm
+" let g:neomake_javascript_enabled_makers = ['eslint']
+" let g:neomake_jsx_enabled_makers = ['eslint']
+" let g:neomake_elixir_enabled_makers = ['mix', 'credo']
+"
+" let g:neomake_open_list = 0
+"
+" " Disable inherited syntastic
+" let g:syntastic_mode_map = {
+"       \ "mode": "passive",
+"       \ "active_filetypes": [],
+"       \ "passive_filetypes": [] }
+"
+" let g:neomake_serialize = 1
+" let g:neomake_serialize_abort_on_error = 1
 
-" let g:neomake_javascript_jscs_maker = {
-" \ 'exe': 'jscs',
-" \ 'args': ['--no-color', '--preset', 'airbnb', '--reporter', 'inline', '--esnext'],
-" \ 'errorformat': '%f: line %l\, col %c\, %m',
-" \ }
 
-" install eslint via npm
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_haskell_enabled_makers = ['hlint', 'ghc-mod']
-let g:neomake_elixir_enabled_makers = ['mix', 'credo']
-
-let g:neomake_open_list = 0
-
-" Disable inherited syntastic
-let g:syntastic_mode_map = {
-      \ "mode": "passive",
-      \ "active_filetypes": [],
-      \ "passive_filetypes": [] }
-
-let g:neomake_serialize = 1
-let g:neomake_serialize_abort_on_error = 1
-
+" 'w0rp/ale'
+" Asynchronous Lint Engine (ALE)
+" Limit linters used for JavaScript.
+let g:ale_linters = {
+\  'javascript': ['eslint', 'flow']
+\}
+highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
+highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
+let g:ale_sign_error = 'X' " could use emoji
+let g:ale_sign_warning = '?' " could use emoji
+let g:ale_statusline_format = ['X %d', '? %d', '']
+" %linter% is the name of the linter that provided the message
+" %s is the error or warning message
+let g:ale_echo_msg_format = '%linter% says %s'
+" Map keys to navigate between lines with errors and warnings.
+nnoremap <leader>an :ALENextWrap<cr>
+nnoremap <leader>ap :ALEPreviousWrap<cr>
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
 
 " ====================================================================
 " Session management
@@ -149,6 +117,13 @@ let g:sesh_versioning = 1
 " 'mxw/vim-jsx': JavaScript and JSX highlighting
 " Allow JSX in normal JS files
 let g:jsx_ext_required = 0
+let g:javascript_plugin_flow = 1
+
+" ====================================================================
+" Git
+" ====================================================================
+" 'mhinz/vim-signify': git gutter symbols
+" let g:signify_line_highlight = 1
 
 
 " Elixir:
@@ -317,6 +292,11 @@ command! -bang -nargs=* GGrep
       \           : fzf#vim#with_preview(g:fzf_prev_opts, 'right:50%:hidden:wrap', '?'),
       \   <bang>0)
 
+" Override Colors command. You can safely do this in your .vimrc as fzf.vim
+" will not override existing commands.
+command! -bang Colors
+  \ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'}, <bang>0)
+
 " --column: Show column number
 " --line-number: Show line number
 " --no-heading: Do not show file headings in results
@@ -453,9 +433,9 @@ set nowb
 set noswapfile
 
 " tell it to use an undo file
-" set undofile
+set undofile
 " set a directory to store the undo history
-" set undodir="~/nvim.local/undo/"
+set undodir="~/nvim.local/undo/"
 
 " set path=**
 " set path+=**
@@ -543,6 +523,9 @@ set smartcase
 
 " Makes search act like search in modern browsers
 set incsearch
+
+" Highlight all when using ex
+set inccommand=nosplit
 
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
@@ -635,7 +618,7 @@ augroup file_types
   " autocmd BufRead,BufNewFile *.inc set filetype=php
   " autocmd BufRead,BufNewFile *.profile set filetype=php
   " autocmd BufRead,BufNewFile *.view set filetype=php
-  autocmd BufNewFile,BufRead *.less set filetype=less
+  autocmd BufRead,BufNewFile *.less set filetype=less
   autocmd BufRead,BufNewFile *.js set ft=javascript syntax=javascript
   autocmd BufRead,BufNewFile *.jsx set ft=javascript syntax=javascript
   autocmd BufRead,BufNewFile *.ts set ft=typescript syntax=typescript
@@ -661,10 +644,11 @@ augroup omnifuncs
 augroup end
 
 "Haskell
-augroup NeomakeHaskell
-  autocmd!
-  autocmd! BufWritePost *.hs Neomake
-augroup END
+" TODO: switch to ale
+" augroup NeomakeHaskell
+"   autocmd!
+"   autocmd! BufWritePost *.hs Neomake
+" augroup END
 
 " tern
 " if exists('g:plugs["tern_for_vim"]')
