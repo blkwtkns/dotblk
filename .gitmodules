@@ -2,5 +2,5 @@
 	path = .manjaro
 	url = https://github.com/blkwtkns/dotManjaro.git
 [submodule "dotremote"]
-	path = dotremote
+	path = .dotremote
 	url = https://github.com/blkwtkns/dotremote.git
