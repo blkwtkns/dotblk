@@ -11,7 +11,6 @@ fi;
 export SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 
 source "${0:h}/prompts/blaenk.zsh"
-# λ
 PROMPT='
 %F{yellow}λ%f %{$fg[$color]%}%n%{$reset_color%} ${vcs_info_msg_0_} $(p_hostname) $(p_envs) $(p_exit_code)
 ${vim_mode} '

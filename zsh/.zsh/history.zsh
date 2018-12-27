@@ -2,6 +2,10 @@
 HISTSIZE=10000
 SAVEHIST=9000
 HISTFILE=~/.zsh_history
+# HISTFILE=~/.zsh/dirhist/${PWD//\//@}
+# chpwd() {
+#   [[ $PWD = $OLDPWD ]] || fc -Pp ~/.zsh/dirhist/${PWD//\//@}
+# }
 
 # better history management, using partial term and arrow keys
 # https://coderwall.com/p/jpj_6q

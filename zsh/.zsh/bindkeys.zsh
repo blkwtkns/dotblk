@@ -2,12 +2,11 @@
 autoload -Uz edit-command-line
 bindkey -M vicmd 'v' edit-command-line
 
-# bindkey -v
+bindkey -v
 
 # ❯❯❯
 # vim_ins_mode="%B%F{1}❯%F{3}❯%F{2}❯%f%b"
 # vim_cmd_mode="%B%F{2}❮%F{3}❮%F{1}❮%f%b"
-# >>>
 vim_ins_mode="%B%F{1}>%F{3}>%F{2}>%f%b"
 vim_cmd_mode="%B%F{2}<%F{3}<%F{1}<%f%b"
 vim_mode=$vim_ins_mode
@@ -31,8 +30,24 @@ TRAPWINCH() {
   zle &&  zle -R
 }
 
-# Open a new window in this term's cwd
-nwZle() { zle push-line; BUFFER="setsid urxvt"; zle accept-line; }
-zle -N nwZle
-# CTRL+n
-bindkey '^n' nwZle
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc

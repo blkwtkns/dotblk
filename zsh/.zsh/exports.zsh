@@ -45,7 +45,9 @@ fi
 
 # neovim specifics
 if [ -x "$(command -v nvim)" ]; then
+  # Make vimrc var
   export MYVIMRC='.config/nvim/init.vim'
+  # Make neovim default
   export EDITOR='/usr/bin/nvim'
   export VISUAL='/usr/bin/nvim'
 else
@@ -79,24 +81,16 @@ path=(
 )
 
 # if cargo present add to path
-if [ -x "$(command -v cargo)" ]; then
+# if [ -x "$(command -v cargo)" ]; then
   # Set up local bins
   export PATH=$HOME/.local/bin:$PATH
   export PATH=$HOME/.cargo/bin:$PATH
-fi
-
-# https://wiki.archlinux.org/index.php/Go
-if [ -x "$(command -v go)" ]; then
-  export PATH="$PATH:$HOME/go/bin"
-fi
+  export PATH=$HOME/go/bin:$PATH
+  export PATH=$HOME/bin:$PATH
+# fi
 
 if which ruby >/dev/null && which gem >/dev/null; then
-  export PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-fi
-
-
-if [ -x "$(command -v google-chrome-unstable)" ]; then
-  export BROWSER='/usr/bin/google-chrome-unstable'
+    PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi
 
 # add ~/bin to path if it exists
@@ -135,8 +129,6 @@ fi
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 # fi
 
-
-
 # fzf
 if [ -x "$(command -v rg)" ]; then
     # FZF and Ripgrep ish --> move into .zshrc
@@ -147,4 +139,22 @@ if [ -x "$(command -v rg)" ]; then
     command -v tree > /dev/null && export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200' --preview-window right:70%:hidden:wrap --bind '?:toggle-preview' --bind 'alt-j:preview-down,alt-k:preview-up'"
 fi
 
+# Open a new window in this term's cwd
+nwZle() { zle push-line; BUFFER="setsid urxvt"; zle accept-line; }
+zle -N nwZle
+# CTRL+n
+bindkey '^n' nwZle
+
 TMPPREFIX="${TMPDIR%/}/zsh"
+
+### pyenv ###
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+#
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+###################################
+
+
+# added by Miniconda2 installer
+export PATH="/home/blakesisu/miniconda2/bin:$PATH"

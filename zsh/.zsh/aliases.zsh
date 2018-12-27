@@ -43,7 +43,7 @@ if [ -x "$(command -v nvim)" ]; then
   # if vim-dirvish/netrw toggle config is setup
   alias vimrw='nvim --cmd "let g:stop_netrw=0"'
   alias vfcs='nvim `git diff-tree --no-commit-id --name-only -r "$(fcs)"`'
-  alias vlog="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | nvim -R -c 'set hidden nowrap keywordprg=:enew\ \|\ terminal\ \git\ --no-pager\ show | nnoremap q :bd!<cr>' -"
+  alias vshow="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | nvim -R -c 'set hidden nowrap keywordprg=:enew\ \|\ terminal\ \git\ --no-pager\ show | nnoremap q :bd!<cr>' -"
 else
   alias vi='vim'
   alias ev='vim ~/.vimrc'
@@ -52,15 +52,17 @@ else
   alias visesh='vim -c RestoreSesh'
   # if vim-dirvish/netrw toggle config is setup
   alias vimrw='vim --cmd "let g:stop_netrw=0"'
+  # adjust and make a fzf function that lets user choose commit and
+  # opens all files that were changed in that commit
   alias vfcs='vim `git diff-tree --no-commit-id --name-only -r "$(fcs)"`'
-  alias vlog="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c 'set filetype=git nowrap' -"
+  # opens list of commits and enables viewing of changes with press of shift + k
+  alias vshow=`git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c 'set filetype=git nowrap' -`
 fi
 
 # -------------------------------------------------------------------
 # Git
 # -------------------------------------------------------------------
 source "${0:h}/git/alias.zsh"
-
 # -------------------------------------------------------------------
 # System
 # -------------------------------------------------------------------
@@ -90,6 +92,7 @@ alias pbp=pbpaste
 # alias po=popd
 # alias pu=pushd
 # alias pushdf='pushd "$(pfd)"'
+alias ill='kill -KILL'
 alias rake='noglob rake'
 alias rm='nocorrect rm -i'
 alias rsync='noglob rsync'
@@ -118,6 +121,19 @@ if [ -x "$(command -v stack)" ]; then
   alias ghc='stack exec -- ghc'
   alias ghci='stack exec -- ghci'
 fi
+
+
+# -------------------------------------------------------------------
+# Node
+# -------------------------------------------------------------------
+# vim bindings
+alias nodevim='node ~/node-rdln/.readline.config.js'
+
+# update node with nvm
+alias nodeup='nvm install node --reinstall-packages-from=node'
+
+# update yarn
+alias yarnup='curl --compressed -o- -L https://yarnpkg.com/install.sh | bash'
 
 # -------------------------------------------------------------------
 # Docker

@@ -1,17 +1,4 @@
 # -------------------------------------------------------------------
-# markdown viewer
-# (first download https://daringfireball.net/projects/markdown/)
-# -------------------------------------------------------------------
-mdv() {
-  if [ -x "$(command -v ~/bin/Markdown.pl)" ]; then
-    ~/bin/Markdown.pl $1 | w3m -T text/html
-  else
-    echo "Markdown perl script not found"
-    echo "Download at https://daringfireball.net/projects/markdown/"
-  fi
-}
-
-# -------------------------------------------------------------------
 # compressed file expander
 # (from https://github.com/myfreeweb/zshuery/blob/master/zshuery.sh)
 # -------------------------------------------------------------------
@@ -47,6 +34,16 @@ ex() {
 # -------------------------------------------------------------------
 function find-exec() {
   find . -type f -iname "*${1:-}*" -exec "${2:-file}" '{}' \;
+}
+
+
+# -------------------------------------------------------------------
+# Display ports being listened on.
+# -------------------------------------------------------------------
+function listening() {
+  if [ -x "$(command -v netstat)" ]; then
+    netstat -tulpn | grep LISTEN
+  fi
 }
 
 # -------------------------------------------------------------------
@@ -135,6 +132,8 @@ path() {
 # -------------------------------------------------------------------
 # Note taking function and command completion
 # -------------------------------------------------------------------
+
+# TODO: create directory if a unknown directory is given in filename path
 _n() {
   local lis cur
 
@@ -281,6 +280,21 @@ function psax() {
   ps auxwwwh | grep "$@" | grep -v grep
 }
 
+# --------------------------------------------------------------------
+# copy file and put into clipboard
+# --------------------------------------------------------------------
+function copyfile() {
+  # find clipboard tool
+
+  # check if argument is a valid file
+
+  # make sure it's not a crazy size of text
+
+  # use tool and copy to clipboard
+
+  # e.g: xclip -sel clip < ~/.ssh/id_rsa.pub
+}
+
 
 # --------------------------------------------------------------------
 # FZF functions
@@ -327,6 +341,25 @@ vf() {
      print -l $files[1]
   fi
 }
+
+# vfg - fzf list of files that match grep to open with vim
+# ex: vfg string
+# zsh autoload function
+vrg () {
+  if [ -x "$(command -v rg)" ]; then
+
+    echo $1
+    local files
+    files=($(rg -l $1))
+    #
+    if [[ -n $files ]]
+    then
+       vim -- $files
+       print -l $files[1]
+    fi
+  fi
+}
+
 
 # --------------------------------------------------------------------
 # FZF - Changing Directories
